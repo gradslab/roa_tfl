@@ -1,0 +1,16 @@
+{
+ "runs": [
+  "runs/power_obs2_s0",
+  "runs/power_obs2_s1",
+  "runs/power_obs2_s2",
+  "runs/power_obs2_s3"
+ ],
+ "singles": [
+  67.60694620923337,
+  80.88945362134689,
+  79.01736552308344,
+  67.11562897077509
+ ],
+ "union": 81.03346039813638,
+ "false_positive": 0.0
+}

@@ -1,0 +1,440 @@
+{
+ "method": "sos_sound",
+ "system": "vdp3",
+ "settings": {
+  "V_degree": 6,
+  "V_monomials": "degrees 2..6 in the state",
+  "shape": "linearization quadratic y'Py (A'P+PA=-I in y), scaled to unit largest eigenvalue",
+  "init": "quadratic Lyapunov function of the linearization, A'P+PA=-I in box-normalized y",
+  "s1": "SOS, degrees 0..4",
+  "s2": "SOS, degrees 2..4",
+  "s3": "SOS, degrees 0..2 in the state",
+  "aux_g_multipliers": null,
+  "remainder_multipliers": null,
+  "aux_h_multipliers": null,
+  "eps": 1e-06,
+  "level_backoff": 0.98,
+  "bisection_steps": 14,
+  "beta_slack": 0.98,
+  "stall": 3,
+  "max_iter": 60,
+  "time_cap_s": 21600.0,
+  "solver": "Clarabel only, status 'optimal'",
+  "box_containment": true,
+  "remainder": null,
+  "vertices": 1,
+  "fixedV": "results/baseline_sos_vdp3.json"
+ },
+ "stop": "fixed V (no iteration)",
+ "iterations": [],
+ "n_iterations": 0,
+ "iteration_seconds": 0.0,
+ "argv": {
+  "systems": [
+   "vdp3"
+  ],
+  "rem": "vertex",
+  "dV": null,
+  "s1deg": null,
+  "s2deg": null,
+  "s3deg": 2,
+  "auxdeg": 2,
+  "lamdeg": 2,
+  "s2aux": 0,
+  "remdeg": 6,
+  "shape": "lin",
+  "init": "y",
+  "box": 1,
+  "iters": 60,
+  "stall": 3,
+  "cap": 21600.0,
+  "samples": 4000000,
+  "fixedV": "results/baseline_sos_vdp3.json",
+  "update": 0,
+  "out": "results/sos_recert_vdp3.json",
+  "solve_limit": 0.0,
+  "lenient": 0
+ },
+ "recertification": {
+  "level": 1.0,
+  "mode": "default",
+  "status": "optimal",
+  "accepted": true,
+  "gram_checks": [
+   {
+    "label": "multiplier s2_0",
+    "size": 5,
+    "lam_min_Q": 0.020525141021773552,
+    "lam_min_Q_plus_E": 0.020525141021773552,
+    "max_residual": 3.197442310920451e-14,
+    "unabsorbed_residual": 0.0,
+    "unabsorbed_bound_on_K": 0.0,
+    "float_tol": 0.0,
+    "exact": true,
+    "certified": true,
+    "by": "SOS by construction (z'Q+z)"
+   },
+   {
+    "label": "multiplier s3_0",
+    "size": 3,
+    "lam_min_Q": 0.980440050381526,
+    "lam_min_Q_plus_E": 0.980440050381526,
+    "max_residual": 2.6645352591003757e-15,
+    "unabsorbed_residual": 0.0,
+    "unabsorbed_bound_on_K": 0.0,
+    "float_tol": 0.0,
+    "exact": true,
+    "certified": true,
+    "by": "SOS by construction (z'Q+z)"
+   },
+   {
+    "label": "multiplier s3_1",
+    "size": 3,
+    "lam_min_Q": 1.6594789280603022,
+    "lam_min_Q_plus_E": 1.6594789280603022,
+    "max_residual": 3.552713678800501e-15,
+    "unabsorbed_residual": 0.0,
+    "unabsorbed_bound_on_K": 0.0,
+    "float_tol": 0.0,
+    "exact": true,
+    "certified": true,
+    "by": "SOS by construction (z'Q+z)"
+   },
+   {
+    "label": "multiplier s3_2",
+    "size": 3,
+    "lam_min_Q": 0.9804400503864074,
+    "lam_min_Q_plus_E": 0.9804400503864074,
+    "max_residual": 1.7763568394002505e-15,
+    "unabsorbed_residual": 0.0,
+    "unabsorbed_bound_on_K": 0.0,
+    "float_tol": 0.0,
+    "exact": true,
+    "certified": true,
+    "by": "SOS by construction (z'Q+z)"
+   },
+   {
+    "label": "multiplier s3_3",
+    "size": 3,
+    "lam_min_Q": 1.659478928032544,
+    "lam_min_Q_plus_E": 1.659478928032544,
+    "max_residual": 1.7763568394002505e-15,
+    "unabsorbed_residual": 0.0,
+    "unabsorbed_bound_on_K": 0.0,
+    "float_tol": 0.0,
+    "exact": true,
+    "certified": true,
+    "by": "SOS by construction (z'Q+z)"
+   },
+   {
+    "label": "V positive",
+    "size": 9,
+    "lam_min_Q": 0.005160482492240255,
+    "lam_min_Q_plus_E": 0.0051604824922399685,
+    "max_residual": 4.440892098500626e-16,
+    "unabsorbed_residual": 0.0,
+    "unabsorbed_bound_on_K": 0.0,
+    "float_tol": 8.492323914840436e-14,
+    "exact": true,
+    "certified": true,
+    "residual_without_bound": 0.0,
+    "data_resolution": 4.2495585353761046e-14,
+    "by": "exact SOS"
+   },
+   {
+    "label": "recert decrease vertex 0",
+    "size": 20,
+    "lam_min_Q": 0.00026803089987195944,
+    "lam_min_Q_plus_E": 0.0002680308998386135,
+    "max_residual": 1.1937117960769683e-12,
+    "unabsorbed_residual": 0.0,
+    "unabsorbed_bound_on_K": 0.0,
+    "float_tol": 5.908690806515304e-12,
+    "exact": true,
+    "certified": true,
+    "residual_without_bound": 0.0,
+    "data_resolution": 1.3409461628352726e-12,
+    "by": "exact SOS"
+   },
+   {
+    "label": "recert containment 0",
+    "size": 15,
+    "lam_min_Q": 0.025643722347880912,
+    "lam_min_Q_plus_E": 0.02564372234788787,
+    "max_residual": 1.9895196601282805e-13,
+    "unabsorbed_residual": 0.0,
+    "unabsorbed_bound_on_K": 0.0,
+    "float_tol": 4.752067669537879e-13,
+    "exact": true,
+    "certified": true,
+    "residual_without_bound": 0.0,
+    "data_resolution": 1.5895786356316603e-13,
+    "by": "exact SOS"
+   },
+   {
+    "label": "recert containment 1",
+    "size": 15,
+    "lam_min_Q": 0.0295070586157225,
+    "lam_min_Q_plus_E": 0.0295070586157319,
+    "max_residual": 1.9895196601282805e-13,
+    "unabsorbed_residual": 0.0,
+    "unabsorbed_bound_on_K": 0.0,
+    "float_tol": 5.143991902248169e-13,
+    "exact": true,
+    "certified": true,
+    "residual_without_bound": 0.0,
+    "data_resolution": 1.6783806611916354e-13,
+    "by": "exact SOS"
+   },
+   {
+    "label": "recert containment 2",
+    "size": 15,
+    "lam_min_Q": 0.025643722348946796,
+    "lam_min_Q_plus_E": 0.025643722348948406,
+    "max_residual": 1.4210854715202004e-13,
+    "unabsorbed_residual": 0.0,
+    "unabsorbed_bound_on_K": 0.0,
+    "float_tol": 4.752067669783445e-13,
+    "exact": true,
+    "certified": true,
+    "residual_without_bound": 0.0,
+    "data_resolution": 1.5895786356769687e-13,
+    "by": "exact SOS"
+   },
+   {
+    "label": "recert containment 3",
+    "size": 15,
+    "lam_min_Q": 0.029507058616374454,
+    "lam_min_Q_plus_E": 0.029507058616382763,
+    "max_residual": 5.684341886080802e-14,
+    "unabsorbed_residual": 0.0,
+    "unabsorbed_bound_on_K": 0.0,
+    "float_tol": 5.1439919019537e-13,
+    "exact": true,
+    "certified": true,
+    "residual_without_bound": 0.0,
+    "data_resolution": 1.6783806611643315e-13,
+    "by": "exact SOS"
+   }
+  ],
+  "dropped": {},
+  "all_exact": true,
+  "all_certified": true,
+  "min_lam_Q_plus_E": 0.0002680308998386135,
+  "tried": [
+   {
+    "level": 1.0,
+    "mode": "default",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": true,
+    "all_certified": true,
+    "min_lam_Q_plus_E": 0.0002680308998386135
+   }
+  ]
+ },
+ "recert_seconds": 0.11610889434814453,
+ "best_iter": null,
+ "best_beta": null,
+ "coverage": 93.26443085143781,
+ "false_positive": 0.0,
+ "degree": 6,
+ "V": [
+  [
+   [
+    0,
+    2
+   ],
+   3.809403985334056
+  ],
+  [
+   [
+    1,
+    1
+   ],
+   -10.57835820823886
+  ],
+  [
+   [
+    2,
+    0
+   ],
+   8.178352148050482
+  ],
+  [
+   [
+    0,
+    3
+   ],
+   -1.3995547385544475e-10
+  ],
+  [
+   [
+    1,
+    2
+   ],
+   3.417436212353568e-10
+  ],
+  [
+   [
+    2,
+    1
+   ],
+   -5.257354603367207e-10
+  ],
+  [
+   [
+    3,
+    0
+   ],
+   2.5901207084953753e-10
+  ],
+  [
+   [
+    0,
+    4
+   ],
+   -0.5480991423425666
+  ],
+  [
+   [
+    1,
+    3
+   ],
+   -0.91440318305042
+  ],
+  [
+   [
+    2,
+    2
+   ],
+   8.111542113737434
+  ],
+  [
+   [
+    3,
+    1
+   ],
+   18.438198551209283
+  ],
+  [
+   [
+    4,
+    0
+   ],
+   -29.478394681409682
+  ],
+  [
+   [
+    0,
+    5
+   ],
+   2.854218582852226e-10
+  ],
+  [
+   [
+    1,
+    4
+   ],
+   -1.2249439864387305e-09
+  ],
+  [
+   [
+    2,
+    3
+   ],
+   2.808828410798546e-09
+  ],
+  [
+   [
+    3,
+    2
+   ],
+   -3.112919149330735e-09
+  ],
+  [
+   [
+    4,
+    1
+   ],
+   2.0021930033399128e-09
+  ],
+  [
+   [
+    5,
+    0
+   ],
+   -4.152411650037272e-10
+  ],
+  [
+   [
+    0,
+    6
+   ],
+   0.9439444865104697
+  ],
+  [
+   [
+    1,
+    5
+   ],
+   -3.3569670092310373
+  ],
+  [
+   [
+    2,
+    4
+   ],
+   3.194045842792188
+  ],
+  [
+   [
+    3,
+    3
+   ],
+   0.7039187215324755
+  ],
+  [
+   [
+    4,
+    2
+   ],
+   -16.017613270293275
+  ],
+  [
+   [
+    5,
+    1
+   ],
+   9.413683402176954
+  ],
+  [
+   [
+    6,
+    0
+   ],
+   42.495585353761044
+  ]
+ ],
+ "indeterminates": [
+  "y1",
+  "y2"
+ ],
+ "sample_check": {
+  "samples": 4000000,
+  "in_set": 681342,
+  "decrease_violations": 0,
+  "nonpositive_V": 0,
+  "outside_admissible": 0,
+  "remainder_bound_violations": 0,
+  "max_Vdot_over_|y|^2": -0.001105383195125806,
+  "region": "box enlarged x1.25 about its center, uniform, seed 7"
+ },
+ "solver_status_counts": {
+  "recert:optimal": 1
+ },
+ "solver_seconds": {
+  "recert": 0.10458707809448242
+ },
+ "seconds": 5.091578960418701
+}

@@ -1,0 +1,16 @@
+{
+ "runs": [
+  "runs\\power_s0_rep",
+  "runs\\power_s1_rep",
+  "runs\\power_s2_rep",
+  "runs\\power_s3_rep"
+ ],
+ "singles": [
+  92.42936488770829,
+  91.75319971021493,
+  91.08307172180632,
+  94.8804636561217
+ ],
+ "union": 95.98526925863318,
+ "false_positive": 0.0
+}

@@ -1,0 +1,23 @@
+\begin{table}[ht]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\caption{Per-seed results. Before: the trained network. Round: selected fine-tuning round (0 is the trained network). Sel.\ and Final: level after the retest and after the final test. Annulus: final-test samples between $c_1$ and the selected level. FP as in Table~\ref{tab:main}.}
+\label{tab:seeds}
+\begin{tabular}{llcccccccc}
+\toprule
+Case & Seed & $c_2$ before & Cov.\ before & Round & $c_2$ sel. & $c_2$ final & Annulus & Cov. & FP\\
+\midrule
+Circle & 0 & 0.9335 & 69.84 & 4 & 0.9835 & 0.9835 & 574093 & 73.82 & 0.000\\
+Circle & 1 & 0.9328 & 69.98 & 4 & 0.9855 & 0.9822 & 587824 & 73.31 & 0.000\\
+Circle & 2 & 0.9347 & 69.52 & 4 & 0.9877 & 0.9877 & 586506 & 74.81 & 0.000\\
+Circle & 3 & 0.9384 & 68.73 & 4 & 0.9869 & 0.9866 & 586012 & 74.01 & 0.000\\
+Sinusoid & 0 & 0.8583 & 57.16 & 3 & 0.9784 & 0.9784 & 682245 & 72.77 & 0.000\\
+Sinusoid & 1 & 0.8980 & 62.53 & 2 & 0.9808 & 0.9670 & 698328 & 70.32 & 0.000\\
+Sinusoid & 2 & 0.8871 & 58.11 & 2 & 0.9749 & 0.9749 & 659706 & 70.39 & 0.000\\
+Sinusoid & 3 & 0.8359 & 54.29 & 2 & 0.9607 & 0.9607 & 640343 & 68.29 & 0.000\\
+Quadrotor & 0 & 0.3240 & 9.39 & 0 & 0.4337 & 0.3835 & 75400 & 11.57 & 0.000\\
+Quadrotor & 1 & 0.3099 & 7.95 & 0 & 0.4327 & 0.2795 & 69250 & 6.83 & 0.000\\
+Quadrotor & 2 & 0.3647 & 10.02 & 0 & 0.3800 & 0.3119 & 59678 & 8.12 & 0.000\\
+Quadrotor & 3 & 0.4471 & 10.10 & 0 & 0.4471 & 0.4471 & 56764 & 10.10 & 0.000\\
+\bottomrule
+\end{tabular}
+\end{table}

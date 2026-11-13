@@ -1,0 +1,120 @@
+{
+ "system": "power",
+ "c0": 0.15853845849658862,
+ "c_bisection": 0.16013985706726125,
+ "safety_factor": 0.99,
+ "rho_local": 0.05,
+ "local": {
+  "rho": 0.05,
+  "N_half_widths": [
+   0.125,
+   0.15000000000000002
+  ],
+  "lambda_max_midpoint": -0.11105182439900017,
+  "radius_frobenius": 0.07434475176700812,
+  "admissible": true,
+  "negative_definite": true
+ },
+ "share_of_box": 5.202983805072805,
+ "share_of_box_sampled": 5.196,
+ "share_of_reference_roa": 15.684617242212026,
+ "reference_states_in_E_outside_roa": 0,
+ "cells_final": 725,
+ "seconds_final": 0.027189016342163086,
+ "cells_bisection": 11597,
+ "seconds_total": 6.8685948848724365,
+ "sampled_failure_level": 0.16088615515023352,
+ "sampled_failure_point": [
+  0.5462847402454298,
+  0.2551888471614028
+ ],
+ "box_limit": 0.9446964568323784,
+ "c_inner_sampled": [
+  0.1726456582546234,
+  0.1726456582546234,
+  0.1726456582546234,
+  0.1726456582546234
+ ],
+ "inner_inside_core": false,
+ "inner_over_core_level": 1.0889828240529937,
+ "inner_over_core_volume": 1.0889828240529937,
+ "inner_sampled_check": {
+  "samples": 4000000,
+  "in_I": 2810091,
+  "in_I_outside_E": 230748,
+  "in_I_dq_nonneg": 4760,
+  "in_I_inadmissible": 0,
+  "share_of_box_in_I": 5.669534942253949,
+  "share_of_box_in_I_outside_E": 0.4655485707954704,
+  "share_of_box_in_I_dq_nonneg": 0.009603598718023295,
+  "share_of_box_in_I_inadmissible": 0.0
+ },
+ "first_failure_above": {
+  "level": 0.16017913591373345,
+  "reason": "counterexample",
+  "x": [
+   0.5581441015561954,
+   0.24105735150325996
+  ],
+  "q": 0.16017850423691887,
+  "dq": 3.1464442798723163e-06,
+  "limited_by": "decrease of q"
+ },
+ "selftests": {
+  "level_above_sampled_failure": {
+   "level": 0.1641038782532382,
+   "verified": false,
+   "reason": "counterexample"
+  },
+  "field_plus_kappa_q_x": {
+   "kappa": 0.013252946706460406,
+   "witness": [
+    0.5466799823563411,
+    0.24852291996241443
+   ],
+   "witness_q": 0.15843244071905188,
+   "witness_dq_lower_bound": 0.00033266007190610437,
+   "local_test_passes": true,
+   "verified": false,
+   "reason": "counterexample"
+  },
+  "field_plus_gamma_x": {
+   "gamma": 0.22541797354631846,
+   "local_test_passes": false,
+   "verified": false,
+   "reason": "local test failed on N",
+   "note": "the proof needs both the local test and the branch and bound"
+  }
+ },
+ "selftests_pass": true,
+ "crosscheck": {
+  "field_contains_code_value": true,
+  "constraint_signs_agree": true,
+  "box_matches": true
+ },
+ "constants": {
+  "P_float32": [
+   [
+    1.8472222089767456,
+    1.2000000476837158
+   ],
+   [
+    1.2000000476837158,
+    3.880000114440918
+   ]
+  ],
+  "s_float32": [
+   0.4000000059604645,
+   0.3333333432674408
+  ],
+  "box_lo_float32": [
+   -2.0,
+   -3.0
+  ],
+  "box_hi_float32": [
+   3.0,
+   3.0
+  ]
+ },
+ "arithmetic": "float64 intervals, outward rounding by 2 ulps per operation; pi and decimal constants enclosed; exact rationals for M, the bounding box and the local matrix test"
+}

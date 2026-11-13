@@ -1,0 +1,72 @@
+{
+ "case": "con3d",
+ "N": 1000000,
+ "seed": 13024261,
+ "distribution": "uniform on the box, i.i.d.",
+ "step": 0.025,
+ "t_max": 200.0,
+ "levels": [
+  0.9864781498908997,
+  0.9811704158782959,
+  0.9851144552230835,
+  0.9809083938598633
+ ],
+ "c_inner": 0.032899096674643497,
+ "samples_in_S": 506099,
+ "samples_in_inner": 11730,
+ "share_of_box_in_S": 50.6099,
+ "reached_inner": 506098,
+ "left_or_crossed": 1,
+ "not_reached": 0,
+ "unsafe": 1,
+ "eps_k": 1.6688289884005404e-05,
+ "confidence": 0.999999,
+ "longest_time_to_inner": 4.800000000000001,
+ "unsafe_examples": [
+  [
+   -0.8932490348815918,
+   1.38704252243042,
+   0.5698833465576172
+  ]
+ ],
+ "seconds": 11.98863410949707,
+ "target_set": "verified core E = {q < c0} of core_proof.py (the *_inner keys refer to E)",
+ "c_core": 0.032899096674643497,
+ "samples_in_core": 11730,
+ "longest_time_to_core": 4.800000000000001,
+ "c_inner_sampled": 0.03352102264761925,
+ "samples_in_sampled_inner": 12064,
+ "runs": [
+  "con3d_s0_rep",
+  "con3d_s1_rep",
+  "con3d_s2_rep",
+  "con3d_s3_rep"
+ ],
+ "snapshots": [
+  "epoch_001.pt",
+  "epoch_001.pt",
+  "epoch_001.pt",
+  "epoch_004.pt"
+ ],
+ "union_coverage_of_S": 85.59810233819044,
+ "union_coverage_stored": 85.59810233819044,
+ "failing_constraint": {
+  "obstacle": 1
+ },
+ "unsafe_all": [
+  {
+   "state": [
+    -0.8932490348815918,
+    1.38704252243042,
+    0.5698833465576172
+   ],
+   "label": 1,
+   "failing": "obstacle",
+   "seeds_containing": [
+    3
+   ],
+   "in_sampled_inner": false
+  }
+ ],
+ "mode": "core"
+}

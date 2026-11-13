@@ -1,0 +1,575 @@
+{
+ "macros": {
+  "resAbsCirc": "75.8%",
+  "resAbsInnerCirc": "6.4%",
+  "resRoaCirc": "84.8%",
+  "resCovCircMean": "74.0%",
+  "resCeilCirc": "84.8%",
+  "resCeilFracCirc": "87%",
+  "resQuadCirc": "8.3%",
+  "resPinnTFLCirc": "6.4%",
+  "resDzTFLCirc": "11.5%",
+  "resSafetyCirc": "33.5%",
+  "resGapCirc": "37.1",
+  "resWholeLevelMaxCirc": "0.9947",
+  "resZubovMaxCirc": "11.5%",
+  "resOtherMaxCirc": "36.9%",
+  "resWholeCirc": "36.9%",
+  "resWholeUnionCirc": "54.1%",
+  "resPinnCirc": "9.4%",
+  "resRawCircMean": "69.5%",
+  "resRepairGainCirc": "+4.5",
+  "resRichMaxCirc": "18.2%",
+  "resKeptCirc": "zero",
+  "resCeilNineCirc": "73.0%",
+  "resCtwoMinCirc": "0.98",
+  "resCtwoMaxCirc": "0.99",
+  "resSeedZeroCirc": "69.8%",
+  "resAbsSin": "75.0%",
+  "resAbsInnerSin": "1.1%",
+  "resRoaSin": "95.0%",
+  "resCovSinMean": "70.4%",
+  "resCeilSin": "76.6%",
+  "resCeilFracSin": "92%",
+  "resQuadSin": "2.1%",
+  "resPinnTFLSin": "4.0%",
+  "resDzTFLSin": "1.1%",
+  "resSafetySin": "29.5%",
+  "resGapSin": "12.8",
+  "resWholeLevelMaxSin": "0.9855",
+  "resZubovMaxSin": "4.0%",
+  "resOtherMaxSin": "57.6%",
+  "resWholeSin": "57.6%",
+  "resWholeUnionSin": "62.8%",
+  "resRawSinMean": "58.0%",
+  "resRepairGainSin": "+12.4",
+  "resRichMaxSin": "2.5%",
+  "resKeptSin": "zero",
+  "resCeilNineSin": "57.4%",
+  "resCtwoMinSin": "0.96",
+  "resCtwoMaxSin": "0.98",
+  "resSeedZeroSin": "57.2%",
+  "resAbsQuad": "12.8%",
+  "resAbsInnerQuad": "0.0%",
+  "resRoaQuad": "56.2%",
+  "resCovQuadMean": "9.2%",
+  "resCeilQuad": "33.3%",
+  "resCeilFracQuad": "28%",
+  "resQuadQuad": "0.0%",
+  "resPinnTFLQuad": "0.0%",
+  "resDzTFLQuad": "0.0%",
+  "resSafetyQuad": "8.4%",
+  "resGapQuad": "9.1",
+  "resWholeLevelMaxQuad": "0.0007",
+  "resZubovMaxQuad": "0.0%",
+  "resOtherMaxQuad": "0.1%",
+  "resWholeQuad": "0.1%",
+  "resWholeUnionQuad": "0.3%",
+  "resRawQuadMean": "9.4%",
+  "resRepairGainQuad": "-0.2",
+  "resRichMaxQuad": "0.0%",
+  "resKeptQuad": "four",
+  "resDrawMaxQuad": "2.2",
+  "resCeilNineQuad": "79.8%",
+  "resCtwoMinQuad": "0.28",
+  "resCtwoMaxQuad": "0.45",
+  "resSeedZeroQuad": "9.4%",
+  "resUnsafeKCirc": "1",
+  "resUnsafeInCirc": "644243",
+  "resUnsafeEpsCirc": "1.7e-5",
+  "resUnsafeTimeCirc": "5",
+  "resUnsafeKSin": "0",
+  "resUnsafeInSin": "713563",
+  "resUnsafeEpsSin": "1.4e-5",
+  "resUnsafeTimeSin": "5",
+  "resUnsafeKQuad": "2",
+  "resUnsafeInQuad": "72523",
+  "resUnsafeEpsQuad": "1.9e-5",
+  "resUnsafeTimeQuad": "8",
+  "resUnsafeDis": "41",
+  "resUnsafeAgree": "38",
+  "resUnsafeCmp": "9000",
+  "resUnsafeCons": "3",
+  "resUnsafeDisInS": "none",
+  "resUnsafeTotal": "3",
+  "resUnsafeConfirmed": "3",
+  "resUnsafeEpsMax": "1.9e-5",
+  "resUnsafeTimeMax": "8",
+  "resContactCirc": "0.1252",
+  "resCICirc": "0.1050",
+  "resFloorCirc": "0.7%",
+  "resContactSin": "0.0563",
+  "resCISin": "0.0509",
+  "resFloorSin": "5.0%",
+  "resContactQuad": "0.0056",
+  "resCIQuad": "0.0006",
+  "resFloorQuad": "57.9%",
+  "resRefNoiseMax": "0.74%",
+  "resRefNoiseCirc": "0.24%",
+  "resRefNoiseSin": "0.24%",
+  "resRefNoiseQuad": "0.74%",
+  "resPinnLevelMax": "0.033",
+  "resFPMax": "0.000%",
+  "resFPSentence": "No reference state lies",
+  "resIidFailures": "six",
+  "resRepairGain": "5.6",
+  "resRepairKept": "4",
+  "resTimeTrain": "15 to 31 minutes",
+  "resTimeCert": "1 to 5 minutes",
+  "resTimeRepair": "1 to 16 minutes",
+  "resTimeInner": "110 to 3626 seconds per case",
+  "resPinnVdpOne": "98.1%",
+  "resDzVdpOne": "97.3%",
+  "resSeedVdpOne": "98.6%",
+  "resPinnBestVdpOne": "98.4%",
+  "resPinnWorstVdpOne": "97.8%",
+  "resSosVdpOne": "99.1%",
+  "resPinnVdpThree": "83.4%",
+  "resDzVdpThree": "91.9%",
+  "resSeedVdpThree": "90.4%",
+  "resPinnBestVdpThree": "91.4%",
+  "resPinnWorstVdpThree": "73.6%",
+  "resSosVdpThree": "93.3%",
+  "resPinnPend": "90.5%",
+  "resDzPend": "50.6%",
+  "resSeedPend": "91.6%",
+  "resPinnBestPend": "92.4%",
+  "resPinnWorstPend": "88.2%",
+  "resSosPend": "53.8%",
+  "resPinnConThree": "3.6%",
+  "resDzConThree": "51.9%",
+  "resSeedConThree": "82.8%",
+  "resPinnBestConThree": "5.2%",
+  "resPinnWorstConThree": "2.1%",
+  "resSosConThree": "10.0%",
+  "resPinnPower": "96.5%",
+  "resDzPower": "76.9%",
+  "resSeedPower": "92.5%",
+  "resPinnBestPower": "97.4%",
+  "resPinnWorstPower": "95.8%",
+  "resSosPower": "43.8%",
+  "resSeedObsVdpOne": "85.5%",
+  "resDzObsVdpOne": "80.3%",
+  "resPinnObsVdpOne": "58.0%",
+  "resUnionObsVdpOne": "89.9%",
+  "resSeedObsVdpTwo": "66.5%",
+  "resDzObsVdpTwo": "65.9%",
+  "resPinnObsVdpTwo": "56.1%",
+  "resUnionObsVdpTwo": "73.4%",
+  "resSeedObsPowTwo": "74.0%",
+  "resDzObsPowTwo": "39.3%",
+  "resPinnObsPowTwo": "42.6%",
+  "resUnionObsPowTwo": "81.0%",
+  "resSeedObsPowFour": "64.8%",
+  "resDzObsPowFour": "77.6%",
+  "resPinnObsPowFour": "59.8%",
+  "resUnionObsPowFour": "75.7%",
+  "resObsBestCount": "four",
+  "resObsNoObsMin": "5.3%",
+  "resObsNoObsMax": "46.4%",
+  "resSosLiuSetVdpOne": "78.7%",
+  "resSosLiuSetVdpThree": "48.2%",
+  "resSosStudyOurs": "93.4%",
+  "resSosStudyShape": "56.2%",
+  "resSosStudyInitx": "73.1%",
+  "resSosStudySone": "57.1%",
+  "resSosStudyBoxGap": "1.3",
+  "resSosStudyNobox": "94.7%",
+  "resSosLevelConThree": "0.999",
+  "resSosTimePend": "14",
+  "resSosTimePower": "3",
+  "resBenchFPSentence": "No reference state lies",
+  "resPinnVdpOneMean": "85.3%",
+  "resPinnVdpThreeLow": "78.2%",
+  "resPinnVdpThreeMin": "84.0",
+  "resPinnVdpThreeMax": "86.6%",
+  "resBenchFPMax": "0.000%",
+  "resSosGapMax": "0.6",
+  "resBenchMin": "73.4%",
+  "resBenchMax": "99.2%",
+  "resBenchSeedMin": "82.8%",
+  "resBenchSeedMax": "98.6%",
+  "resCoreRoaMin": "2.0%",
+  "resCoreRoaMax": "43.7%",
+  "resCoreTimeMax": "12",
+  "resRedN": "ten",
+  "resRecN": "Six",
+  "resRecLo": "84.7",
+  "resRecHi": "97.1",
+  "resRestN": "four",
+  "resRestGap": "0.3",
+  "resGridLowerMax": "0.007",
+  "resPinnWinsN": "three",
+  "resObsBestBeforeCount": "two",
+  "resAllUnsafeMax": "four",
+  "resOUnsafeList": "2, 0, 0 and 1",
+  "resOUnsafeEpsMax": "1.9e-5",
+  "resOUnsafeDis": "0",
+  "resBUnsafeList": "2, 3, 4, 1 and 0",
+  "resBUnsafeEpsMax": "2.3e-5",
+  "resBUnsafeTimeMax": "19.5",
+  "resBUnsafeCmp": "15000",
+  "resBUnsafeDis": "0",
+  "resBUnsafeTotal": "10",
+  "resBUnsafePend": "four",
+  "resBUnsafePendSeeds": "one",
+  "resBUnsafeDisWord": "in no case",
+  "resBUnsafeConfirmed": "10"
+ },
+ "systems": [
+  {
+   "name": "Unicycle, circle",
+   "group": "TFL",
+   "roa": 84.8,
+   "quad": [
+    8.3,
+    null
+   ],
+   "pinn": [
+    6.4,
+    0.0
+   ],
+   "dz": [
+    11.5,
+    4.0
+   ],
+   "nodecomp": [
+    36.9,
+    21.8
+   ],
+   "ours": [
+    74.0,
+    0.6
+   ],
+   "union": 75.8,
+   "exact": 84.8,
+   "sos": null,
+   "before": null
+  },
+  {
+   "name": "Unicycle, sinusoid",
+   "group": "TFL",
+   "roa": 95.0,
+   "quad": [
+    2.1,
+    null
+   ],
+   "pinn": [
+    4.0,
+    0.6
+   ],
+   "dz": [
+    1.1,
+    0.0
+   ],
+   "nodecomp": [
+    57.6,
+    3.5
+   ],
+   "ours": [
+    70.4,
+    1.8
+   ],
+   "union": 75.0,
+   "exact": 76.6,
+   "sos": null,
+   "before": null
+  },
+  {
+   "name": "Planar quadrotor",
+   "group": "TFL",
+   "roa": 56.2,
+   "quad": [
+    0.0,
+    null
+   ],
+   "pinn": [
+    0.0,
+    0.0
+   ],
+   "dz": [
+    0.0,
+    0.0
+   ],
+   "nodecomp": [
+    0.1,
+    0.1
+   ],
+   "ours": [
+    9.2,
+    2.1
+   ],
+   "union": 12.8,
+   "exact": 33.3,
+   "sos": null,
+   "before": null
+  },
+  {
+   "name": "Van der Pol, μ = 1",
+   "group": "Equilibrium",
+   "roa": 39.2,
+   "quad": [
+    77.8,
+    null
+   ],
+   "pinn": [
+    98.1,
+    0.2
+   ],
+   "dz": [
+    97.3,
+    0.5
+   ],
+   "nodecomp": null,
+   "ours": [
+    98.6,
+    0.4
+   ],
+   "before": [
+    98.6,
+    0.4
+   ],
+   "union": 99.2,
+   "sos": [
+    99.1,
+    null
+   ]
+  },
+  {
+   "name": "Van der Pol, μ = 3",
+   "group": "Equilibrium",
+   "roa": 28.4,
+   "quad": [
+    55.8,
+    null
+   ],
+   "pinn": [
+    83.4,
+    3.6
+   ],
+   "dz": [
+    91.9,
+    1.3
+   ],
+   "nodecomp": null,
+   "ours": [
+    90.4,
+    2.0
+   ],
+   "before": [
+    79.0,
+    6.5
+   ],
+   "union": 93.8,
+   "sos": [
+    93.3,
+    null
+   ]
+  },
+  {
+   "name": "Pendulum, |u| ≤ 0.8",
+   "group": "Equilibrium",
+   "roa": 32.3,
+   "quad": [
+    14.7,
+    null
+   ],
+   "pinn": [
+    90.5,
+    1.8
+   ],
+   "dz": [
+    50.6,
+    2.3
+   ],
+   "nodecomp": null,
+   "ours": [
+    91.6,
+    1.4
+   ],
+   "before": [
+    87.5,
+    2.0
+   ],
+   "union": 93.2,
+   "sos": [
+    53.8,
+    null
+   ]
+  },
+  {
+   "name": "3-D, limit and obstacle",
+   "group": "Equilibrium",
+   "roa": 59.0,
+   "quad": [
+    2.1,
+    null
+   ],
+   "pinn": [
+    3.6,
+    1.7
+   ],
+   "dz": [
+    51.9,
+    4.2
+   ],
+   "nodecomp": null,
+   "ours": [
+    82.8,
+    1.2
+   ],
+   "before": [
+    70.6,
+    3.2
+   ],
+   "union": 85.6,
+   "sos": [
+    10.0,
+    null
+   ]
+  },
+  {
+   "name": "Power system",
+   "group": "Equilibrium",
+   "roa": 33.1,
+   "quad": [
+    25.1,
+    null
+   ],
+   "pinn": [
+    96.5,
+    0.8
+   ],
+   "dz": [
+    76.9,
+    2.8
+   ],
+   "nodecomp": null,
+   "ours": [
+    92.5,
+    1.7
+   ],
+   "before": [
+    90.8,
+    1.2
+   ],
+   "union": 96.0,
+   "sos": [
+    43.8,
+    null
+   ]
+  },
+  {
+   "name": "Van der Pol, 1 obstacle",
+   "group": "Obstacles (Meng and Liu)",
+   "roa": 33.9,
+   "quad": [
+    21.0,
+    null
+   ],
+   "pinn": [
+    58.0,
+    2.7
+   ],
+   "dz": [
+    80.3,
+    1.4
+   ],
+   "nodecomp": null,
+   "ours": [
+    85.5,
+    3.0
+   ],
+   "before": [
+    78.8,
+    5.7
+   ],
+   "union": 89.9,
+   "sos": null
+  },
+  {
+   "name": "Van der Pol, 2 obstacles",
+   "group": "Obstacles (Meng and Liu)",
+   "roa": 28.5,
+   "quad": [
+    24.9,
+    null
+   ],
+   "pinn": [
+    56.1,
+    1.1
+   ],
+   "dz": [
+    65.9,
+    2.4
+   ],
+   "nodecomp": null,
+   "ours": [
+    66.5,
+    5.5
+   ],
+   "before": [
+    59.0,
+    6.7
+   ],
+   "union": 73.4,
+   "sos": null
+  },
+  {
+   "name": "Power, 2 obstacles",
+   "group": "Obstacles (Meng and Liu)",
+   "roa": 23.6,
+   "quad": [
+    7.2,
+    null
+   ],
+   "pinn": [
+    42.6,
+    2.2
+   ],
+   "dz": [
+    39.3,
+    1.9
+   ],
+   "nodecomp": null,
+   "ours": [
+    74.0,
+    6.4
+   ],
+   "before": [
+    73.6,
+    7.3
+   ],
+   "union": 81.0,
+   "sos": null
+  },
+  {
+   "name": "Power, 4 obstacles",
+   "group": "Obstacles (Meng and Liu)",
+   "roa": 20.3,
+   "quad": [
+    32.9,
+    null
+   ],
+   "pinn": [
+    59.8,
+    1.2
+   ],
+   "dz": [
+    77.6,
+    2.0
+   ],
+   "nodecomp": null,
+   "ours": [
+    64.8,
+    2.9
+   ],
+   "before": [
+    64.5,
+    3.2
+   ],
+   "union": 75.7,
+   "sos": null
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+{
+ "case": "circ3",
+ "N": 1000000,
+ "seed": 9455757,
+ "distribution": "uniform on the box, i.i.d.",
+ "step": 0.025,
+ "t_max": 200.0,
+ "levels": [
+  0.9835332036018372,
+  0.9821966886520386,
+  0.9876964092254639,
+  0.9865997433662415
+ ],
+ "c_inner": 0.10497684620895598,
+ "samples_in_S": 644243,
+ "samples_in_inner": 54050,
+ "share_of_box_in_S": 64.4243,
+ "reached_inner": 644242,
+ "left_or_crossed": 1,
+ "not_reached": 0,
+ "unsafe": 1,
+ "eps_k": 1.6688289884005404e-05,
+ "confidence": 0.999999,
+ "longest_time_to_inner": 5.0,
+ "unsafe_examples": [
+  [
+   0.39234375953674316,
+   -0.26258182525634766,
+   -2.6767961978912354,
+   -2.9300854206085205
+  ]
+ ],
+ "seconds": 82.03613305091858
+}

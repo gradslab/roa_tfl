@@ -1,0 +1,118 @@
+{
+ "case": "vdp",
+ "N": 1000000,
+ "seed": 11315946,
+ "distribution": "uniform on the box, i.i.d.",
+ "step": 0.025,
+ "t_max": 200.0,
+ "levels": [
+  0.9984678030014038,
+  0.9980244636535645,
+  0.9980581402778625,
+  0.998530924320221
+ ],
+ "c_inner": 0.255273123594074,
+ "samples_in_S": 389563,
+ "samples_in_inner": 171603,
+ "share_of_box_in_S": 38.9563,
+ "reached_inner": 389559,
+ "left_or_crossed": 4,
+ "not_reached": 0,
+ "unsafe": 4,
+ "eps_k": 2.3431295769514433e-05,
+ "confidence": 0.999999,
+ "longest_time_to_inner": 12.25,
+ "unsafe_examples": [
+  [
+   -0.894153356552124,
+   -2.6746177673339844
+  ],
+  [
+   0.7660918235778809,
+   -1.37503981590271
+  ],
+  [
+   0.8350801467895508,
+   -1.3090298175811768
+  ],
+  [
+   0.6945040225982666,
+   -1.4455442428588867
+  ]
+ ],
+ "seconds": 8.41600513458252,
+ "target_set": "verified core E = {q < c0} of core_proof.py (the *_inner keys refer to E)",
+ "c_core": 0.255273123594074,
+ "samples_in_core": 171603,
+ "longest_time_to_core": 12.25,
+ "c_inner_sampled": 0.36239686608314514,
+ "samples_in_sampled_inner": 243704,
+ "runs": [
+  "vdp_s0_rep",
+  "vdp_s1_rep",
+  "vdp_s2_rep",
+  "vdp_s3_rep"
+ ],
+ "snapshots": [
+  "epoch_000.pt",
+  "epoch_000.pt",
+  "epoch_000.pt",
+  "epoch_000.pt"
+ ],
+ "union_coverage_of_S": 99.18400652794777,
+ "union_coverage_stored": 99.18400652794777,
+ "failing_constraint": {
+  "x2 low face": 1,
+  "x1 high face": 3
+ },
+ "unsafe_all": [
+  {
+   "state": [
+    -0.894153356552124,
+    -2.6746177673339844
+   ],
+   "label": 1,
+   "failing": "x2 low face",
+   "seeds_containing": [
+    0
+   ],
+   "in_sampled_inner": false
+  },
+  {
+   "state": [
+    0.7660918235778809,
+    -1.37503981590271
+   ],
+   "label": 1,
+   "failing": "x1 high face",
+   "seeds_containing": [
+    3
+   ],
+   "in_sampled_inner": false
+  },
+  {
+   "state": [
+    0.8350801467895508,
+    -1.3090298175811768
+   ],
+   "label": 1,
+   "failing": "x1 high face",
+   "seeds_containing": [
+    2
+   ],
+   "in_sampled_inner": false
+  },
+  {
+   "state": [
+    0.6945040225982666,
+    -1.4455442428588867
+   ],
+   "label": 1,
+   "failing": "x1 high face",
+   "seeds_containing": [
+    3
+   ],
+   "in_sampled_inner": false
+  }
+ ]
+}

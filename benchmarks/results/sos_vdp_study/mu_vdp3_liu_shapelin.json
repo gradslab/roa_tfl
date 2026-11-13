@@ -1,0 +1,567 @@
+{
+ "method": "sos_sound",
+ "system": "vdp3",
+ "settings": {
+  "V_degree": 6,
+  "V_monomials": "degrees 2..6 in the state",
+  "shape": "linearization quadratic y'Py (A'P+PA=-I in y), scaled to unit largest eigenvalue",
+  "init": "quadratic Lyapunov function of the linearization, A'P+PA=-I in original x",
+  "s1": "SOS, degrees 0..2",
+  "s2": "SOS, degrees 2..4",
+  "s3": null,
+  "aux_g_multipliers": null,
+  "remainder_multipliers": null,
+  "aux_h_multipliers": null,
+  "eps": 1e-06,
+  "level_backoff": 0.98,
+  "bisection_steps": 14,
+  "beta_slack": 0.98,
+  "stall": 0,
+  "max_iter": 30,
+  "time_cap_s": 21600.0,
+  "solver": "Clarabel only, status 'optimal'",
+  "box_containment": false,
+  "remainder": null,
+  "vertices": 1,
+  "returned": "the iterate with the largest beta (multiplier step), scaled so that level 1 is its certified level"
+ },
+ "stop": "V step infeasible",
+ "iterations": [
+  {
+   "iter": 0,
+   "beta": 0.0523681640625,
+   "beta_V": 0.05266712294345621,
+   "retries": 0,
+   "seconds": 0.3594779968261719
+  },
+  {
+   "iter": 1,
+   "beta": 0.05694580078125,
+   "beta_V": 0.05774666653172409,
+   "retries": 0,
+   "seconds": 1.142650842666626
+  },
+  {
+   "iter": 2,
+   "beta": 0.06024169921875,
+   "beta_V": 0.06181274274356686,
+   "retries": 0,
+   "seconds": 1.8419880867004395
+  },
+  {
+   "iter": 3,
+   "beta": 0.06298828125,
+   "beta_V": 0.06505709049524544,
+   "retries": 0,
+   "seconds": 2.6222331523895264
+  },
+  {
+   "iter": 4,
+   "beta": 0.06622314453125,
+   "beta_V": 0.06859119496398434,
+   "retries": 0,
+   "seconds": 3.3474929332733154
+  },
+  {
+   "iter": 5,
+   "beta": 0.07012939453125,
+   "beta_V": 0.07285089704771502,
+   "retries": 0,
+   "seconds": 4.110231161117554
+  },
+  {
+   "iter": 6,
+   "beta": 0.07452392578125,
+   "beta_V": 0.07721830574272696,
+   "retries": 0,
+   "seconds": 4.931725025177002
+  },
+  {
+   "iter": 7,
+   "beta": 0.0772705078125,
+   "beta_V": 0.07959609891372756,
+   "retries": 0,
+   "seconds": 5.777270078659058
+  },
+  {
+   "iter": 8,
+   "beta": 0.0789794921875,
+   "beta_V": 0.08095850705429007,
+   "retries": 0,
+   "seconds": 6.606319904327393
+  },
+  {
+   "iter": 9,
+   "beta": 0.079833984375,
+   "beta_V": 0.08118267148913773,
+   "retries": 0,
+   "seconds": 7.487200975418091
+  },
+  {
+   "iter": 10,
+   "beta": 0.08001708984375,
+   "beta_V": 0.08138028320258438,
+   "retries": 0,
+   "seconds": 8.364202976226807
+  },
+  {
+   "iter": 11,
+   "beta": 0.0802001953125,
+   "beta_V": 0.08143697665952704,
+   "retries": 0,
+   "seconds": 9.27027678489685
+  },
+  {
+   "iter": 12,
+   "beta": 0.08026123046875,
+   "beta_V": 0.08145745933914057,
+   "retries": 0,
+   "seconds": 10.173686981201172
+  },
+  {
+   "iter": 13,
+   "beta": 0.08026123046875,
+   "beta_V": 0.08147906819924115,
+   "retries": 0,
+   "seconds": 10.987352132797241
+  },
+  {
+   "iter": 14,
+   "beta": 0.08026123046875,
+   "beta_V": 0.0815023888226047,
+   "retries": 0,
+   "seconds": 11.797337055206299
+  },
+  {
+   "iter": 15,
+   "beta": 0.08026123046875,
+   "beta_V": 0.0814713462264797,
+   "retries": 0,
+   "seconds": 12.623842000961304
+  },
+  {
+   "iter": 16,
+   "beta": 0.08026123046875,
+   "beta_V": 0.081395135778614,
+   "retries": 0,
+   "seconds": 13.436208009719849
+  },
+  {
+   "iter": 17,
+   "beta": 0.0802001953125,
+   "beta_V": null,
+   "retries": 0,
+   "seconds": 14.362226963043213
+  }
+ ],
+ "n_iterations": 18,
+ "iteration_seconds": 14.362297058105469,
+ "argv": {
+  "systems": [
+   "vdp3"
+  ],
+  "rem": "vertex",
+  "dV": null,
+  "s1deg": 2,
+  "s2deg": 4,
+  "s3deg": 2,
+  "auxdeg": 2,
+  "lamdeg": 2,
+  "s2aux": 0,
+  "remdeg": 6,
+  "shape": "lin",
+  "init": "x",
+  "box": 0,
+  "iters": 30,
+  "stall": 0,
+  "cap": 21600.0,
+  "samples": 0,
+  "fixedV": null,
+  "out": "results/sos_vdp_study/mu_vdp3_liu_shapelin.json",
+  "solve_limit": 0.0,
+  "lenient": 0
+ },
+ "recertification": {
+  "level": null,
+  "mode": "tight",
+  "status": "optimal_inaccurate",
+  "accepted": false,
+  "gram_checks": [],
+  "dropped": {},
+  "all_exact": false,
+  "all_certified": false,
+  "min_lam_Q_plus_E": null,
+  "tried": [
+   {
+    "level": 1.0,
+    "mode": "default",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -2.448940247542582e-10
+   },
+   {
+    "level": 1.0,
+    "mode": "tight",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -1.8760527125387507e-09
+   },
+   {
+    "level": 1.0,
+    "mode": "tight+facial",
+    "status": "infeasible",
+    "accepted": false,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": null
+   },
+   {
+    "level": 0.999,
+    "mode": "default",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -2.948524265292416e-10
+   },
+   {
+    "level": 0.999,
+    "mode": "tight",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -1.2236264938842318e-09
+   },
+   {
+    "level": 0.999,
+    "mode": "tight+facial",
+    "status": "infeasible",
+    "accepted": false,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": null
+   },
+   {
+    "level": 0.99,
+    "mode": "default",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -3.4269140384531e-10
+   },
+   {
+    "level": 0.99,
+    "mode": "tight",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -7.224926553598481e-10
+   },
+   {
+    "level": 0.99,
+    "mode": "tight+facial",
+    "status": "infeasible",
+    "accepted": false,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": null
+   },
+   {
+    "level": 0.98,
+    "mode": "default",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -9.301810701883046e-10
+   },
+   {
+    "level": 0.98,
+    "mode": "tight",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -1.9474118979519403e-09
+   },
+   {
+    "level": 0.98,
+    "mode": "tight+facial",
+    "status": "infeasible",
+    "accepted": false,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": null
+   },
+   {
+    "level": 0.95,
+    "mode": "default",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -1.1161406763646867e-10
+   },
+   {
+    "level": 0.95,
+    "mode": "tight",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -1.573800650956334e-09
+   },
+   {
+    "level": 0.95,
+    "mode": "tight+facial",
+    "status": "infeasible",
+    "accepted": false,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": null
+   },
+   {
+    "level": 0.9,
+    "mode": "default",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -1.8906268827569683e-10
+   },
+   {
+    "level": 0.9,
+    "mode": "tight",
+    "status": "optimal_inaccurate",
+    "accepted": false,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": null
+   }
+  ]
+ },
+ "recert_seconds": 0.6217501163482666,
+ "best_iter": 12,
+ "best_beta": 0.08026123046875,
+ "coverage": 60.929480419039585,
+ "false_positive": 0.0,
+ "degree": 6,
+ "V": [
+  [
+   [
+    0,
+    2
+   ],
+   4.404703893250591
+  ],
+  [
+   [
+    1,
+    1
+   ],
+   -10.014356317722585
+  ],
+  [
+   [
+    2,
+    0
+   ],
+   5.929189560854446
+  ],
+  [
+   [
+    0,
+    3
+   ],
+   3.4125897301437005e-10
+  ],
+  [
+   [
+    1,
+    2
+   ],
+   4.534812370976685e-11
+  ],
+  [
+   [
+    2,
+    1
+   ],
+   -6.094741543537863e-10
+  ],
+  [
+   [
+    3,
+    0
+   ],
+   2.403553442595365e-10
+  ],
+  [
+   [
+    0,
+    4
+   ],
+   4.534616100070391
+  ],
+  [
+   [
+    1,
+    3
+   ],
+   -27.920066671617686
+  ],
+  [
+   [
+    2,
+    2
+   ],
+   63.92776040070886
+  ],
+  [
+   [
+    3,
+    1
+   ],
+   -14.699402254837702
+  ],
+  [
+   [
+    4,
+    0
+   ],
+   1.6016734516367024
+  ],
+  [
+   [
+    0,
+    5
+   ],
+   3.3042605928148226e-15
+  ],
+  [
+   [
+    1,
+    4
+   ],
+   -1.4402513673058247e-14
+  ],
+  [
+   [
+    2,
+    3
+   ],
+   -2.4103538977677858e-14
+  ],
+  [
+   [
+    3,
+    2
+   ],
+   1.620783792055023e-14
+  ],
+  [
+   [
+    4,
+    1
+   ],
+   2.1469401224256535e-14
+  ],
+  [
+   [
+    5,
+    0
+   ],
+   -2.2156249487249347e-15
+  ],
+  [
+   [
+    0,
+    6
+   ],
+   6.5540952704352e-11
+  ],
+  [
+   [
+    1,
+    5
+   ],
+   -1.8094184092139738e-12
+  ],
+  [
+   [
+    2,
+    4
+   ],
+   4.8002177705847226e-11
+  ],
+  [
+   [
+    3,
+    3
+   ],
+   3.4935895480430583e-12
+  ],
+  [
+   [
+    4,
+    2
+   ],
+   5.6568471399001e-11
+  ],
+  [
+   [
+    5,
+    1
+   ],
+   -1.3795249263550089e-12
+  ],
+  [
+   [
+    6,
+    0
+   ],
+   5.969590344079914e-11
+  ]
+ ],
+ "indeterminates": [
+  "y1",
+  "y2"
+ ],
+ "solver_status_counts": {
+  "level:optimal": 88,
+  "level:infeasible": 195,
+  "mult:optimal": 18,
+  "beta:infeasible": 174,
+  "beta:optimal": 114,
+  "V:optimal": 17,
+  "level:error:SolverError": 2,
+  "level:infeasible_inaccurate": 1,
+  "level:optimal_inaccurate": 2,
+  "V:optimal_inaccurate": 1,
+  "recert:optimal": 10,
+  "recert:infeasible": 4
+ },
+ "solver_seconds": {
+  "level": 9.374314785003662,
+  "mult": 0.5242574214935303,
+  "beta": 2.1159451007843018,
+  "V": 1.1365573406219482,
+  "recert": 0.45046281814575195
+ },
+ "seconds": 14.950149774551392,
+ "recert_status_counts": {
+  "recert:optimal": 11,
+  "recert:infeasible": 5,
+  "recert:optimal_inaccurate": 1
+ },
+ "recert_history": [
+  "re-certified in place by sos_sound.py --fixedV --update (Tue Nov 10 17:25:41 2026)"
+ ]
+}

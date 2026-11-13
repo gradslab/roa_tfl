@@ -1,0 +1,50 @@
+{
+ "case": "power",
+ "N": 1000000,
+ "seed": 15527873,
+ "distribution": "uniform on the box, i.i.d.",
+ "step": 0.025,
+ "t_max": 200.0,
+ "levels": [
+  0.9472883343696594,
+  0.9445213675498962,
+  0.9477900862693787,
+  0.9712480306625366
+ ],
+ "c_inner": 0.15853845849658862,
+ "samples_in_S": 317119,
+ "samples_in_inner": 51753,
+ "share_of_box_in_S": 31.7119,
+ "reached_inner": 317119,
+ "left_or_crossed": 0,
+ "not_reached": 0,
+ "unsafe": 0,
+ "eps_k": 1.3815415124209019e-05,
+ "confidence": 0.999999,
+ "longest_time_to_inner": 15.775,
+ "unsafe_examples": [],
+ "seconds": 9.769443988800049,
+ "target_set": "verified core E = {q < c0} of core_proof.py (the *_inner keys refer to E)",
+ "c_core": 0.15853845849658862,
+ "samples_in_core": 51753,
+ "longest_time_to_core": 15.775,
+ "c_inner_sampled": 0.1726456582546234,
+ "samples_in_sampled_inner": 56475,
+ "runs": [
+  "power_s0_rep",
+  "power_s1_rep",
+  "power_s2_rep",
+  "power_s3_rep"
+ ],
+ "snapshots": [
+  "epoch_004.pt",
+  "epoch_004.pt",
+  "epoch_004.pt",
+  "epoch_004.pt"
+ ],
+ "union_coverage_of_S": 95.97923206954842,
+ "union_coverage_stored": 95.97923206954842,
+ "failing_constraint": {},
+ "unsafe_all": [],
+ "mode": "core_relaxed"
+}

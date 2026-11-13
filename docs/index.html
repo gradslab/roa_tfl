@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Learning Constrained Regions of Attraction</title>
+<meta name="description" content="An estimate of the constrained region of attraction of a transverse feedback linearizing path-following controller, with a verified inner layer and an outer layer tested on samples.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- ============================== HERO ============================== -->
+<header class="hero" id="top">
+  <div class="hero-text">
+    <span class="badge"><i></i>Under review</span>
+    <h1>Learning Constrained Regions of Attraction: Transverse Feedback Linearization and Beyond</h1>
+    <div class="authors"><span>Abdullah Waqar Malik<sup>1</sup></span><span>Hamza Tariq<sup>2</sup></span><span>Adeel Akhtar<sup>2</sup></span></div>
+    <p class="affil"><sup>1</sup>National University of Sciences and Technology, Islamabad &nbsp;·&nbsp; <sup>2</sup>New Jersey Institute of Technology</p>
+    <div class="btns">
+      <span class="btn solid" title="Preprint link coming soon" aria-disabled="true" style="cursor:default"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Paper</span>
+      <a class="btn" href="https://github.com/gradslab/roa_tfl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.7.1-.7 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6a4.7 4.7 0 0 1 1.3-3.2 4.3 4.3 0 0 1 .1-3.2s1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5a4.3 4.3 0 0 1 .1 3.2 4.7 4.7 0 0 1 1.3 3.2c0 4.6-2.8 5.6-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>Code</a>
+      <a class="btn" href="#launch">Try it</a>
+      <a class="btn" href="#cite">Cite</a>
+    </div>
+  </div>
+  <div class="hero-map">
+    <canvas id="hero" width="1200" height="1200" aria-label="live simulation of unicycles following a circle"></canvas>
+    <span class="map-tag tl">live · unicycle on a circle</span>
+    <span class="map-tag br"><span class="ok">converged <b id="hOk">0</b></span><span class="bad">failed <b id="hBad">0</b></span></span>
+  </div>
+  <span class="scroll-cue">scroll</span>
+</header>
+
+<!-- ============================== TL;DR ============================== -->
+<section class="tldr">
+  <div class="wrap grid">
+    <div><h3>The problem</h3><p>A transverse feedback linearizing controller is undefined on a <b>singular set</b>, such as zero speed for a unicycle or zero thrust for a quadrotor. Only some initial states converge to the path. Which ones?</p></div>
+    <div><h3>The idea</h3><p>Where the controller is defined, the transverse dynamics are <b>exactly linear</b>. The state-constrained Zubov value function then splits into a <b>known quadratic cost-to-go</b> plus a <b>safety value function</b>, and only the latter is learned.</p></div>
+    <div><h3>The result</h3><p>An estimate with an <b>inner layer verified</b> by interval branch and bound and an <b>outer layer tested on samples</b>. It covers on average <b data-m="resCovCircMean">–</b> and <b data-m="resCovSinMean">–</b> of the simulated region of attraction on the unicycle and <b data-m="resCovQuadMean">–</b> on the planar quadrotor.</p></div>
+  </div>
+</section>
+
+<!-- ============================== THE QUESTION ============================== -->
+<section class="section" id="question">
+  <div class="wrap">
+    <p class="kicker">The question</p>
+    <h2 class="headline">The path attracts a neighbourhood. How large is it?</h2>
+    <p class="lead">Within each animation, every vehicle runs the same controller. While a vehicle stays admissible, its transverse error obeys linear, exponentially stable dynamics. Some vehicles reach the singular set or a state limit first, and then the controller fails. The constrained region of attraction is the set of starting states that never reach the singular set or leave the state limits.</p>
+    <div class="cards">
+      <figure class="card" style="margin:0"><video data-src="assets/media/unicycle_circle" muted loop playsinline autoplay></video>
+        <figcaption class="cap"><h3>Unicycle, circle</h3><p>Fifty vehicles start heading north at speed 1. Those in the simulated region swirl onto the circle. Red marks show runs that leave the state limits or reach the centre of the circle, where the path coordinate is undefined.</p></figcaption></figure>
+      <figure class="card" style="margin:0"><video data-src="assets/media/unicycle_sinusoid" muted loop playsinline autoplay></video>
+        <figcaption class="cap"><h3>Unicycle, sinusoid</h3><p>The same vehicle on a periodic path. On this slice the only failures are exits through the state limit on x₂.</p></figcaption></figure>
+      <figure class="card" style="margin:0"><video data-src="assets/media/quadrotor" muted loop playsinline autoplay></video>
+        <figcaption class="cap"><h3>Planar quadrotor</h3><p>Zero thrust is singular. Blue vehicles start in the estimate and orbit the loop. The others drive their thrust to zero and fail.</p></figcaption></figure>
+    </div>
+    <div class="legend-row"><span><i class="sw roa"></i>simulated region of attraction</span><span><i class="sw est"></i>our estimate</span><span><i class="sw inner"></i>verified inner layer</span><span><i class="sw bad"></i>reaches the singular set or a limit</span><span><i class="sw path"></i>path</span></div>
+  </div>
+</section>
+
+<!-- ============================== LAUNCH PAD ============================== -->
+<section class="section band" id="launch">
+  <div class="wrap">
+    <p class="kicker">Launch a vehicle</p>
+    <h2 class="headline">Pick a starting state. Watch why it succeeds or fails.</h2>
+    <p class="lead">Click anywhere on the map to launch a unicycle with the heading and speed below. The page integrates the true closed loop in your browser. Watch the three traces: while the vehicle stays admissible, the transverse error obeys linear, exponentially stable dynamics, so the only way to fail is to leave the admissible set.</p>
+    <div class="lab">
+      <div class="panel">
+        <canvas id="pad" width="900" height="900" aria-label="map of the slice; click to launch"></canvas>
+        <p class="hint">Map: the slice of the state space at the chosen heading and speed. Aqua is the simulated region of attraction, blue our estimate (union of four seeds), orange the verified inner layer.</p>
+      </div>
+      <div class="ctrls">
+        <div class="seg" id="padCase"><button data-case="circle" class="on">Circle</button><button data-case="sinusoid">Sinusoid</button></div>
+        <div class="ctrl"><label for="hdg">Initial heading <output id="hdgOut">90°</output></label><input type="range" id="hdg" min="0" max="330" step="30" value="90"></div>
+        <div class="ctrl"><label for="spd">Initial speed <output id="spdOut">1.0</output></label><input type="range" id="spd" min="0" max="2" step="1" value="1"></div>
+        <div class="verdict" id="verdict"><span class="chip neutral">click the map to launch</span></div>
+        <div class="minis">
+          <div class="mini"><h4><span>transverse error |ξ₁|</span><span>log scale</span></h4><canvas id="mXi" width="560" height="120"></canvas></div>
+          <div class="mini"><h4><span>speed</span><span class="bad">0 = singular</span></h4><canvas id="mSpd" width="560" height="120"></canvas></div>
+          <div class="mini"><h4><span>value function along the run</span><span><span style="color:var(--orange)">γq<sub>ex</sub></span> + <span style="color:var(--blue)">Φ</span></span></h4><canvas id="mV" width="560" height="140"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== DECOMPOSITION ============================== -->
+<section class="section" id="idea">
+  <div class="wrap">
+    <p class="kicker">The idea</p>
+    <h2 class="headline">Half of the value function is known in closed form.</h2>
+    <div class="two">
+      <div>
+        <p class="lead" style="margin-bottom:14px">The state-constrained Zubov value function of Grüne and Zidani is finite exactly on the constrained region of attraction. On the admissible set the error coordinates obey ż = Az, so the running cost integrates to a quadratic, and the value function splits in two:</p>
+        <div class="eq" id="eqSplit"></div>
+        <p style="color:var(--ink2)">The first term is the <b style="color:var(--orange)">quadratic cost-to-go</b>. It is exact, and it decreases strictly along every trajectory in the admissible set until the trajectory reaches the path. The second is a <b style="color:var(--blue)">safety value function</b>: the worst future margin to the constraints. It is the only part a network has to learn, and it is learned by fitted value iteration from short simulated steps, without infinite-horizon labels. In the traces above, the orange part always falls. The blue part is positive only while the vehicle will later approach a constraint, and it never grows along a run.</p>
+      </div>
+      <div class="panel">
+        <canvas id="split" width="700" height="520" aria-label="value function along a trajectory"></canvas>
+        <div class="ctrl" style="margin-top:12px"><label for="tSlide">Time along the trajectory <output id="tOut">0.0</output></label><input type="range" id="tSlide" min="0" max="1000" value="0"></div>
+        <p class="hint">A run that passes close to a state limit, the face x₂ = −2. The bar shows V at the current state, split into the known part and the part a network learns.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== LEVEL ============================== -->
+<section class="section band" id="level">
+  <div class="wrap">
+    <p class="kicker">Two layers</p>
+    <h2 class="headline">Push the level. See where the estimate breaks.</h2>
+    <p class="lead">The estimate is a sublevel set {v &lt; c₂} of the learned function, joined to a sublevel set of the quadratic cost-to-go that interval branch and bound verifies. The level c₂ is set by counterexamples, states where v fails to decrease. Drag the level well past the selected value and watch red states appear: the estimate then contains states outside the simulated region of attraction.</p>
+    <div class="lab">
+      <div class="panel"><canvas id="lvl" width="900" height="900" aria-label="sublevel set of the learned function"></canvas></div>
+      <div class="ctrls">
+        <div class="seg" id="lvlCase"><button data-case="circle" class="on">Circle</button><button data-case="sinusoid">Sinusoid</button></div>
+        <div class="ctrl"><label for="lv">Level V = −ln(1 − c) <output id="lvOut">–</output></label><input type="range" id="lv" min="0" max="1000" value="500"></div>
+        <div class="ctrl"><label for="lh">Heading <output id="lhOut">90°</output></label><input type="range" id="lh" min="0" max="330" step="30" value="90"></div>
+        <div class="ctrl"><label for="ls">Speed <output id="lsOut">1.0</output></label><input type="range" id="ls" min="0" max="2" step="1" value="1"></div>
+        <div class="readout">
+          <div><b id="rCov">–</b><small>of the simulated region covered</small></div>
+          <div><b id="rFp" class="bad">–</b><small>slice states wrongly included</small></div>
+          <div><b id="rC2">–</b><small>selected level c₂ (seed 0)</small></div>
+        </div>
+        <button class="btn" id="snap" style="justify-self:start">snap to the selected level</button>
+        <p class="note">One seed, one slice of the four-dimensional state space at a time. Coverage here is measured on the 121 × 121 slice grid, so it differs from the numbers in the paper, which are measured on the whole box.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== ODDS ============================== -->
+<section class="section" id="odds">
+  <div class="wrap">
+    <p class="kicker">What a million samples buy</p>
+    <h2 class="headline">The outer layer is tested, not proved. The test still says a lot.</h2>
+    <div class="odds">
+      <div>
+        <p class="lead">The direct test of unsafe states draws N independent samples of the box and simulates each sample in the estimate until it reaches the verified inner layer. If k of them are unsafe, then with confidence 1 − 10⁻⁶ and up to the integration error, the unsafe states occupy at most ε of the box, where ε is the one-sided Clopper–Pearson bound.</p>
+        <div class="ctrl"><label for="nS">Samples N <output id="nOut">10⁶</output></label><input type="range" id="nS" min="3" max="7" step="0.25" value="6"></div>
+        <div class="ctrl" style="margin-top:14px"><label for="kS">Failures found k <output id="kOut">0</output></label><input type="range" id="kS" min="0" max="20" step="1" value="0"></div>
+        <p class="note" style="margin-top:14px">In the paper: <span data-m="resUnsafeKCirc">–</span>, <span data-m="resUnsafeKSin">–</span> and <span data-m="resUnsafeKQuad">–</span> unsafe samples, with 10⁶ box samples per case, in the unions of four estimates of the circle, the sinusoid and the quadrotor, giving ε ≤ <span data-m="resUnsafeEpsCirc">–</span>, <span data-m="resUnsafeEpsSin">–</span> and <span data-m="resUnsafeEpsQuad">–</span>.</p>
+      </div>
+      <div class="panel" style="text-align:center">
+        <div class="big" id="eps">–</div>
+        <p style="margin:6px 0 16px;color:var(--ink2)">largest share of the box that can still fail</p>
+        <canvas id="ruler" width="600" height="300" aria-label="share of the box"></canvas>
+        <p class="hint">The marker shows ε on a log scale of the share of the box.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== STATUS ============================== -->
+<section class="section band" id="status">
+  <div class="wrap">
+    <p class="kicker">What holds, and how</p>
+    <h2 class="headline">Three kinds of claims, kept apart.</h2>
+    <div class="trio">
+      <div class="status proved"><span class="tag">proved</span><h3>The region and the split</h3><p>On the admissible set, the constrained region of attraction of a TFL controller is its largest forward invariant subset, and the value function splits into the quadratic cost-to-go and the safety value function.</p></div>
+      <div class="status verified"><span class="tag">verified</span><h3>The inner layer</h3><p>A sublevel set of the quadratic cost-to-go, checked by interval branch and bound in floating-point arithmetic with outward rounding. It does not depend on the network, and {v &lt; c₁} lies inside it for every candidate.</p></div>
+      <div class="status tested"><span class="tag">tested on samples</span><h3>The outer layer</h3><p>The learned sublevel set, tested with 10⁶ samples. A scenario bound limits the missed counterexamples, and a direct test of unsafe states limits the states it wrongly includes.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== RESULTS ============================== -->
+<section class="section" id="results">
+  <div class="wrap">
+    <p class="kicker">Results</p>
+    <h2 class="headline">Twelve systems, five methods.</h2>
+    <p class="lead">Coverage of the simulated region of attraction, mean over four seeds. Every method except sum-of-squares passes the same level selection and final test. Toggle methods, and hover a marker for its value. The physics-informed baselines win on some equilibrium benchmarks, and the plot shows where.</p>
+    <div class="res-tools" id="resTools"></div>
+    <div class="panel"><canvas id="dots" width="1100" height="760" aria-label="coverage of every method on every system"></canvas></div>
+    <p class="note" style="margin-top:12px">Sum-of-squares is not applied to the TFL closed loops, which are rational with trigonometric terms and singular, and was not run on the obstacle benchmarks. The quadrotor is the hardest case: counterexamples hold its level low, and the bound V ≥ γq<sub>ex</sub> alone then excludes <span data-m="resFloorQuad">–</span> of its simulated region of attraction.</p>
+  </div>
+</section>
+
+<!-- ============================== BEYOND ============================== -->
+<section class="section band" id="beyond">
+  <div class="wrap two" style="align-items:center">
+    <div>
+      <p class="kicker">Beyond TFL</p>
+      <h2 class="headline">The same learning applies to closed loops with an exponentially stable equilibrium.</h2>
+      <p class="lead">With the quadratic form of the linearization in place of the exact cost-to-go, the method applies to general closed loops. A sublevel set of that quadratic form, verified by interval branch and bound, is again the inner layer. Among the five benchmarks with obstacles, the 3-D system and the four of Meng and Liu, the estimate covers the most on <span data-m="resObsBestCount">–</span>.</p>
+    </div>
+    <figure class="card" style="margin:0"><video data-src="assets/media/obstacles" muted loop playsinline autoplay></video>
+      <figcaption class="cap"><h3>Van der Pol with two obstacles</h3><p>Trajectories that start in the estimate converge, and so do some that start outside it. The others run into an obstacle or leave the box.</p></figcaption></figure>
+  </div>
+</section>
+
+<!-- ============================== REPRODUCE ============================== -->
+<section class="section" id="paper">
+  <div class="wrap">
+    <p class="kicker">Reproduce</p>
+    <h2 class="headline">Every number comes from one script.</h2>
+    <div class="two">
+      <pre><span class="c"># clone and set up</span>
+git clone https://github.com/gradslab/roa_tfl.git
+cd roa_tfl
+bash reproduce.sh setup
+
+<span class="c"># every table and number of the paper, compared with the paper</span>
+bash reproduce.sh tables
+
+<span class="c"># Figure 1 and the paper PDF</span>
+bash reproduce.sh figure
+bash reproduce.sh paper
+
+<span class="c"># the full computation from scratch (hours on a laptop CPU)</span>
+bash reproduce.sh all</pre>
+      <table class="map">
+        <tr><td>tfl/</td><td>the three TFL cases: training, interval verification, level selection, final test, fine-tuning, baselines, and the generator of every number</td></tr>
+        <tr><td>benchmarks/</td><td>the nine equilibrium benchmarks, their verified inner layers, sum-of-squares and the physics-informed baselines</td></tr>
+        <tr><td>paper/</td><td>the paper sources and the reference copy of every generated table</td></tr>
+        <tr><td>render/, web/</td><td>the animations and the data of this page</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CITE ============================== -->
+<section class="section band" id="cite">
+  <div class="wrap">
+    <p class="kicker">Cite</p>
+    <div style="position:relative"><button class="copy" id="copyBib">copy</button><pre id="bib">@unpublished{malik2027constrained,
+  author = {Abdullah Waqar Malik and Hamza Tariq and Adeel Akhtar},
+  title  = {Learning Constrained Regions of Attraction: Transverse
+            Feedback Linearization and Beyond},
+  note   = {Under review},
+  year   = {2027}
+}</pre></div>
+  </div>
+</section>
+
+<footer><div class="wrap">Abdullah Waqar Malik, Hamza Tariq and Adeel Akhtar · NUST and NJIT · The live simulations on this page integrate the unicycle closed loop of the paper in your browser.</div></footer>
+<div class="tip" id="tip"></div>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="assets/app.js"></script>
+</body>
+</html>

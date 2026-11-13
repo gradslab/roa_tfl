@@ -1,0 +1,58 @@
+{
+ "system": "quadrotor",
+ "path": "x^2 + y^2 - 1 = 0",
+ "pi": "atan2(y, x)",
+ "eta_c_hi": 1.8,
+ "alpha": 0.08640078996816024,
+ "c_inner": 0.0005978051076726842,
+ "c1": 0.0005976264578003709,
+ "volume_of_box": 0.0,
+ "cells_processed": 21270981,
+ "seconds": 3626.2013218402863,
+ "min_rel_width": 0.0001,
+ "verify_info": {
+  "processed": 21270981,
+  "seconds": 217.90360403060913,
+  "min_q_lower_bound_on_constraint_cells": -1e-323
+ },
+ "problem": {
+  "system": "quadrotor",
+  "target": "z",
+  "path": "x^2 + y^2 - 1 = 0",
+  "pi": "atan2(y, x)",
+  "periodic_x1": false,
+  "eta_c": 0.4,
+  "eta_c_hi": 1.8,
+  "Q_diag": [
+   1.742,
+   0.249,
+   3.281
+  ],
+  "alpha": 0.08640078996816024,
+  "z_scale": [
+   1.546367883682251,
+   2.4393858909606934,
+   5.953335762023926,
+   0.7031854391098022,
+   1.03385591506958
+  ],
+  "box": [
+   -2.0,
+   2.0,
+   -2.0,
+   2.0,
+   -2.0,
+   2.0,
+   -2.0,
+   2.0,
+   0.0,
+   4.0
+  ],
+  "eps": [
+   0.01,
+   0.01,
+   0.05
+  ]
+ },
+ "engine": "interval"
+}

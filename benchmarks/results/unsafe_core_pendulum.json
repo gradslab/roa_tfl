@@ -1,0 +1,118 @@
+{
+ "case": "pendulum",
+ "N": 1000000,
+ "seed": 13087494,
+ "distribution": "uniform on the box, i.i.d.",
+ "step": 0.025,
+ "t_max": 200.0,
+ "levels": [
+  0.9864968061447144,
+  0.9862654805183411,
+  0.9902939200401306,
+  0.9897016882896423
+ ],
+ "c_inner": 0.005400558526681169,
+ "samples_in_S": 301278,
+ "samples_in_inner": 9968,
+ "share_of_box_in_S": 30.1278,
+ "reached_inner": 301274,
+ "left_or_crossed": 0,
+ "not_reached": 4,
+ "unsafe": 4,
+ "eps_k": 2.3431295769514433e-05,
+ "confidence": 0.999999,
+ "longest_time_to_inner": 19.5,
+ "unsafe_examples": [
+  [
+   0.9448831081390381,
+   -0.024363040924072266
+  ],
+  [
+   0.9258954524993896,
+   0.0029783248901367188
+  ],
+  [
+   0.9332358837127686,
+   -0.007061004638671875
+  ],
+  [
+   0.9376552104949951,
+   -0.01375579833984375
+  ]
+ ],
+ "seconds": 15.820252180099487,
+ "target_set": "verified core E = {q < c0} of core_proof.py (the *_inner keys refer to E)",
+ "c_core": 0.005400558526681169,
+ "samples_in_core": 9968,
+ "longest_time_to_core": 19.5,
+ "c_inner_sampled": 0.009162809699773788,
+ "samples_in_sampled_inner": 16995,
+ "runs": [
+  "pendulum_s0_rep",
+  "pendulum_s1_rep",
+  "pendulum_s2_rep",
+  "pendulum_s3_rep"
+ ],
+ "snapshots": [
+  "epoch_003.pt",
+  "epoch_003.pt",
+  "epoch_003.pt",
+  "epoch_003.pt"
+ ],
+ "union_coverage_of_S": 93.17872603586889,
+ "union_coverage_stored": 93.17872603586889,
+ "failing_constraint": {
+  "not reached": 4
+ },
+ "unsafe_all": [
+  {
+   "state": [
+    0.9448831081390381,
+    -0.024363040924072266
+   ],
+   "label": 2,
+   "failing": "not reached",
+   "seeds_containing": [
+    3
+   ],
+   "in_sampled_inner": false
+  },
+  {
+   "state": [
+    0.9258954524993896,
+    0.0029783248901367188
+   ],
+   "label": 2,
+   "failing": "not reached",
+   "seeds_containing": [
+    3
+   ],
+   "in_sampled_inner": false
+  },
+  {
+   "state": [
+    0.9332358837127686,
+    -0.007061004638671875
+   ],
+   "label": 2,
+   "failing": "not reached",
+   "seeds_containing": [
+    3
+   ],
+   "in_sampled_inner": false
+  },
+  {
+   "state": [
+    0.9376552104949951,
+    -0.01375579833984375
+   ],
+   "label": 2,
+   "failing": "not reached",
+   "seeds_containing": [
+    3
+   ],
+   "in_sampled_inner": false
+  }
+ ],
+ "mode": "core"
+}

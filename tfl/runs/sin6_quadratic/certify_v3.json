@@ -1,0 +1,69 @@
+{
+ "run": "runs/sin6_quadratic",
+ "case": "sinusoid",
+ "snapshot": "epoch_000.pt",
+ "alpha": 0.18226820820421552,
+ "c_inner": 0.05094421305220749,
+ "c1": 0.04966831484224343,
+ "c2_screening_and_retest": [
+  0.08294510841369629,
+  0.0968703031539917
+ ],
+ "c2_selected": 0.08294510841369629,
+ "c2": 0.0770336389541626,
+ "iid": {
+  "N": 1000000,
+  "seed": 7867806,
+  "distribution": "uniform on the box, i.i.d.",
+  "eps": 1.3815510557964274e-05,
+  "confidence": 0.999999,
+  "c1": 0.04966831484224343,
+  "c2_old": 0.08294510841369629,
+  "c2_iid": 0.0770336389541626,
+  "c2": 0.0770336389541626,
+  "n_band": 11582,
+  "n_tested": 11582,
+  "first_failure": {
+   "v": 0.0770336389541626,
+   "kind": 1,
+   "x": [
+    -0.8612635135650635,
+    -0.95310378074646,
+    0.7196729183197021,
+    0.9847800731658936
+   ]
+  },
+  "n_below_c1_outside_inner": 0,
+  "n_below_c1_outside_inner_failed": 0
+ },
+ "screening": [
+  {
+   "snapshot": "epoch_000.pt",
+   "c2": 0.0968703031539917,
+   "volume": 0.027459999546408653
+  }
+ ],
+ "retest": [
+  {
+   "snapshot": "epoch_000.pt",
+   "c2": 0.08294510841369629,
+   "volume": 0.021460000425577164
+  }
+ ],
+ "horizons": [
+  1.0,
+  2.0,
+  4.0,
+  8.0
+ ],
+ "step_h": 0.025,
+ "c1_sampled": false,
+ "coverage": 2.062506576870462,
+ "false_positive": 0.0,
+ "false_positive_of_region": 0.0,
+ "inner_coverage": 1.090182047774387,
+ "roa_fraction_of_box": 95.03,
+ "region_fraction_of_box": 1.9600000232458115,
+ "n_ground_truth": 50000,
+ "seconds": 4.718130111694336
+}

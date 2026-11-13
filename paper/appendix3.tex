@@ -1,0 +1,350 @@
+% Appendices of main.tex
+\section{Related Work}\label{app:related}
+
+\paragraph{Zubov functions with constraints.} \citet{camilli2001} extended Zubov's equation to perturbed systems, and
+\citet{gruene2015} added state constraints through an obstacle term. Our value function is their equation~(3.4) without the
+perturbation. \citet{xue2020} use the same kind of value function with a prescribed running cost built from a polynomial, whose
+integral along trajectories is unknown, and compute convex sum-of-squares inner approximations for polynomial systems. Lemma~\ref{lem:split}
+gives this integral in closed form for TFL closed loops. Converse Lyapunov-barrier theorems show that a smooth Lyapunov function exists on sets such as $\D(M)$ when the target set is compact and uniformly
+asymptotically stable, for perturbed continuous-time systems \citep{meng2022} and for hybrid systems \citep{meng2023}. Such a function is not known in closed form. Neural solvers of Zubov equations \citep{liu2025,liu2024lyznet,kang2023} and their
+state-constrained versions in continuous time \citep{mengliu2026} and discrete time \citep{serry2025,serry2026} learn the value function of an
+equilibrium or of a compact invariant set. Those that certify the result verify Lie-derivative conditions in continuous time or one-step
+conditions in discrete time, with satisfiability-modulo-theories or bound-propagation tools. \citet{xue2020bellman} characterize the interior of the maximal robust region of attraction of an equilibrium of a
+state-constrained, perturbed discrete-time system by a Bellman equation, a discrete-time analogue of the equation of \citet{gruene2015}. \citet{serry2026} note that initial estimates of
+the region of attraction for non-singleton sets remain open, and our inner layer gives one for TFL closed loops.
+
+\paragraph{Safety value functions and reachability.} Equation~\eqref{eq:dp} is the self-consistency equation of an undiscounted
+safety value function \citep{yu2022}, and reach-avoid reinforcement learning uses the same recursion with a frozen target \citep{hsu2021}.
+DeepReach solves reachability equations by a residual loss \citep{bansal2021}, and \citet{bokanowski2023} use neural backward recursions for finite-horizon
+problems with a maximum running cost and obstacles. The closest precedent for our problem is \citet{oishi2006}, who synthesize, on a grid and in low dimension, parameterized feedback-linearizing
+controllers together with the set of states on which they satisfy state and saturation limits. Our setting differs in the
+target set, the singular decoupling matrix, the learned function, and the known decrease that the running cost provides. In the language of viability theory, $\D(M)$ is the viability kernel of $\Oad$ under the closed loop.
+
+\paragraph{Local estimates and sampled certificates.} \citet{manchester2011} computes inner estimates of the regions of attraction of hybrid limit cycles from a quadratic form on the linearized transverse dynamics. \citet{faulwasser2016} use a sublevel set of a quadratic in transverse coordinates as the terminal region of
+a path-following predictive controller, for a global transverse feedback linearization without a singular decoupling matrix. Finite-step Lyapunov conditions go back to
+\citet{aeyels1998} and \citet{geiselhart2014}. \citet{bobiti2018} verify a finite-step decrease on samples with Lipschitz margins and glue the
+verified annulus to a local set obtained from linearization and a numerical optimizer, and they set the level below the samples that violate the decrease. Our annulus
+has the same shape and is tested on samples only, and our inner layer is verified by interval arithmetic. \citet{liu2025} combine a local quadratic region with a neural sublevel set, with
+the inclusion checked by a formal verifier. \citet{li2025} certify an annulus above an inner level, and \citet{score2026} certify an annulus statistically above an independently
+certified inner set. The anchored networks of \citet{liu2026anchored} give an inclusion of sublevel sets with a constant that depends on the parameters.
+Inclusion~(ii) of Theorem~\ref{thm:main} holds with no such constant. \citet{boffi2020} bound the generalization error of certificates learned from
+trajectories, and Proposition~\ref{prop:scen} is the one-dimensional case of \citet{campi2008}. \citet{kenanian2019} show by example that a bound on the measure of
+counterexamples to the decrease does not bound the measure of non-converging states. \citet{berkenkamp2016} and \citet{richards2018} close the gap between samples and the continuum with
+Lipschitz constants on a grid. In our setting the Lipschitz constant grows as the margins to the singular set shrink, which makes such a grid expensive in four to six
+dimensions.
+
+\paragraph{Neural Lyapunov functions and TFL.} Neural Lyapunov functions with counterexample-guided training and exact verification
+\citep{chang2019,abate2021,dai2021,wu2023,yang2024} reach systems of six to twelve states. \citet{barreau2024} learn a maximal Lyapunov function
+as a quadratic plus a signed residual, optimized jointly on a prescribed compact domain. Our candidate shares this additive form. Its quadratic is
+fixed and exact on the admissible set, and its network is nonnegative. We found no prior network composed with an obstacle function by a maximum. The TFL literature \citep{nielsen2006,nielsen2008,akhtar2011,akhtar2015,akhtar2012,allawati2026} proves local exponential
+stability of the target set and treats regularity as an assumption. For the quadrotor, Assumption~A1 of \citet{allawati2026} assumes nonzero thrust on a neighbourhood of the
+path, and their Remark~2 notes that positive thrust is guaranteed only near the path-following manifold.
+
+\section{The Two Systems}\label{app:systems}
+
+\paragraph{Unicycle.} The dynamically extended unicycle, a simpler model than the car-like robot of \citet{akhtar2015} with the same singularity at zero speed, has state $x=(x_1,x_2,x_3,x_4)$ and
+\begin{equation}\label{eq:uni}
+\dot x_1=(1+x_4)\cos x_3,\quad \dot x_2=(1+x_4)\sin x_3,\quad \dot x_3=u_2,\quad \dot x_4=u_1,
+\end{equation}
+so $1+x_4$ is the speed, $u_1$ the acceleration and $u_2$ the turn rate. Both outputs have relative degree two,
+$\xi=(\alpha,L_f\alpha)$, $\eta=(\varpi,L_f\varpi)$, $\Tm(x)=(\eta,\xi)$, and
+\begin{equation}
+D(x)=\begin{bmatrix}L_{g_1}L_f\varpi & L_{g_2}L_f\varpi\\ L_{g_1}L_f\alpha & L_{g_2}L_f\alpha\end{bmatrix},\qquad
+\det D(x)=\pm(1+x_4)\det\begin{bmatrix}\nabla\varpi\\ \nabla\alpha\end{bmatrix}.
+\end{equation}
+The controller is \eqref{eq:tfl} with $\nu_\perp=-\xi_1-2\xi_2$ (double pole at $-1$) and $\nu_\parallel=-(\eta_2-1)$, so the
+tangential speed $\eta_2=L_f\varpi$ is driven to $\bar\eta=1$. The error coordinates are $z=(\xi_1,\xi_2,\eta_2-1)$ with
+$A=\operatorname{blkdiag}\big(\begin{smallmatrix}0&1\\-1&-2\end{smallmatrix}\big),-1\big)$ and $Q=\operatorname{diag}(1.742,0.249,3.281)$.
+The target set $M=\{z=0\}$ is the path traversed with tangential speed $\eta_2=1$. For the unicycle it has two components,
+with the heading along the path and positive speed, and with the heading against the path and negative speed, because
+$\eta_2$ depends on the velocity and not on the heading. On both components, $|\det D|$ and $|\det J_\Tm|$ are bounded away
+from zero and the state is inside the box, as the expressions below show, so $M$ is compact and lies in $\Oad$. The
+reference simulation counts convergence to either component.
+
+\emph{Circle.} The path is $\alpha=x_1^2+x_2^2-1$ with $\varpi=\operatorname{atan2}(x_2,x_1)$, so
+$\xi_2=2(1+x_4)(x_1\cos x_3+x_2\sin x_3)$, $\eta_2=(1+x_4)(x_1\sin x_3-x_2\cos x_3)/(x_1^2+x_2^2)$,
+$\det D=-2(1+x_4)$, $\det J_\Tm=4(1+x_4)$, $\|\nabla\varpi\|^{-1}=\sqrt{x_1^2+x_2^2}$. Box: $|x_1|,|x_2|\le2$,
+$x_4\in[-3,1]$ (speed in $[-2,2]$), $x_3\in S^1$.
+\emph{Sinusoid.} The path is $\alpha=x_2-\sin x_1$ with $\varpi=x_1$, so $\xi_2=(1+x_4)(\sin x_3-\cos x_1\cos x_3)$,
+$\eta_2=(1+x_4)\cos x_3$, $\det D=\det J_\Tm=1+x_4$, $\|\nabla\varpi\|^{-1}=1$. The closed loop is $2\pi$-periodic in $x_1$,
+taken in $[-\pi,\pi)$. The box is $|x_2|\le2$, $x_4\in[-3,1]$. On $M$ the speed has magnitude $\sqrt{1+\cos^2x_1}\le\sqrt2$.
+The thresholds are $\epsilon_D=\epsilon_\Tm=10^{-2}$ and $\epsilon_\varpi=5\cdot10^{-2}$, so $\Oad$ excludes $|1+x_4|\le0.005$ (circle)
+or $\le0.01$ (sinusoid) and, for the circle, the disc of radius $0.05$ around the centre.
+
+\paragraph{Planar quadrotor.} The state is $(p_1,p_2,w_1,w_2,\vartheta,T)$ with
+\begin{equation}\label{eq:quad}
+\dot p=w,\qquad \dot w=T\begin{bmatrix}-\sin\vartheta\\ \cos\vartheta\end{bmatrix}-\begin{bmatrix}0\\1\end{bmatrix},\qquad
+\dot\vartheta=u_2,\qquad \dot T=u_1,
+\end{equation}
+in units with unit mass, unit gravity and unit path radius. The thrust $T$ is a controller state (the dynamic extension of \citet{akhtar2012}),
+and the tilt rate is the second input, as provided by a multirotor autopilot with an inner rate loop. For the loop
+$\alpha=p_1^2+p_2^2-1$, $\varpi=\operatorname{atan2}(p_2,p_1)$ both outputs have relative degree three:
+$\xi=(\alpha,\ 2p^\top w,\ 2|w|^2+2p^\top\dot w)$,
+$\eta_2=(p_1w_2-p_2w_1)/|p|^2$ the angular rate, $\eta_3=L_f^2\varpi$, and
+\begin{equation}
+D(x)=\begin{bmatrix}n_1/|p|^2 & Tn_2/|p|^2\\ 2n_2 & -2Tn_1\end{bmatrix},\qquad
+n_1=p_1\cos\vartheta+p_2\sin\vartheta,\quad n_2=p_2\cos\vartheta-p_1\sin\vartheta,
+\end{equation}
+so $\det D=-2T$ and $\det J_\Tm=-8T$.
+The controller is \eqref{eq:tfl} with $\nu_\perp=-8\xi_1-12\xi_2-6\xi_3$ (triple pole at $-2$) and
+$\nu_\parallel=-(\eta_2-\tfrac12)-2\eta_3$ (double pole at $-1$). The error coordinates are
+$z=(\xi_1,\xi_2,\xi_3,\eta_2-\tfrac12,\eta_3)$ with $Q=I$, and $M=\{z=0\}$ is the loop traversed counter-clockwise at
+angular rate $\tfrac12$. On $M$ the thrust is $T=|\dot w+(0,1)|\in[0.75,1.25]$. The box is $|p_i|\le2$, $|w_i|\le2$, $T\in[0,4]$
+(thrust-to-weight ratio up to four), $\vartheta\in S^1$. The thresholds are those of the unicycle, so $\Oad$ excludes $T\le0.005$ and the
+disc of radius $0.05$ around the centre. The reference simulation treats a sign change of $T$ between two steps as a
+departure through the singular set.
+
+\paragraph{Constants.} Table~\ref{tab:consts} lists the scaling $S_z$ and the cost scale $\gamma$. The scale is
+$\gamma=3/p_{90}$, where $p_{90}$ is the 90th percentile of $\zeta^\top P\zeta$ over admissible samples. Both are computed
+from the model, without simulating trajectories.
+\input{table_consts3}
+
+\section{Proofs}\label{app:proofs}
+
+\paragraph{Proof of Lemma~\ref{lem:split}.} By Assumption~\ref{ass:main}(b), the error coordinates satisfy $\dot z=Az$ on $\Oad$, hence $\dot\zeta=\tilde A\zeta$ and
+$\frac{d}{dt}\zeta^\top P\zeta=\zeta^\top(\tilde A^\top P+P\tilde A)\zeta=-\zeta^\top Q\zeta$. Integrating along a trajectory in $\Oad$ gives
+$\int_0^t\ell=\gamma\qex(x)-\gamma\qex(y(t))$. Substituting in \eqref{eq:V}, $V(x)=\gamma\qex(x)+\sup_{t\ge0}[h(y(t))-\gamma\qex(y(t))]$ when the
+trajectory stays in $\Oad$. In that case $z(y(t))\to0$ and the limit points of the trajectory lie in $M$, so $h(y(t))=0$ eventually and $\qex(y(t))\to0$. The supremum is
+therefore nonnegative and equals $\sup_t\relu(h-\gamma\qex)(y(t))$. If the trajectory leaves $\Oad$, both sides are infinite by definition. For \eqref{eq:dp}, split the
+supremum over $[0,\tau]$ and $[\tau,\infty)$ and use $y(t;x)=y(t-\tau;y(\tau;x))$. \hfill$\square$
+
+Substituting \eqref{eq:split} in the obstacle equation of Theorem~4.4 of \citet{gruene2015} gives, formally, the
+variational inequality $\min\{-L_{f_{\mathrm{cl}}}\Phi-\kappa\rho,\ \Phi-\psi\}=0$ on $\Oad$.
+
+\paragraph{Proof of Theorem~\ref{thm:gz}.} Let $y(t;x)$ stay in $\Oad$. By Assumption~\ref{ass:main}(a), the field is bounded on the compact set $\overline{\Oad}$, so the solution exists for all time. Since $\dot z=Az$, $z(y(t))\to0$.
+Every limit point of the bounded trajectory lies in $\overline{\Oad}$ and has $z=0$, so it lies in $M$, and $\dist(y(t),M)\to0$. The converse holds by
+definition of $\D(M)$. A forward invariant subset of $\Oad$ consists of states that never leave $\Oad$, which gives the maximality. For
+$x\in\D(M)$, the closure of the trajectory is a compact subset of $\Oad$, because its limit points lie in $M\subset\Oad$ by Assumption~\ref{ass:main}(c), so $h$ is bounded along
+it. By Lemma~\ref{lem:split}, $\int_0^\infty\ell=\gamma\qex(x)<\infty$, and the extra running cost vanishes once the trajectory has entered its
+zero set near $M$, so $V(x)<\infty$. Conversely, $V(x)<\infty$ forces $h(y(t;x))<\infty$ for all $t$, so the trajectory never leaves $\Oad$. \hfill$\square$
+
+\paragraph{Proof of Theorem~\ref{thm:main}.} (i) By Lemma~\ref{lem:split}, $\qex$ decreases along the flow on $\Oad$, so a trajectory from $x\in\I$ keeps $\gamma\qex<c_I$
+while it stays in $\Oad$. It cannot reach a regularity constraint, because the first such point would have $\gamma\qex<c_I$ by
+continuity, and the hypothesis excludes it. It cannot leave $B$, because leaving through a face requires a point where the field points
+outward or is tangent, and the hypothesis gives strict inflow at every point of $\{\gamma\qex<c_I\}$ on the faces. So the trajectory stays in $\I$, and
+$\I\subset\D(M)$ by Theorem~\ref{thm:gz}. The points of $M$ have $\qex=0$ and lie in $B^\circ$, so $M\subset\I$.
+(ii) The inequality $v<c_1$ means $-\ln(1-v)<c_I$, and $\gamma\qex\le-\ln(1-v)$.
+(iii) Let $v(x)<c_2$. While $v\ge c_1$, apply a step of the finite-step decrease condition. Each step stays in $\Oad$, has length at
+least one and lowers $v$, so the state remains in $\{v<c_2\}$. Either a step reaches $\{v<c_1\}\subset\I$, which is forward invariant in $\Oad$, or
+the steps continue forever. In both cases the orbit of $\bar f$ stays in $\Oad$ for all normalized time. By Assumption~\ref{ass:main}(a), the factor $a$ is bounded on
+$\overline{\Oad}$, so physical time also diverges, and $x\in\D(M)$ by Theorem~\ref{thm:gz}. \hfill$\square$
+
+\paragraph{Proof of Proposition~\ref{prop:eq}.} The matrix $P$ is positive definite, so $E$ is a compact ellipsoid. A trajectory from $E\setminus\{0\}$ cannot
+leave $E$, because it would have to cross $\{q=c_0\}$, where $L_fq<0$, and the origin is an equilibrium. Since $E\subset\Oad$ is compact and forward invariant and
+$L_fq<0$ on $E\setminus\{0\}$, LaSalle's invariance principle \citep{khalil2002} shows that every trajectory from $E$ converges to the origin, so $E\subset\D(\{0\})$. Since $\Phi_\theta\ge0$, we have
+$V_\theta\ge\gamma q$, and $v_\theta<c_1$ gives $\gamma q\le V_\theta<\gamma c_0$.
+
+For the last claim, note first that $\Phi_\theta\ge\psi$ gives $V_\theta\ge h$. Each term of $h$ tends to infinity as its distance $d_i$ tends to zero,
+and the faces of $B$ are among the constraints. For $c<1$ the set $\{v_\theta\le c\}$ therefore keeps every $d_i$ above a positive constant, so it is a
+compact subset of $\Oad$ on which $v_\theta$ is continuous. Let $x_0\in\Oad$ with $v_\theta(x_0)<c_2$. While $q(x_k)\ge c_0$, let $x_{k+1}$ be an end point in $\{q<c_0\}$ if one of the horizons
+reaches this set along a trajectory in $\Oad$. Otherwise, let $x_{k+1}$ be the end point with the lowest $v_\theta$ among the horizons that satisfy the
+finite-step decrease condition at $x_k$. Suppose the sequence never enters $\{q<c_0\}$. The values
+$v_\theta(x_k)$ decrease, so all $x_k$ lie in the compact set $K=\{x\in\Oad:\ q(x)\ge c_0,\ v_\theta(x)\le v_\theta(x_0)\}$. A subsequence converges to some
+$x_*\in K$, and $v_\theta(x_k)$ decreases to $c_*=v_\theta(x_*)$. The flow of $\bar f$ depends continuously on the initial state, and $\Oad$ and $\{q<c_0\}$ are open. If a horizon $H$ takes $x_*$ to
+$\{q<c_0\}$ along a trajectory in $\Oad$, the same holds for every $x_k$ close enough to $x_*$, and the sequence enters $\{q<c_0\}$, a contradiction. Otherwise
+$x_*$ satisfies the finite-step decrease condition with some horizon $H$, so its trajectory stays in $\Oad$ over length $H$ and ends at a value below $c_*-\delta$
+for some $\delta>0$. For every $x_k$ close enough to $x_*$, the trajectory over the same horizon therefore also stays in $\Oad$ and ends at a value below
+$c_*-\delta/2$. The choice of $x_{k+1}$ then gives $v_\theta(x_{k+1})<c_*$, which contradicts $v_\theta(x_k)\downarrow c_*$. After finitely many steps, each along a trajectory in $\Oad$, the
+state thus enters $\{q<c_0\}\subset E$, and it then converges to the origin inside $E$. The fields $\bar f$ and $f$ have the same
+orbits, and $a\ge1$, so a step of normalized length $H$ takes physical time at most $H$. Hence $x_0\in\D(\{0\})$. \hfill$\square$
+
+\paragraph{Proof of Proposition~\ref{prop:scen}.} Let $G(t)=\mathbb P(\text{counterexamples in }\{c_1\le v<t\})$, nondecreasing and left-continuous. If $G(\bar c_2)\le\varepsilon$
+there is nothing to prove. Otherwise let $t_*=\inf\{t:G(t)>\varepsilon\}$. The set $\mathcal C_*$ of counterexamples in
+$\{c_1\le v\le t_*\}$ has measure at least $\varepsilon$, the event $G(c_2)>\varepsilon$ requires $c_2>t_*$ and hence no
+sample in $\mathcal C_*$, and that has probability at most $(1-\varepsilon)^N$. This is the one-dimensional case of the scenario
+theorem of \citet{campi2008}. \hfill$\square$
+
+\paragraph{Proof of Proposition~\ref{prop:unsafe}.} A state of $\mathcal S\setminus U$ lies in $\Oad$ and reaches $\I$ along a trajectory in $\Oad$. By Theorem~\ref{thm:main}(i),
+$\I$ is forward invariant and lies in $\D(M)$, so the state lies in $\D(M)$, and $\mathcal S\setminus\D(M)\subset U$. The count $K$ of samples in $U$ is
+binomial with parameters $N$ and $p=\mathbb P(U)$. Since $\varepsilon_k$ increases with $k$, the event $p>\varepsilon_K$ is the event $K\le k_*$, with
+$k_*$ the largest $k$ such that $\varepsilon_k<p$, and it is empty if there is no such $k$. The distribution function of the binomial at $k_*$
+decreases in its success probability, so $\Pr[K\le k_*]\le\Pr[\mathrm{Bin}(N,\varepsilon_{k_*})\le k_*]=10^{-6}$. This is the one-sided
+Clopper-Pearson bound. \hfill$\square$
+
+\section{Equilibrium Benchmarks and Baselines}\label{app:bench}
+\paragraph{Systems.} Each system has its equilibrium at the origin. Leaving the box counts as leaving $\Oad$. The reversed Van der Pol oscillator is
+$\dot x_1=-x_2$, $\dot x_2=x_1-\mu(1-x_1^2)x_2$, on $[-2.5,2.5]\times[-3.5,3.5]$ for $\mu=1$ and $[-3,3]\times[-6,6]$ for $\mu=3$. The pendulum is
+$\dot x_1=x_2$, $\dot x_2=\sin x_1-x_2+u$, with $u=\operatorname{sat}_{0.8}(-4.4142x_1-2.3163x_2)$, the gains of Example~5 of \citet{liu2025} and a torque limit that we add, on $[-\pi,\pi]\times[-4,4]$. The 3-D system is $\dot x_1=-x_1+x_2$,
+$\dot x_2=0.1x_1-2x_2-x_1^2-0.1x_1^3$, $\dot x_3=-x_3+x_1x_2$, with $x_3<1$ and $(x_1+1)^2+(x_2-1)^2>0.3^2$, on $[-3,3]^2\times[-2,2]$. The power system is
+$\dot x_1=x_2$, $\dot x_2=-0.5x_2-\sin(x_1+\pi/3)+\sin(\pi/3)$, on $[-2,3]\times[-3,3]$. The obstacle benchmarks are Examples 3 and 4 of \citet{mengliu2026}. They
+use the oscillator with $\mu=1$ on $[-2.5,2.5]\times[-3.5,3.5]$, with a disc of radius $0.25$ at $(1,1)$ and, in the second case, another at $(-1,-1)$. They use the
+power system on $[-1,1.5]\times[-1.5,1]$ with discs of radius $1/8$ at $(0.25,\pm0.25)$, and on $[-2,3]\times[-3,1.5]$ with discs of radius $1/4$ at $(2,-1.5)$,
+$(-1,0.5)$, $(-1,-1.5)$ and $(\pi/3,0)$. The last disc covers the saddle of the power system. Each disc with centre $o_i$ and radius $r_i$ enters $\Oad$ as the
+constraint $\|x-o_i\|-r_i>0$, which gives the admissible set of their obstacle constraints. The reference simulation integrates $5\times10^4$ states with RK4, step $0.01$ and horizon
+$40$ ($60$ for the power system), and a state has converged when the scaled state has norm below $10^{-3}$ for one time unit.
+
+\paragraph{Baselines.} The sum-of-squares baseline is the $V$-$s$ iteration with an expanding interior \citep{jarvis2003,topcu2008,packard2010}, with a polynomial
+of degree 6 in two dimensions and 4 in three. It works in the state scaled by the half-widths of the box. The shape function and the initial $V_{\mathrm{sos}}$ are the
+quadratic form of the linearization. The multiplier of the expanding set has degree at most 4. The multiplier of the decrease condition has degree 4 on the
+polynomial systems and 6 on the pendulum and the power system. One multiplier of degree 2 per constraint keeps $\{V_{\mathrm{sos}}\le1\}$ inside the box and, on the 3-D system,
+below the limit and outside the obstacle. The iteration stops after three iterations that raise the level of the expanding set by less than $0.1$ percent. On the
+pendulum and the power system, the sine is its Taylor polynomial of degree 5 plus a remainder $\mathrm{rem}(x_1)$ with $|\mathrm{rem}|\le x_1^6/720$. The derivative of $V_{\mathrm{sos}}$ is affine in the remainder.
+Imposing the decrease condition at $\mathrm{rem}=\pm x_1^6/720$ therefore covers every admissible remainder, as in \citet{topcu2009} and \citet{chesi2005}. The
+saturation of the pendulum enters through an auxiliary variable whose real solutions are exactly the saturated input. Each reported set was solved again with Clarabel to the
+status optimal. Its multipliers were then projected onto the positive semidefinite cone. With the coefficient residuals absorbed into the Gram matrices, every
+condition passed a floating-point test of positive definiteness. On the pendulum the test needed tighter tolerances and facial reduction, and it accepts residuals of the
+decrease condition of about $3\times10^{-16}$, the floating-point resolution of the data. The 3-D set passes the test at the level
+\resSosLevelConThree\ of $V_{\mathrm{sos}}$, and the table reports that level. A check of the decrease of $V_{\mathrm{sos}}$ on $4\times10^6$ uniform states found no violation in any set. The runs took
+\resSosTimePend\ minutes on the pendulum and \resSosTimePower\ on the power system.
+
+\citet{liu2025} report sum-of-squares volumes of $94.17$ and $70.88$ percent on the two Van der Pol systems, with the interior expanding
+algorithm of \citet{packard2010}. On the power system they report $18.53$ percent for a Taylor expansion of the model. They do not define this volume.
+We ran our code with the settings of \citet{packard2010}. These are the shape function $x^\top x$, the initial quadratic form computed in the unscaled state,
+a multiplier of degree 2 for the expanding set, and 30 iterations without the box. The code then covers \resSosLiuSetVdpOne\ and \resSosLiuSetVdpThree\ of the two
+Van der Pol systems. The set for $\mu=3$ fails the Gram test at every level down to $0.9$, so its coverage is not certified. On $\mu=3$ we also changed one of our
+settings at a time, against \resSosStudyOurs\ with all of them. The shape function $x^\top x$ gives \resSosStudyShape, the initial form computed in the unscaled state
+\resSosStudyInitx, and a multiplier of degree 2 \resSosStudySone. Removing the box gives \resSosStudyNobox, so the box costs the baseline \resSosStudyBoxGap\ points. Our larger
+coverage comes from the initial form computed in the scaled state, the shape function and the degree of the multiplier.
+
+The Zubov PINN
+follows \citet{liu2025}: two hidden layers of 30 tanh units, $W=\tanh(\sigma V)$, residual $\nabla W\cdot f+\sigma\omega(1-W^2)=0$ with $\omega=\|\tilde x\|^2$, a boundary term at the target, and a data term on $3000$
+simulated states, trained for $2\times10^4$ Adam steps on batches of $2048$ from $10^5$ collocation points. On the TFL closed loops the residual is divided by $a(x)$ of Section~\ref{sec:problem}, and the running cost in place of $\|\tilde x\|^2$ is $\omega=\zeta^\top Q\zeta$. On the benchmarks each PINN seed gives one final network, and on the TFL closed loops four snapshots are screened. The inputs on the TFL closed loops are the normalized state with angles as sine and cosine. The sublevel sets of both PINNs are restricted to $\Oad$.
+
+\paragraph{Dirichlet-Zubov PINN.} We follow \citet{mengliu2026}. With $d_{\min}=\min_id_i/\mathrm{median}\,d_i$ and their value $\lambda=0.1$, the same residual is solved with the field $\lambda d_{\min}f$. The function is zero at the target and one on the $2000$ admissible states closest to the boundary of $\Oad$. The data term integrates $\omega/(\lambda d_{\min})$ along the simulated trajectories. For uniformity with the TFL closed loops, collocation and the boundary term act on admissible states. On the TFL closed loops the residual is divided by $\sqrt{1+\|S\lambda d_{\min}f\|^2+(\sigma\omega)^2}$, a positive weight. On their obstacle benchmarks our
+reimplementation departs from their settings in three ways. The quantity $d_{\min}$ also counts the faces of the box, the network sees the normalized state, and the
+scale comes from the search below in place of their fixed values.
+
+\paragraph{Scale search.} For the Zubov PINN we search $\sigma=\gamma/n$ with $n$ in $\{1,3,10,30,100,300\}$ by coverage on seed 0. For the Dirichlet-Zubov PINN the grid is $\{1,3,10,30,100\}$, and on the Van der Pol oscillator with $\mu=1$ it extends to $300$ and $1000$. On the circle and the quadrotor the Zubov PINN ties at the inner layer at every scale, as does the Dirichlet-Zubov PINN on the sinusoid and the quadrotor, and $n=1$ is reported for these ties. On the sinusoid, the smaller scale $n=1/3$ gives no gain for the Zubov PINN. For the Zubov PINN the benchmark table gives the larger mean of the default $n=1$ and the selected scale, because a selection on one seed is unreliable when that seed reduces to the inner layer. On the TFL closed loops we also trained both PINNs on seed 0 with the features and the network of the candidate, at $n=1$ and $n=10$. The better of the two PINNs then covers \resRichMaxCirc, \resRichMaxSin\ and \resRichMaxQuad\ on the three cases. On the oscillator with two obstacles the Zubov PINN selects $n=300$, the largest value of its grid. Neither PINN is fine-tuned.
+
+\paragraph{Other baselines on the TFL closed loops.} The no-decomposition baseline keeps the features of the candidate and its factor $\tanh(\qex/q_0)$. Its function is
+$V_\theta=\max\{h,\Psi_\theta\}$, and the running cost $\ell$ is integrated along the short steps and included in the target. Sum-of-squares and moment
+methods \citep{xue2020,korda2013} are not applied to the TFL closed loops, which are rational with trigonometric terms and singular.
+
+\paragraph{Scoring.} \citet{liu2025} report formally verified coverage of $95.6$ and $85.1$ percent on the two Van der Pol systems, measured on their own reference set. We score our reimplementation with the level selection and final test of this paper. On the benchmarks the quadratic baseline, the PINNs and the candidate are scored with the verified inner layer $E$ of Appendix~\ref{app:core}. Counterexamples are sought only outside $E$, and a step
+that ends in $\{q<c_0\}$ passes. For the quadratic baseline and the PINNs, $c_1$ lies just below the lowest value of the function outside $E$ over the samples. The PINNs are not clipped at
+zero, because clipping creates plateaus on which no step can decrease. Without the rule for steps that end in $\{q<c_0\}$, the estimates of \resRedN\ PINN seeds
+reduce to $E$. \resRecN\ of them, on the oscillator with $\mu=3$, the pendulum and the power system, have networks that are lower near $E$ than at the origin. The
+rule raises these seeds to between \resRecLo\ and \resRecHi\ percent. On the 3-D system the other \resRestN\ stay within \resRestGap\ points of $E$, because their
+lowest values lie at states whose step leaves $\Oad$. The final test of each benchmark run reuses the seed of an earlier final test of the
+same run. Its samples did not enter the training, the screening, the fine-tuning or the retest, so Proposition~\ref{prop:scen} still applies to the
+candidate. The scale search of the PINNs ranked the scales on seed 0 by coverage after this final test, which lowered no level there by more than \resGridLowerMax.
+
+
+
+\paragraph{Results on the five benchmarks.} The mean single-seed coverage of the candidate lies between \resBenchSeedMin\ and \resBenchSeedMax. On the oscillator with $\mu=1$, the Zubov PINN and the Dirichlet-Zubov PINN cover \resPinnVdpOne\ and \resDzVdpOne, against \resSeedVdpOne\ for the candidate. With $\mu=3$, the Dirichlet-Zubov PINN covers more than the candidate, \resDzVdpThree\ against \resSeedVdpThree. On the pendulum the Zubov PINN at the searched scale covers about as much as the candidate, \resPinnPend\ against \resSeedPend. On the power system it covers more, \resPinnPower\ against \resSeedPower. On the 3-D system, the one benchmark of the upper block with constraints inside the box, the candidate covers \resSeedConThree, the Dirichlet-Zubov PINN \resDzConThree, sum-of-squares \resSosConThree\ and the Zubov PINN \resPinnConThree. On the two oscillators, sum-of-squares covers more than the mean single-seed coverage and comes within \resSosGapMax\ points of the union of four seeds. On the pendulum and the power system, sum-of-squares with a bound on the Taylor remainder covers \resSosPend\ and \resSosPower. Sum-of-squares estimates rest on a numerical semidefinite certificate, and the outer layers of the candidate are tested on samples.
+
+\paragraph{What do the verified inner layers add?} They give the quadratic baseline, the PINNs and the candidate one common verified inner layer,
+and the direct test of unsafe states uses them as its terminal set. They hold \resCoreRoaMin\ to \resCoreRoaMax\ of the simulated regions of attraction
+(Table~\ref{tab:core}). The rule for steps that end in $\{q<c_0\}$ changes no estimate of the candidate. On the five systems of the upper block, the direct test
+finds \resBUnsafeList\ unsafe samples in the unions, so $\varepsilon_k$ is at most \resBUnsafeEpsMax\ in each case.
+The \resBUnsafePend\ unsafe samples of the pendulum lie in the estimate of \resBUnsafePendSeeds\ seed, near the saddle at $(\arcsin0.8,\,0)$ of the saturated loop. They
+converge to the stable equilibrium at $(\pi-\arcsin0.8,\,0)$. On \resBUnsafeCmp\ reference states the test disagrees with the reference simulation \resBUnsafeDisWord.
+
+\paragraph{How does the candidate compare on the obstacle benchmarks of Meng and Liu?} The obstacles of the lower block of Table~\ref{tab:bench}
+remove \resObsNoObsMin\ to \resObsNoObsMax\ of the box from the simulated region of attraction. Counting an exit from the box as a failure changes no reference
+label, although \citet{mengliu2026} treat the box only as a region of interest. With one obstacle on the oscillator, the candidate covers \resSeedObsVdpOne\ against
+\resDzObsVdpOne\ for the Dirichlet-Zubov PINN. With two obstacles the two are close, \resSeedObsVdpTwo\ against \resDzObsVdpTwo. On the power system with two
+obstacles near the equilibrium, the candidate covers \resSeedObsPowTwo, and neither PINN exceeds \resPinnObsPowTwo. With four obstacles the Dirichlet-Zubov PINN
+covers more, \resDzObsPowFour\ against a mean single-seed coverage of \resSeedObsPowFour\ and \resUnionObsPowFour\ for the union of four. \citet{mengliu2026} report formally verified
+levels of their learned function and no areas, so we compare with our reimplementation of their method. The direct test of unsafe states finds \resOUnsafeList\
+unsafe samples, so $\varepsilon_k$ is at most \resOUnsafeEpsMax, and each of them runs into an obstacle.
+
+\section{Interval Verification of the Inner Layer}\label{app:inner}
+The hypotheses of Theorem~\ref{thm:main}(i) are statements about explicit functions on a box, and we check them by interval branch and bound \citep{moore2009}. The box is
+split into cells. A cell is discarded when interval arithmetic shows that $\gamma\qex\ge c_I$ on it or that it contains no violating point. A cell contains
+no violating point when all distances $d_i$ to the regularity constraints are positive on it and, if it touches a face, the normal component of the field has the
+inward sign. The remaining cells are bisected along their widest normalized side until none is left. The checks run on the closed box with the periodic angle
+over $[-\pi,\pi]$. The lower bound of the quadratic form is the larger of its eigendecomposition $\sum_k\lambda_k(e_k^\top\zeta)^2$, with each square bounded
+below by zero, and $\lambda_{\min}(P)\sum_i\zeta_i^2$. The distances $d_i$ and the field components are the symbolic expressions of Appendix~\ref{app:systems},
+evaluated in float64 interval arithmetic with outward rounding by two units in the last place per operation and with enclosed constants. For each case the level
+is found by bisection over twelve rounds between zero and the sampled minimum of $\gamma\qex$ over samples outside $\Oad$ and samples on box faces where the field
+points outward. The last verified level is multiplied by $0.99$. This one percent reduction absorbs the float32 evaluation of $\qex$ in the training pipeline and
+the residual effects of the eigendecomposition of $P$ and the float32 storage of $P$ and $S_z$. Table~\ref{tab:inner} lists the
+verified levels, the share of the box in $\I$, the number of cells and the time.
+\input{table_inner3}
+
+\section{Interval Verification of the Inner Layer of an Equilibrium}\label{app:core}
+For an equilibrium, the inner layer is $E=\{q\le c_0\}$ with $q(x)=x^\top\hat Px$ and $\hat P=SPS$, where $S$ is the diagonal matrix of inverse half-widths of $B$.
+The matrices $S$ and $P$ are the float32 values that the networks use. They are stored with the verification and checked against the pipeline before each run.
+They are exact in rational arithmetic, so $\hat P$ is exact, and Sylvester's criterion in exact rationals shows that $\hat P$ is positive definite. The ellipsoid
+$E$ has the bounding box $|x_i|\le\sqrt{c_0(\hat P^{-1})_{ii}}$, so its inclusion in the open box is an exact rational test.
+
+The decrease of $q$ vanishes at the origin, so cells near the origin need a separate argument. On a box $B_0$ around the origin on which $f$ is continuously
+differentiable, $f(x)=\bar J(x)x$ with $\bar J(x)=\int_0^1Df(tx)\,dt$. Since $B_0$ is convex and contains the origin, $\bar J(x)$ lies in the interval enclosure
+$[Df](B_0)$, and $L_fq=x^\top(\hat P\bar J+\bar J^\top\hat P)x$. Let $\Sigma$ be the midpoint and $\Delta$ the entrywise radius of the symmetric interval matrix
+$\hat P[Df](B_0)+[Df](B_0)^\top\hat P$. Every symmetric matrix in it has largest eigenvalue at most $\lambda_{\max}(\Sigma)+\|\Delta\|_F$. It therefore suffices that
+$-\Sigma-\bar\delta I$ is positive definite for a rational upper bound $\bar\delta\ge\|\Delta\|_F$, which Sylvester's criterion checks in exact rationals, and then $L_fq<0$ on $B_0\setminus\{0\}$.
+
+Branch and bound covers the rest of the bounding box. A cell is discarded when $q>c_0$ on it, or when every constraint other than the faces of $B$ is positive
+on it and either $L_fq<0$ on it or it lies in $B_0$. The bound on $L_fq$ is the natural interval extension of $2(\hat Px)\cdot f(x)$, intersected with the
+mean-value form where $f$ is smooth on the cell. On the pendulum this requires the saturation to be strictly active or strictly inactive on the whole cell. A cell
+below a minimum width, or a cell whose midpoint violates a condition, ends the verification as a failure. The arithmetic is that of Appendix~\ref{app:inner}, with
+sine and cosine widened by a further $10^{-15}$. Decimal constants are enclosed by the neighbouring floats unless they are exact, and $\pi$ is enclosed. The constant
+$0.1$ of the 3-D system and $\pi/3$ of the power system are enclosed at their exact values. The verification thus concerns the exact field, which the code
+evaluates in float32. The largest passing level is found by bisection over twelve rounds below the lowest sampled failure. It is reduced by one percent to absorb the
+float32 evaluation of $q$ in the pipeline, and verified again at the reduced level. Table~\ref{tab:core} lists the inner layers. They hold \resCoreRoaMin\ to
+\resCoreRoaMax\ of the simulated regions of attraction. The decrease of $q$ limits the level on the two Van der Pol systems and the power system. The obstacle limits it
+on the 3-D system, and the minimum cell width on the pendulum.
+\input{table_core3}
+
+\section{Configuration}\label{app:config}
+\paragraph{Training setup.} The candidate uses the network, optimizer and collocation points of Table~\ref{tab:config}, with the level selection and
+fine-tuning of Section~\ref{sec:method}. The quadrotor uses a weight of $10$ in place of $100$ for the finite-step penalty and no exponential loss weight during
+training.
+
+\paragraph{Extra running cost.} With $c_I$ the level of the inner layer, $\rho$ vanishes below $\gamma\qex=c_I/2$ and equals one above $c_I$. The
+constant $\kappa$ is $0.3$ when the inner layer holds at least one percent of the box and $0$ otherwise.
+
+\paragraph{Penalties.} The finite-step penalty acts on steps of unit length in $\Oad$ from $x$ to $x_1$. It asks for
+$V_\theta(x_1)\le V_\theta(x)-\chi[\gamma(\qex(x)-\qex(x_1))+C_1]$ with $\chi=0.2$ and $C_1$ the quantity $C_s$ of Section~\ref{sec:method} over the unit step,
+and it is applied to the values $e^{-V_\theta}$. An error $\delta V$ at level $V$ moves $v$ by only $e^{-V}\delta V$, so without the exponential loss weight the
+loss would carry almost no gradient at the levels near one. Every
+five epochs, the $10^4$ states of a fresh pool of $2.5\times10^5$ that violate the finite-step penalty most join the data with
+four Gaussian neighbours each, in a rolling buffer of $10^5$. The network starts close to $\Phi_\theta=\psi$, which lies below the exact
+solution. Table~\ref{tab:config} gives every constant.
+
+\paragraph{Screening and retest.} Screening uses $3\times5\cdot10^4$ box samples and the additional samples of Table~\ref{tab:config}. The three best
+snapshots are retested on $5\times10^5$ fresh box samples, and the best one is kept with the lowest level it received.
+
+\input{table_config3}
+
+\section{Additional Results}\label{app:extra}
+\paragraph{Unsafe samples and the final test.} The direct test of unsafe states draws $10^6$ i.i.d.\ box samples per case and simulates each sample in the union of the four
+estimates until it reaches the inner layer. Of the \resUnsafeInCirc, \resUnsafeInSin\ and \resUnsafeInQuad\ samples in the unions,
+\resUnsafeKCirc, \resUnsafeKSin\ and \resUnsafeKQuad\ leave the box first, and finer integration confirms all \resUnsafeConfirmed.
+These counts give the bounds of Section~\ref{sec:exp}, and each bound holds for every seed. By Theorem~\ref{thm:main}(iii), the annulus of every
+seed whose estimate contains an unsafe sample holds counterexamples that the final test missed. The final test found a counterexample and lowered the level in \resIidFailures\ of
+the twelve runs (Table~\ref{tab:seeds}).
+
+\paragraph{How reliable is the direct test of unsafe states?} It is at least as accurate as the reference simulation. The test uses seeds
+disjoint from all other tests, the RK4 integration of the normalized field with substeps of length $0.025$ as in the final test, and $t_{\max}=200$. Every sample that reached $\I$ did so within \resUnsafeTimeMax\ units of normalized time. On \resUnsafeCmp\ reference states, the test
+and the reference simulation disagree on \resUnsafeDis, and the reference simulation with a four times finer step agrees with the test on
+\resUnsafeAgree\ of them. In the other \resUnsafeCons, the test counts as unsafe a state that the finer reference finds converging, which is
+the conservative direction. None of the disagreeing states lies in an estimate, so this comparison does not test the safe labels inside the
+estimates. The \resUnsafeTotal\ samples counted as unsafe still leave $\Oad$ with four and sixteen times finer substeps, and the reference
+simulation with step $0.001$ finds that they leave the box.
+
+\paragraph{What do the two tests leave open?} With $N=10^6$ and $\varepsilon=\ln(10^6)/N=1.38\times10^{-5}$, Proposition~\ref{prop:scen} says
+with confidence $1-10^{-6}$ that the uniform measure of counterexamples in the annulus is at most $\varepsilon$. This alone does not bound the measure
+of states of the outer layer outside $\D(M)$, because a function can decrease everywhere except on a set of small measure while
+most trajectories diverge \citep{kenanian2019}. Both tests integrate numerically and check
+membership in $\Oad$ at substeps of length $0.025$, so a crossing of the singular set between substeps could go unnoticed. The test of
+Proposition~\ref{prop:unsafe} also checks the sign of $\det D$ at every substep, which rules this out for the zero set of $\det D$ but not for
+the other constraints. The union of the outer layers over several seeds is therefore also tested on
+samples only. A deterministic check of the hypothesis of Theorem~\ref{thm:main}(iii) needs an enclosure of the flow over a unit step on every cell of the annulus, and we did not
+compute one.
+
+\paragraph{What limits the outer layer?} The level limits it on the unicycle, and both the level and the fit limit it on the quadrotor. The exact value function cut at the
+level of the candidate covers \resCeilCirc, \resCeilSin\ and \resCeilQuad\ of the simulated region of attraction. The outer layers cover \resCeilFracCirc, \resCeilFracSin\
+and \resCeilFracQuad\ of these shares. On the unicycle the levels lie above \resCtwoMinSin, and most of the uncovered states have an exact value function $v$ above $c_2$. Their trajectories pass
+near a constraint before converging, so they have a large $\Phi$, and only a level closer to one would include them. On the quadrotor, counterexamples hold the level between
+\resCtwoMinQuad\ and \resCtwoMaxQuad, while the exact value function cut at $0.9$ covers \resCeilNineQuad. At these levels the bound $V_\theta\ge\gamma\qex$ excludes \resFloorQuad\ of the simulated region of attraction, against \resFloorCirc\ on the circle and
+\resFloorSin\ on the sinusoid.
+
+\paragraph{What do the components contribute?} Fine-tuning helps on the unicycle and changes nothing on the quadrotor. On the quadrotor, screening kept the trained network in
+\resKeptQuad\ of four runs. The quadrotor entries before and after fine-tuning in Table~\ref{tab:seeds} therefore differ only through the draw of the final test. This draw alone moves
+the coverage of a seed by up to \resDrawMaxQuad\ points. Table~\ref{tab:ablation} removes components on the circle, where the PDE residual loss in place of fitted value iteration reaches \resPinnCirc.
+
+\paragraph{Does the integration step change the reference labels?} It changes few of them. We simulated $5000$ of the $5\times10^4$ reference states of each case again with an RK4 step of $0.0025$ in place of $0.01$. The label changes on \resRefNoiseCirc, \resRefNoiseSin\ and \resRefNoiseQuad\ of these states on the circle, the sinusoid and the quadrotor.
+
+\paragraph{What limits the inner layer?} Contact with the constraints bounds it from above, and the interval verification stops below that bound. On samples, the sublevel sets of $\gamma\qex$
+first meet a regularity constraint or a face of the box where the field points outward at levels of at most \resContactCirc, \resContactSin\ and \resContactQuad\ on the three cases. The verified levels are \resCICirc, \resCISin\ and
+\resCIQuad\ (Table~\ref{tab:inner}), and on the quadrotor the verification at the next level exceeds its budget of cells. The first contact lies near the centre of the circle, on the speed limit for the sinusoid, and on the
+zero-thrust face for the quadrotor. Thrust enters $z$ only through the acceleration coordinates, so a state with no thrust can have a small $\qex$, and the inner layer of the
+quadrotor is negligible.
+
+\paragraph{Computation time.} All computations run on the CPU of a laptop (Apple M1). With three cases running at once, training takes \resTimeTrain\ per seed,
+level selection \resTimeCert, fine-tuning \resTimeRepair, and the interval verification \resTimeInner.
+
+\input{table_seeds3}
+\input{table_ablation3}

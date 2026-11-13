@@ -1,0 +1,100 @@
+[
+ {
+  "N": 1000000,
+  "seed": 0,
+  "distribution": "uniform on the box, i.i.d.",
+  "eps": 1.3815510557964274e-05,
+  "confidence": 0.999999,
+  "c1": 0.0,
+  "c2_old": 0.0,
+  "c2_iid": 1.0,
+  "c2": 0.0,
+  "n_band": 0,
+  "n_tested": 0,
+  "first_failure": null,
+  "n_below_c1_outside_inner": 0,
+  "n_below_c1_outside_inner_failed": 0,
+  "coverage_old": 2.0332090816672315,
+  "coverage": 2.0332090816672315,
+  "false_positive": 0.0,
+  "coverage_stored": 2.0332090816672315
+ },
+ {
+  "N": 1000000,
+  "seed": 1,
+  "distribution": "uniform on the box, i.i.d.",
+  "eps": 1.3815510557964274e-05,
+  "confidence": 0.999999,
+  "c1": 0.05852984150648117,
+  "c2_old": 0.27188485860824585,
+  "c2_iid": 0.2682628631591797,
+  "c2": 0.2682628631591797,
+  "n_band": 20731,
+  "n_tested": 20731,
+  "first_failure": {
+   "v": 0.2682628631591797,
+   "kind": 1,
+   "x": [
+    -0.7150077819824219,
+    0.9250631332397461,
+    -0.026958227157592773
+   ],
+   "in_roa": false
+  },
+  "n_below_c1_outside_inner": 1,
+  "n_below_c1_outside_inner_failed": 0,
+  "coverage_old": 4.079972890545577,
+  "coverage": 4.0257539817011185,
+  "false_positive": 0.0,
+  "coverage_stored": 4.079972890545577
+ },
+ {
+  "N": 1000000,
+  "seed": 2,
+  "distribution": "uniform on the box, i.i.d.",
+  "eps": 1.3815510557964274e-05,
+  "confidence": 0.999999,
+  "c1": 0.07014689900055528,
+  "c2_old": 0.28221675753593445,
+  "c2_iid": 0.2790795862674713,
+  "c2": 0.2790795862674713,
+  "n_band": 18924,
+  "n_tested": 18924,
+  "first_failure": {
+   "v": 0.2790795862674713,
+   "kind": 1,
+   "x": [
+    -0.7209885120391846,
+    0.9312520027160645,
+    0.008862018585205078
+   ],
+   "in_roa": false
+  },
+  "n_below_c1_outside_inner": 3,
+  "n_below_c1_outside_inner_failed": 0,
+  "coverage_old": 3.9410369366316504,
+  "coverage": 3.8834293459844123,
+  "false_positive": 0.0,
+  "coverage_stored": 3.9410369366316504
+ },
+ {
+  "N": 1000000,
+  "seed": 3,
+  "distribution": "uniform on the box, i.i.d.",
+  "eps": 1.3815510557964274e-05,
+  "confidence": 0.999999,
+  "c1": 0.0,
+  "c2_old": 0.0,
+  "c2_iid": 1.0,
+  "c2": 0.0,
+  "n_band": 0,
+  "n_tested": 0,
+  "first_failure": null,
+  "n_below_c1_outside_inner": 0,
+  "n_below_c1_outside_inner_failed": 0,
+  "coverage_old": 2.0332090816672315,
+  "coverage": 2.0332090816672315,
+  "false_positive": 0.0,
+  "coverage_stored": 2.0332090816672315
+ }
+]

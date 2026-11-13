@@ -1,0 +1,21 @@
+{
+ "N": 1000000,
+ "seed": 7077517,
+ "distribution": "uniform on the box, i.i.d.",
+ "eps": 1.3815510557964274e-05,
+ "confidence": 0.999999,
+ "c1": 0.7998335938274861,
+ "c2_old": 0.989604651927948,
+ "c2_iid": 1.0,
+ "c2": 0.989604651927948,
+ "n_band": 205192,
+ "n_tested": 205192,
+ "first_failure": null,
+ "n_below_c1_outside_inner": 0,
+ "n_below_c1_outside_inner_failed": 0,
+ "coverage_old": 87.0491457498418,
+ "coverage": 87.0491457498418,
+ "false_positive": 0.0,
+ "snapshot": "epoch_100.pt",
+ "coverage_stored": 87.0491457498418
+}

@@ -1,0 +1,85 @@
+{
+ "run": "runs/sin6_pinnf30_s0",
+ "case": "sinusoid",
+ "snapshot": "epoch_025.pt",
+ "alpha": 0.18226820820421552,
+ "c_inner": 0.05094421305220749,
+ "c1": 0.0,
+ "c2_screening_and_retest": [
+  0.0,
+  0.0
+ ],
+ "c2_selected": 0.0,
+ "c2": 0.0,
+ "iid": {
+  "N": 1000000,
+  "seed": 7853221,
+  "distribution": "uniform on the box, i.i.d.",
+  "eps": 1.3815510557964274e-05,
+  "confidence": 0.999999,
+  "c1": 0.0,
+  "c2_old": 0.0,
+  "c2_iid": 1.0,
+  "c2": 0.0,
+  "n_band": 0,
+  "n_tested": 0,
+  "first_failure": null,
+  "n_below_c1_outside_inner": 0,
+  "n_below_c1_outside_inner_failed": 0
+ },
+ "screening": [
+  {
+   "snapshot": "epoch_025.pt",
+   "c2": 0.0,
+   "volume": 0.01001999992877245
+  },
+  {
+   "snapshot": "epoch_050.pt",
+   "c2": 0.0,
+   "volume": 0.01001999992877245
+  },
+  {
+   "snapshot": "epoch_075.pt",
+   "c2": 0.0,
+   "volume": 0.01001999992877245
+  },
+  {
+   "snapshot": "epoch_100.pt",
+   "c2": 0.0,
+   "volume": 0.01001999992877245
+  }
+ ],
+ "retest": [
+  {
+   "snapshot": "epoch_025.pt",
+   "c2": 0.0,
+   "volume": 0.01001999992877245
+  },
+  {
+   "snapshot": "epoch_050.pt",
+   "c2": 0.0,
+   "volume": 0.01001999992877245
+  },
+  {
+   "snapshot": "epoch_075.pt",
+   "c2": 0.0,
+   "volume": 0.01001999992877245
+  }
+ ],
+ "horizons": [
+  1.0,
+  2.0,
+  4.0,
+  8.0
+ ],
+ "step_h": 0.025,
+ "c1_sampled": true,
+ "coverage": 1.090182047774387,
+ "false_positive": 0.0,
+ "false_positive_of_region": 0.0,
+ "inner_coverage": 1.090182047774387,
+ "roa_fraction_of_box": 95.03,
+ "region_fraction_of_box": 1.0359999723732471,
+ "n_ground_truth": 50000,
+ "seconds": 133.510192155838
+}

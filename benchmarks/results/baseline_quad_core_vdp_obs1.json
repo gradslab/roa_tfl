@@ -1,0 +1,50 @@
+[
+ {
+  "N": 1000000,
+  "seed": 7220380,
+  "distribution": "uniform on the box, i.i.d.",
+  "eps": 1.3815510557964274e-05,
+  "confidence": 0.999999,
+  "c1": 0.09960549312829971,
+  "c2_old": 0.10077881813049316,
+  "c2_iid": 0.10064566135406494,
+  "c2": 0.10064566135406494,
+  "n_band": 847,
+  "n_tested": 847,
+  "first_failure": {
+   "v": 0.10064566135406494,
+   "kind": 1,
+   "x": [
+    0.7831287384033203,
+    0.875666618347168
+   ],
+   "in_roa": false
+  },
+  "n_below_c1_outside_inner": 0,
+  "n_below_c1_outside_inner_failed": 0,
+  "band": "{c1 <= v < c2_old} outside E",
+  "coverage_old": 21.023733616719802,
+  "coverage": 20.982406423426614,
+  "false_positive": 0.0,
+  "core_coverage": 20.76986657220451,
+  "c1_A": 0.09960620831251145,
+  "c2_A": 0.10077881813049316,
+  "c1_B": 0.09960549312829971,
+  "c2_B": 0.10089099407196045,
+  "n_set_B": 985236,
+  "c0": 0.10493328760939563,
+  "limiting": {
+   "step in Omega_ad, no decrease": 0,
+   "step leaves Omega_ad": 50,
+   "box outflow": 0
+  },
+  "n_below_c1_outside_E_setB": 0,
+  "seconds": 9.659962177276611,
+  "old": {
+   "c1": 0.1009674422621727,
+   "c2": 0.10098624229431152,
+   "coverage": 21.07096469476916,
+   "false_positive": 0.0
+  }
+ }
+]

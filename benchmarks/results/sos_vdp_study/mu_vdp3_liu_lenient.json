@@ -1,0 +1,669 @@
+{
+ "method": "sos_sound",
+ "system": "vdp3",
+ "settings": {
+  "V_degree": 6,
+  "V_monomials": "degrees 2..6 in the state",
+  "shape": "x'x in the original coordinates",
+  "init": "quadratic Lyapunov function of the linearization, A'P+PA=-I in original x",
+  "s1": "SOS, degrees 0..2",
+  "s2": "SOS, degrees 2..4",
+  "s3": null,
+  "aux_g_multipliers": null,
+  "remainder_multipliers": null,
+  "aux_h_multipliers": null,
+  "eps": 1e-06,
+  "level_backoff": 0.98,
+  "bisection_steps": 14,
+  "beta_slack": 0.98,
+  "stall": 0,
+  "max_iter": 30,
+  "time_cap_s": 21600.0,
+  "solver": "Clarabel only, status 'optimal'",
+  "box_containment": false,
+  "remainder": null,
+  "vertices": 1,
+  "returned": "the iterate with the largest beta (multiplier step), scaled so that level 1 is its certified level"
+ },
+ "stop": "max iterations (30)",
+ "iterations": [
+  {
+   "iter": 0,
+   "beta": 0.62127685546875,
+   "beta_V": 0.6345289169927681,
+   "retries": 0,
+   "seconds": 0.3774600028991699
+  },
+  {
+   "iter": 1,
+   "beta": 0.75177001953125,
+   "beta_V": 0.783460024242997,
+   "retries": 0,
+   "seconds": 1.1522870063781738
+  },
+  {
+   "iter": 2,
+   "beta": 0.89080810546875,
+   "beta_V": 0.9258147343838012,
+   "retries": 0,
+   "seconds": 1.9285988807678223
+  },
+  {
+   "iter": 3,
+   "beta": 1.0233154296875,
+   "beta_V": 1.0816465018175905,
+   "retries": 0,
+   "seconds": 2.7461917400360107
+  },
+  {
+   "iter": 4,
+   "beta": 1.1527099609375,
+   "beta_V": 1.208146327268527,
+   "retries": 0,
+   "seconds": 3.5736827850341797
+  },
+  {
+   "iter": 5,
+   "beta": 1.2557373046875,
+   "beta_V": 1.3181719390955189,
+   "retries": 0,
+   "seconds": 4.401549816131592
+  },
+  {
+   "iter": 6,
+   "beta": 1.32598876953125,
+   "beta_V": 1.364228753335046,
+   "retries": 0,
+   "seconds": 5.287529945373535
+  },
+  {
+   "iter": 7,
+   "beta": 1.35491943359375,
+   "beta_V": 1.393572334546353,
+   "retries": 0,
+   "seconds": 6.2526819705963135
+  },
+  {
+   "iter": 8,
+   "beta": 1.38031005859375,
+   "beta_V": 1.4054174152981298,
+   "retries": 0,
+   "seconds": 7.198240041732788
+  },
+  {
+   "iter": 9,
+   "beta": 1.38690185546875,
+   "beta_V": 1.4090990781996957,
+   "retries": 0,
+   "seconds": 8.169447898864746
+  },
+  {
+   "iter": 10,
+   "beta": 1.38983154296875,
+   "beta_V": 1.4092977086507963,
+   "retries": 0,
+   "seconds": 9.15627384185791
+  },
+  {
+   "iter": 11,
+   "beta": 1.3912353515625,
+   "beta_V": 1.4127268901931331,
+   "retries": 0,
+   "seconds": 10.139400959014893
+  },
+  {
+   "iter": 12,
+   "beta": 1.3958740234375,
+   "beta_V": 1.417035621107591,
+   "retries": 0,
+   "seconds": 11.176738023757935
+  },
+  {
+   "iter": 13,
+   "beta": 1.40087890625,
+   "beta_V": 1.4226556456212776,
+   "retries": 0,
+   "seconds": 12.162919759750366
+  },
+  {
+   "iter": 14,
+   "beta": 1.40704345703125,
+   "beta_V": 1.4298507322059586,
+   "retries": 0,
+   "seconds": 13.15669298171997
+  },
+  {
+   "iter": 15,
+   "beta": 1.41387939453125,
+   "beta_V": 1.4393054429995846,
+   "retries": 0,
+   "seconds": 14.209856033325195
+  },
+  {
+   "iter": 16,
+   "beta": 1.4219970703125,
+   "beta_V": 1.4464275103408488,
+   "retries": 0,
+   "seconds": 15.30614972114563
+  },
+  {
+   "iter": 17,
+   "beta": 1.42718505859375,
+   "beta_V": 1.4503216147003588,
+   "retries": 0,
+   "seconds": 16.328616857528687
+  },
+  {
+   "iter": 18,
+   "beta": 1.43072509765625,
+   "beta_V": 1.4537575665400977,
+   "retries": 0,
+   "seconds": 17.511472940444946
+  },
+  {
+   "iter": 19,
+   "beta": 1.4346923828125,
+   "beta_V": 1.4577065960094686,
+   "retries": 0,
+   "seconds": 18.530123949050903
+  },
+  {
+   "iter": 20,
+   "beta": 1.43817138671875,
+   "beta_V": 1.4612781511980828,
+   "retries": 0,
+   "seconds": 19.53692889213562
+  },
+  {
+   "iter": 21,
+   "beta": 1.44171142578125,
+   "beta_V": 1.4643639283818488,
+   "retries": 0,
+   "seconds": 20.65795874595642
+  },
+  {
+   "iter": 22,
+   "beta": 1.44464111328125,
+   "beta_V": 1.4675916534803872,
+   "retries": 0,
+   "seconds": 21.767815828323364
+  },
+  {
+   "iter": 23,
+   "beta": 1.447265625,
+   "beta_V": 1.469780107596935,
+   "retries": 0,
+   "seconds": 22.82164978981018
+  },
+  {
+   "iter": 24,
+   "beta": 1.44927978515625,
+   "beta_V": 1.4718914846948992,
+   "retries": 0,
+   "seconds": 23.882173776626587
+  },
+  {
+   "iter": 25,
+   "beta": 1.450927734375,
+   "beta_V": 1.473789265350782,
+   "retries": 0,
+   "seconds": 24.914682865142822
+  },
+  {
+   "iter": 26,
+   "beta": 1.45220947265625,
+   "beta_V": 1.4754714217268783,
+   "retries": 0,
+   "seconds": 26.020335912704468
+  },
+  {
+   "iter": 27,
+   "beta": 1.4532470703125,
+   "beta_V": 1.476941002712109,
+   "retries": 0,
+   "seconds": 27.12074375152588
+  },
+  {
+   "iter": 28,
+   "beta": 1.4537353515625,
+   "beta_V": 1.4779617512058456,
+   "retries": 0,
+   "seconds": 28.232213973999023
+  },
+  {
+   "iter": 29,
+   "beta": 1.454345703125,
+   "beta_V": 1.479074704039754,
+   "retries": 0,
+   "seconds": 29.205785751342773
+  }
+ ],
+ "n_iterations": 30,
+ "iteration_seconds": 29.966475009918213,
+ "argv": {
+  "systems": [
+   "vdp3"
+  ],
+  "rem": "vertex",
+  "dV": null,
+  "s1deg": 2,
+  "s2deg": 4,
+  "s3deg": 2,
+  "auxdeg": 2,
+  "lamdeg": 2,
+  "s2aux": 0,
+  "remdeg": 6,
+  "shape": "id",
+  "init": "x",
+  "box": 0,
+  "iters": 30,
+  "stall": 0,
+  "cap": 21600.0,
+  "samples": 0,
+  "fixedV": null,
+  "update": 0,
+  "out": "results/sos_vdp_study/mu_vdp3_liu_lenient.json",
+  "solve_limit": 0.0,
+  "lenient": 1
+ },
+ "recertification": {
+  "level": 0.9,
+  "mode": "default",
+  "status": "optimal",
+  "accepted": true,
+  "gram_checks": [
+   {
+    "label": "multiplier s2_0",
+    "size": 5,
+    "lam_min_Q": 0.018515219895854248,
+    "lam_min_Q_plus_E": 0.018515219895854248,
+    "max_residual": 7.105427357601002e-14,
+    "unabsorbed_residual": 0.0,
+    "unabsorbed_bound_on_K": 0.0,
+    "float_tol": 0.0,
+    "exact": true,
+    "certified": true,
+    "by": "SOS by construction (z'Q+z)"
+   },
+   {
+    "label": "V positive",
+    "size": 9,
+    "lam_min_Q": -5.685808077339441e-11,
+    "lam_min_Q_plus_E": 5.303736199168498e-12,
+    "max_residual": 6.854412316774775e-11,
+    "unabsorbed_residual": 0.0,
+    "unabsorbed_bound_on_K": 0.0,
+    "float_tol": 1.6312083675826125e-13,
+    "exact": true,
+    "certified": true,
+    "residual_without_bound": 0.0,
+    "data_resolution": 8.61383039143046e-14,
+    "by": "exact SOS"
+   },
+   {
+    "label": "recert decrease vertex 0",
+    "size": 20,
+    "lam_min_Q": 7.263947168336276e-11,
+    "lam_min_Q_plus_E": 4.661977118665318e-10,
+    "max_residual": 1.5221377735577783e-08,
+    "unabsorbed_residual": 0.0,
+    "unabsorbed_bound_on_K": 0.0,
+    "float_tol": 1.9357041811290637e-11,
+    "exact": true,
+    "certified": true,
+    "residual_without_bound": 0.0,
+    "data_resolution": 8.302496540828977e-12,
+    "by": "exact SOS"
+   }
+  ],
+  "dropped": {},
+  "all_exact": true,
+  "all_certified": true,
+  "min_lam_Q_plus_E": 5.303736199168498e-12,
+  "tried": [
+   {
+    "level": 1.0,
+    "mode": "default",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -2.443361136860388e-09
+   },
+   {
+    "level": 1.0,
+    "mode": "tight",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -1.3018912356821476e-08
+   },
+   {
+    "level": 1.0,
+    "mode": "tight+facial",
+    "status": "infeasible",
+    "accepted": false,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": null
+   },
+   {
+    "level": 0.999,
+    "mode": "default",
+    "status": "optimal_inaccurate",
+    "accepted": false,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": null
+   },
+   {
+    "level": 0.999,
+    "mode": "tight",
+    "status": "optimal_inaccurate",
+    "accepted": false,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": null
+   },
+   {
+    "level": 0.99,
+    "mode": "default",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -3.792905805414714e-09
+   },
+   {
+    "level": 0.99,
+    "mode": "tight",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -2.70626960128455e-09
+   },
+   {
+    "level": 0.99,
+    "mode": "tight+facial",
+    "status": "infeasible",
+    "accepted": false,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": null
+   },
+   {
+    "level": 0.98,
+    "mode": "default",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -7.5519554817189e-09
+   },
+   {
+    "level": 0.98,
+    "mode": "tight",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -7.578809487937257e-09
+   },
+   {
+    "level": 0.98,
+    "mode": "tight+facial",
+    "status": "infeasible",
+    "accepted": false,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": null
+   },
+   {
+    "level": 0.95,
+    "mode": "default",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": -4.5081695286461705e-10
+   },
+   {
+    "level": 0.95,
+    "mode": "tight",
+    "status": "optimal_inaccurate",
+    "accepted": false,
+    "all_exact": false,
+    "all_certified": false,
+    "min_lam_Q_plus_E": null
+   },
+   {
+    "level": 0.9,
+    "mode": "default",
+    "status": "optimal",
+    "accepted": true,
+    "all_exact": true,
+    "all_certified": true,
+    "min_lam_Q_plus_E": 5.303736199168498e-12
+   }
+  ]
+ },
+ "recert_seconds": 0.6244659423828125,
+ "best_iter": 29,
+ "best_beta": 1.454345703125,
+ "coverage": 49.98945370175068,
+ "false_positive": 0.0,
+ "degree": 6,
+ "V": [
+  [
+   [
+    0,
+    2
+   ],
+   5.960252741129929
+  ],
+  [
+   [
+    1,
+    1
+   ],
+   -9.39969944250835
+  ],
+  [
+   [
+    2,
+    0
+   ],
+   4.087632786024146
+  ],
+  [
+   [
+    0,
+    3
+   ],
+   -1.4133845390264637e-10
+  ],
+  [
+   [
+    1,
+    2
+   ],
+   6.991678614655646e-11
+  ],
+  [
+   [
+    2,
+    1
+   ],
+   3.666302824007356e-11
+  ],
+  [
+   [
+    3,
+    0
+   ],
+   -8.559726750992518e-12
+  ],
+  [
+   [
+    0,
+    4
+   ],
+   34.83928792991302
+  ],
+  [
+   [
+    1,
+    3
+   ],
+   -95.70922657144956
+  ],
+  [
+   [
+    2,
+    2
+   ],
+   90.34295357314545
+  ],
+  [
+   [
+    3,
+    1
+   ],
+   -0.949480871498383
+  ],
+  [
+   [
+    4,
+    0
+   ],
+   2.0882151872712678
+  ],
+  [
+   [
+    0,
+    5
+   ],
+   1.0383165092671872e-14
+  ],
+  [
+   [
+    1,
+    4
+   ],
+   3.027741335487529e-14
+  ],
+  [
+   [
+    2,
+    3
+   ],
+   -7.825064568019053e-14
+  ],
+  [
+   [
+    3,
+    2
+   ],
+   -3.5900831215302847e-14
+  ],
+  [
+   [
+    4,
+    1
+   ],
+   6.787044435180514e-14
+  ],
+  [
+   [
+    5,
+    0
+   ],
+   1.6069200216852308e-15
+  ],
+  [
+   [
+    0,
+    6
+   ],
+   1.8961473672019007e-10
+  ],
+  [
+   [
+    1,
+    5
+   ],
+   3.0420598260763615e-11
+  ],
+  [
+   [
+    2,
+    4
+   ],
+   1.3335280686961933e-10
+  ],
+  [
+   [
+    3,
+    3
+   ],
+   -4.475772260839917e-11
+  ],
+  [
+   [
+    4,
+    2
+   ],
+   1.37863652649278e-10
+  ],
+  [
+   [
+    5,
+    1
+   ],
+   4.030810056822355e-11
+  ],
+  [
+   [
+    6,
+    0
+   ],
+   1.9138350051198915e-10
+  ]
+ ],
+ "indeterminates": [
+  "y1",
+  "y2"
+ ],
+ "solver_status_counts": {
+  "level:optimal": 98,
+  "level:infeasible": 379,
+  "mult:optimal": 29,
+  "beta:infeasible": 247,
+  "beta:optimal": 259,
+  "V:optimal": 30,
+  "level:error:SolverError": 12,
+  "beta:optimal_inaccurate": 1,
+  "mult:optimal_inaccurate": 1,
+  "level:optimal_inaccurate": 7,
+  "recert:optimal": 5,
+  "recert:infeasible": 2
+ },
+ "solver_seconds": {
+  "level": 20.391860961914062,
+  "mult": 1.1010932922363281,
+  "beta": 4.087442398071289,
+  "V": 2.1010854244232178,
+  "recert": 0.27371692657470703
+ },
+ "seconds": 30.35079288482666,
+ "recert_status_counts": {
+  "recert:optimal": 8,
+  "recert:infeasible": 3,
+  "recert:optimal_inaccurate": 3
+ },
+ "recert_history": [
+  "re-certified in place by sos_sound.py --fixedV --update (Tue Nov 10 17:25:34 2026)"
+ ]
+}

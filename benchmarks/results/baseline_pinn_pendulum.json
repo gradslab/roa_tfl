@@ -1,0 +1,42 @@
+[
+ {
+  "method": "pinn",
+  "system": "pendulum",
+  "c1": 0.015938178151845932,
+  "c2": 0.6910284161567688,
+  "coverage": 49.795918367346935,
+  "false_positive": 0.0,
+  "scenario_eps": 1.6842062955126398e-05,
+  "seed": 0
+ },
+ {
+  "method": "pinn",
+  "system": "pendulum",
+  "c1": 0.00729947923310101,
+  "c2": 0.6600059866905212,
+  "coverage": 46.26468769325912,
+  "false_positive": 0.0,
+  "scenario_eps": 1.6842062955126398e-05,
+  "seed": 1
+ },
+ {
+  "method": "pinn",
+  "system": "pendulum",
+  "c1": 0.012695868178457023,
+  "c2": 0.6958223581314087,
+  "coverage": 50.51329622758194,
+  "false_positive": 0.0,
+  "scenario_eps": 1.6842062955126398e-05,
+  "seed": 2
+ },
+ {
+  "method": "pinn",
+  "system": "pendulum",
+  "c1": 0.003939219738543034,
+  "c2": 0.7001274824142456,
+  "coverage": 50.575139146567714,
+  "false_positive": 0.0,
+  "scenario_eps": 1.6842062955126398e-05,
+  "seed": 3
+ }
+]

@@ -1,0 +1,94 @@
+{
+ "run": "runs/circ3_pinn_s1",
+ "case": "circle",
+ "snapshot": "epoch_025.pt",
+ "alpha": 0.13319182559965004,
+ "c_inner": 0.10497684620895598,
+ "c1": 0.0333184209689498,
+ "c2_screening_and_retest": [
+  0.03332175314426422,
+  0.040546223521232605
+ ],
+ "c2_selected": 0.03332175314426422,
+ "c2": 0.03332062065601349,
+ "iid": {
+  "N": 1000000,
+  "seed": 7995142,
+  "distribution": "uniform on the box, i.i.d.",
+  "eps": 1.3815510557964274e-05,
+  "confidence": 0.999999,
+  "c1": 0.0333184209689498,
+  "c2_old": 0.03332175314426422,
+  "c2_iid": 0.03332062065601349,
+  "c2": 0.03332062065601349,
+  "n_band": 1,
+  "n_tested": 1,
+  "first_failure": {
+   "v": 0.03332062065601349,
+   "kind": 0,
+   "x": [
+    -0.9455246925354004,
+    0.07294893264770508,
+    -1.7477809190750122,
+    0.14980769157409668
+   ]
+  },
+  "n_below_c1_outside_inner": 0,
+  "n_below_c1_outside_inner_failed": 0
+ },
+ "screening": [
+  {
+   "snapshot": "epoch_025.pt",
+   "c2": 0.040546223521232605,
+   "volume": 0.054760001599788666
+  },
+  {
+   "snapshot": "epoch_050.pt",
+   "c2": 0.009689025580883026,
+   "volume": 0.054740000516176224
+  },
+  {
+   "snapshot": "epoch_075.pt",
+   "c2": 0.0,
+   "volume": 0.054740000516176224
+  },
+  {
+   "snapshot": "epoch_100.pt",
+   "c2": 0.0,
+   "volume": 0.054740000516176224
+  }
+ ],
+ "retest": [
+  {
+   "snapshot": "epoch_025.pt",
+   "c2": 0.03332175314426422,
+   "volume": 0.054740000516176224
+  },
+  {
+   "snapshot": "epoch_050.pt",
+   "c2": 0.0012346729636192322,
+   "volume": 0.054740000516176224
+  },
+  {
+   "snapshot": "epoch_075.pt",
+   "c2": 0.0,
+   "volume": 0.054740000516176224
+  }
+ ],
+ "horizons": [
+  1.0,
+  2.0,
+  4.0,
+  8.0
+ ],
+ "step_h": 0.025,
+ "c1_sampled": true,
+ "coverage": 6.376107863473505,
+ "false_positive": 0.0,
+ "false_positive_of_region": 0.0,
+ "inner_coverage": 6.376107863473505,
+ "roa_fraction_of_box": 84.848,
+ "region_fraction_of_box": 5.4099999368190765,
+ "n_ground_truth": 50000,
+ "seconds": 53.48407816886902
+}

@@ -1,0 +1,42 @@
+[
+ {
+  "method": "pinn",
+  "system": "power_obs2",
+  "c1": 0.0,
+  "c2": 0.0,
+  "coverage": 7.259635747564591,
+  "false_positive": 0.0,
+  "scenario_eps": 1.5000749801261551e-05,
+  "seed": 0
+ },
+ {
+  "method": "pinn",
+  "system": "power_obs2",
+  "c1": 0.0,
+  "c2": 0.0,
+  "coverage": 7.259635747564591,
+  "false_positive": 0.0,
+  "scenario_eps": 1.5000749801261551e-05,
+  "seed": 1
+ },
+ {
+  "method": "pinn",
+  "system": "power_obs2",
+  "c1": 0.0,
+  "c2": 0.0,
+  "coverage": 7.259635747564591,
+  "false_positive": 0.0,
+  "scenario_eps": 1.5000749801261551e-05,
+  "seed": 2
+ },
+ {
+  "method": "pinn",
+  "system": "power_obs2",
+  "c1": 0.0,
+  "c2": 0.0,
+  "coverage": 7.259635747564591,
+  "false_positive": 0.0,
+  "scenario_eps": 1.5000749801261551e-05,
+  "seed": 3
+ }
+]

@@ -1,0 +1,21 @@
+\begin{table}[ht]
+\centering\small
+\caption{Ablations on seed 0 before fine-tuning, with the same level selection and final test. FP as in Table~\ref{tab:main}.}
+\label{tab:ablation}
+\begin{tabular}{llccc}
+\toprule
+Case & Variant & $c_2$ & Coverage & FP\\
+\midrule
+Circle & full method & 0.933 & 69.8 & 0.00\\
+Circle & PDE residual loss in place of fitted value iteration & 0.256 & 9.4 & 0.00\\
+Circle & safety-value baseline & 0.781 & 33.5 & 0.00\\
+Circle & no finite-step penalty, no counterexamples & 0.629 & 38.8 & 0.00\\
+Circle & no exponential loss weight & 0.910 & 64.2 & 0.00\\
+Circle & sum form $\Phi=\psi+\Psi_\theta$ & 0.974 & 33.4 & 0.00\\
+Sinusoid & full method & 0.858 & 57.2 & 0.00\\
+Sinusoid & safety-value baseline & 0.860 & 29.5 & 0.00\\
+Quadrotor & full method & 0.324 & 9.4 & 0.00\\
+Quadrotor & safety-value baseline & 0.609 & 8.4 & 0.00\\
+\bottomrule
+\end{tabular}
+\end{table}

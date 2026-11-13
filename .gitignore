@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+# LaTeX build files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+paper/main.pdf
+paper/fig_slices3.png
+# stored results moved aside by reproduce.sh tfl|benchmarks
+*/runs.stored/
+*/results.stored/
+render/_cache/

@@ -1,0 +1,23 @@
+\begin{table}[H]
+\centering\small
+\caption{Configuration of every case. Step lengths are in normalized time, except in the reference simulation.}
+\label{tab:config}
+\begin{tabular}{@{}p{0.17\linewidth}p{0.80\linewidth}@{}}
+\toprule
+Value function & $b_i=0.1\cdot$median $d_i$, $h=\sum_i\relu(b_i/d_i-1)^2$, $\gamma=3/(\text{90th percentile of }\zeta^\top P\zeta)$\\
+Extra running cost & $\kappa=0.3$ if the inner layer holds at least $1\,\%$ of $2\cdot10^5$ box samples, and $\kappa=0$ otherwise. The function $\rho$ is a smooth step from $\gamma\qex=c_I/2$ to $c_I$. The share on the sinusoid is $1.01\,\%$, close to this threshold\\
+Network & $\mathcal N_\theta$: 64-64-64 tanh. Features: normalized state (angles as sine and cosine), $\tanh(\zeta/3)$, $\tanh(\tfrac12\ln(d_i/\mathrm{median}\,d_i))$ for the regularity constraints. Softplus sharpness $\beta=10$. The constant $q_0$ is the first percentile of $\qex$ on $2\cdot10^5$ collocation points\\
+Collocation & $4\cdot10^5$ Sobol box samples, $10^5$ near the faces, $10^5$ next to the singular set (admissible ones kept)\\
+Initialization & The network starts close to $\Phi_\theta=\psi$, which lies below the exact solution\\
+Fitted value iteration & $\tau=0.2$, 8 RK4 substeps. Target network: copy of the averaged weights (decay $0.999$), refreshed every epoch\\
+Optimization & Adam, 100 epochs, batch 4096, cosine learning rate $10^{-3}\to10^{-5}$. Exponential loss weight $e^{2\min(V_\theta,V_{\max})}$ with $V_{\max}=3$ (no such weight on the quadrotor).\\
+Decrease penalty & Weight 10, on $\relu((L_{f_{\mathrm{cl}}}\Phi_\theta+\kappa\rho)/a)\,e^{-V_\theta}$, where $\Psi_\theta>\psi$\\
+Obstacle penalty & Weight 10, on $\relu(\psi+0.01-\Psi_\theta)\,e^{-V_\theta}$, where $\Psi_\theta\le\psi$ and $L_{f_{\mathrm{cl}}}\psi+\kappa\rho>0$\\
+Finite-step penalty & Weight 100 (10 on the quadrotor), unit step with 40 RK4 substeps, on $\relu(e^{-(V_\theta(x)-\chi\Delta)}-e^{-V_\theta(x_1)})$ with $\Delta=\gamma\relu(\qex(x)-\qex(x_1))+C_1$ and $\chi=0.2$, on steps in $\Oad$ with $V_\theta(x)<8$.\\
+Violating states & Every 5 epochs up to epoch 90: the $10^4$ states that violate the finite-step penalty most, in a pool of $2.5\cdot10^5$, 4 Gaussian neighbours (standard deviation $0.01$ of the half-widths), rolling buffer $10^5$\\
+Level selection & Horizons $H\in\{1,2,4,8\}$, RK4 substep $0.025$, states with $\|\zeta\|\le10^{-3}$, which lie in $\I$, exempt from the decrease. Snapshots every 5 epochs and at epoch 0. A test on $n$ box samples adds $n/2$ near the faces, $n/5$ next to the singular set and $n/2$ on the faces, where states with outward field count as counterexamples. Screening $n=5\cdot10^4$, 3 rounds. Retest of the top 3, $n=10^5$, 5 rounds. Ranking by share of $5\cdot10^4$ fixed box samples. Final test: $10^6$ i.i.d.\ uniform box samples\\
+Fine-tuning & 4 rounds, pool $10^6$, 300 Adam steps (learning rate $5\cdot10^{-5}$, batch 4096), weight 100 on counterexamples whose step stays in $\Oad$, weight 10 on those that leave it, decrease margin 0.2, counterexample sets capped at $5\cdot10^4$, anchor on $2\cdot10^5$ box samples, exponential loss weight with $V_{\max}=3$ on all systems\\
+Reference & $5\cdot10^4$ Sobol states, RK4 step 0.01, horizon 30 (unicycle) and 40 (quadrotor). Converged: held for one time unit, $\|\xi\|<10^{-3}$ and $|\eta_2-1|<0.05$ (unicycle), $\|\zeta\|<10^{-3}$ (quadrotor). States that have neither converged nor failed at the horizon count as outside\\
+\bottomrule
+\end{tabular}
+\end{table}

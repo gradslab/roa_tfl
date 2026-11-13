@@ -1,0 +1,42 @@
+[
+ {
+  "method": "pinn",
+  "system": "vdp_obs1",
+  "c1": 0.14207007718831302,
+  "c2": 0.29306405782699585,
+  "coverage": 29.50171212657929,
+  "false_positive": 0.0,
+  "scenario_eps": 1.40225393286119e-05,
+  "seed": 0
+ },
+ {
+  "method": "pinn",
+  "system": "vdp_obs1",
+  "c1": 0.1506534797027707,
+  "c2": 0.3142373561859131,
+  "coverage": 30.83008619671744,
+  "false_positive": 0.0,
+  "scenario_eps": 1.40225393286119e-05,
+  "seed": 1
+ },
+ {
+  "method": "pinn",
+  "system": "vdp_obs1",
+  "c1": 0.16452234683632852,
+  "c2": 0.28786522150039673,
+  "coverage": 28.69878379974023,
+  "false_positive": 0.0,
+  "scenario_eps": 1.40225393286119e-05,
+  "seed": 2
+ },
+ {
+  "method": "pinn",
+  "system": "vdp_obs1",
+  "c1": 0.14928087730407716,
+  "c2": 0.322104811668396,
+  "coverage": 31.756996103436062,
+  "false_positive": 0.0,
+  "scenario_eps": 1.40225393286119e-05,
+  "seed": 3
+ }
+]

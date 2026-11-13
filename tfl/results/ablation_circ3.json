@@ -1,0 +1,27 @@
+{
+ "no_step": {
+  "c2": 0.6285649538040161,
+  "coverage": 38.770507260041484,
+  "false_positive": 0.002
+ },
+ "no_wcap": {
+  "c2": 0.9102941155433655,
+  "coverage": 64.24429568168961,
+  "false_positive": 0.0
+ },
+ "pinn_style": {
+  "c2": 0.2558516263961792,
+  "coverage": 9.383839336224778,
+  "false_positive": 0.0
+ },
+ "safety_value": {
+  "c2": 0.7809312343597412,
+  "coverage": 33.518762964359794,
+  "false_positive": 0.0
+ },
+ "sum_ansatz": {
+  "c2": 0.9739893078804016,
+  "coverage": 33.40797661700924,
+  "false_positive": 0.0
+ }
+}

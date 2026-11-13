@@ -1,0 +1,26 @@
+{
+ "vdp_obs1": {
+  "roa": 33.875998854637146,
+  "roa_no_box_exit": 33.875998854637146,
+  "roa_no_obstacles": 39.21599984169006,
+  "ref_in_nobox": true
+ },
+ "vdp_obs2": {
+  "roa": 28.540000319480896,
+  "roa_no_box_exit": 28.540000319480896,
+  "roa_no_obstacles": 39.21599984169006,
+  "ref_in_nobox": true
+ },
+ "power_obs2": {
+  "roa": 23.61000031232834,
+  "roa_no_box_exit": 23.61000031232834,
+  "roa_no_obstacles": 70.01799941062927,
+  "ref_in_nobox": true
+ },
+ "power_obs4": {
+  "roa": 20.32400071620941,
+  "roa_no_box_exit": 20.32400071620941,
+  "roa_no_obstacles": 44.18799877166748,
+  "ref_in_nobox": true
+ }
+}
