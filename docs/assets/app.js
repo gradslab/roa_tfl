@@ -299,7 +299,7 @@
       const done = play >= run.pts.length - 1;
       if (!done) return add("neutral", "running…");
       add(run.status === "converged" ? "ok" : run.status === "timeout" ? "neutral" : "bad",
-        run.status === "converged" ? "converged to the path" : run.status === "singular" ? "reached the singular set" : run.status === "box" ? "left the state limits" : "still running at the horizon");
+        run.status === "converged" ? "converged to the path" : run.status === "singular" ? "reached the singular set" : run.status === "box" ? "left the state constraints" : "still running at the horizon");
     }
     cv.addEventListener("click", (ev) => {
       const r = cv.getBoundingClientRect(), px = (ev.clientX - r.left) * cv.width / r.width, py = (ev.clientY - r.top) * cv.height / r.height;

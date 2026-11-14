@@ -25,12 +25,12 @@
   "n_tested": 116273,
   "first_failure": null,
   "n_below_c1_outside_inner": 3,
-  "n_below_c1_outside_inner_failed": 2
+  "n_below_c1_outside_inner_failed": 1
  },
  "screening": [
   {
    "snapshot": "epoch_025.pt",
-   "c2": 0.0,
+   "c2": -0.01971304416656494,
    "volume": 0.054740000516176224
   },
   {
@@ -81,5 +81,5 @@
  "roa_fraction_of_box": 84.848,
  "region_fraction_of_box": 12.817999720573425,
  "n_ground_truth": 50000,
- "seconds": 101.57867383956909
+ "seconds": 127.43646907806396
 }

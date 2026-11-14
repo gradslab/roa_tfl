@@ -1,26 +1,26 @@
 {
- "run": "runs/quad3_pinn_s2",
+ "run": "runs/quad3_pinnf1_s2",
  "case": "quadrotor",
  "snapshot": "epoch_025.pt",
  "alpha": 0.08640078996816024,
  "c_inner": 0.0005978051076726842,
- "c1": 0.0,
+ "c1": -0.11151054143533111,
  "c2_screening_and_retest": [
-  0.0,
-  0.0
+  -0.11149939149618149,
+  -0.1130526140332222
  ],
- "c2_selected": 0.0,
- "c2": 0.0,
+ "c2_selected": -0.11151054143533111,
+ "c2": -0.11151054143533111,
  "iid": {
   "N": 1000000,
-  "seed": 7152145,
+  "seed": 7664764,
   "distribution": "uniform on the box, i.i.d.",
   "eps": 1.3815510557964274e-05,
   "confidence": 0.999999,
-  "c1": 0.0,
-  "c2_old": 0.0,
+  "c1": -0.11151054143533111,
+  "c2_old": -0.11151054143533111,
   "c2_iid": 1.0,
-  "c2": 0.0,
+  "c2": -0.11151054143533111,
   "n_band": 0,
   "n_tested": 0,
   "first_failure": null,
@@ -30,39 +30,39 @@
  "screening": [
   {
    "snapshot": "epoch_025.pt",
-   "c2": 0.0,
+   "c2": -0.1130526140332222,
    "volume": 0.0
   },
   {
    "snapshot": "epoch_050.pt",
-   "c2": 0.0,
+   "c2": -0.14285309612751007,
    "volume": 0.0
   },
   {
    "snapshot": "epoch_075.pt",
-   "c2": 0.0,
+   "c2": -0.16729414463043213,
    "volume": 0.0
   },
   {
    "snapshot": "epoch_100.pt",
-   "c2": 0.0,
+   "c2": -0.16337957978248596,
    "volume": 0.0
   }
  ],
  "retest": [
   {
    "snapshot": "epoch_025.pt",
-   "c2": 0.0,
+   "c2": -0.11149939149618149,
    "volume": 0.0
   },
   {
    "snapshot": "epoch_050.pt",
-   "c2": 0.0,
+   "c2": -0.14469276368618011,
    "volume": 0.0
   },
   {
    "snapshot": "epoch_075.pt",
-   "c2": 0.0,
+   "c2": -0.16408492624759674,
    "volume": 0.0
   }
  ],
@@ -81,5 +81,5 @@
  "roa_fraction_of_box": 56.218,
  "region_fraction_of_box": 0.0,
  "n_ground_truth": 50000,
- "seconds": 77.78199219703674
+ "seconds": 91.00128889083862
 }

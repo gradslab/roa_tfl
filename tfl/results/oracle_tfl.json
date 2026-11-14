@@ -1,0 +1,476 @@
+{
+ "circ3_dz_s0": {
+  "coverage": 15.163586649066566,
+  "snapshot": "epoch_025.pt",
+  "level": 0.6159139275550842,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_dz_s1": {
+  "coverage": 15.882519328681878,
+  "snapshot": "epoch_075.pt",
+  "level": 0.6132399439811707,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_dz_s2": {
+  "coverage": 15.913162360927776,
+  "snapshot": "epoch_075.pt",
+  "level": 0.6170629262924194,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_dz_s3": {
+  "coverage": 17.54667169526683,
+  "snapshot": "epoch_100.pt",
+  "level": 0.6501116156578064,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_dzf100_s0": {
+  "coverage": 12.134640769375824,
+  "snapshot": "epoch_100.pt",
+  "level": 0.029283497482538223,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_dzf10_s0": {
+  "coverage": 15.163586649066566,
+  "snapshot": "epoch_025.pt",
+  "level": 0.6159139275550842,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_dzf1_s0": {
+  "coverage": 7.420328116160664,
+  "snapshot": "epoch_025.pt",
+  "level": 0.6563079953193665,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_dzf30_s0": {
+  "coverage": 20.191401093720536,
+  "snapshot": "epoch_100.pt",
+  "level": 0.34683817625045776,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_dzf3_s0": {
+  "coverage": 12.273712992645672,
+  "snapshot": "epoch_075.pt",
+  "level": 0.8414292335510254,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_pinn_s0": {
+  "coverage": 7.396756552894588,
+  "snapshot": "epoch_100.pt",
+  "level": 0.14928586781024933,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_pinn_s1": {
+  "coverage": 7.116254950028286,
+  "snapshot": "epoch_050.pt",
+  "level": 0.1531534194946289,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_pinn_s2": {
+  "coverage": 6.911182349613426,
+  "snapshot": "epoch_025.pt",
+  "level": 0.11864543706178665,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_pinn_s3": {
+  "coverage": 7.5169715255515746,
+  "snapshot": "epoch_050.pt",
+  "level": 0.19005902111530304,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_pinnf100_s0": {
+  "coverage": 9.230624174995286,
+  "snapshot": "epoch_075.pt",
+  "level": -0.07290223985910416,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_pinnf10_s0": {
+  "coverage": 6.988968508391476,
+  "snapshot": "epoch_025.pt",
+  "level": -0.049678489565849304,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_pinnf1_s0": {
+  "coverage": 7.396756552894588,
+  "snapshot": "epoch_100.pt",
+  "level": 0.14928586781024933,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_pinnf1_s1": {
+  "coverage": 7.116254950028286,
+  "snapshot": "epoch_050.pt",
+  "level": 0.1531534194946289,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_pinnf1_s2": {
+  "coverage": 6.911182349613426,
+  "snapshot": "epoch_025.pt",
+  "level": 0.11864543706178665,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_pinnf1_s3": {
+  "coverage": 7.5169715255515746,
+  "snapshot": "epoch_050.pt",
+  "level": 0.19005902111530304,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_pinnf300_s0": {
+  "coverage": 8.683763907222326,
+  "snapshot": "epoch_100.pt",
+  "level": -0.07899430394172668,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_pinnf30_s0": {
+  "coverage": 7.387327927588157,
+  "snapshot": "epoch_025.pt",
+  "level": -0.07996995002031326,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_pinnf3_s0": {
+  "coverage": 7.137469356967754,
+  "snapshot": "epoch_100.pt",
+  "level": 0.029042884707450867,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_richdz_f10_s0": {
+  "coverage": 20.144257967188384,
+  "snapshot": "epoch_050.pt",
+  "level": 0.6559488773345947,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_richdz_f1_s0": {
+  "coverage": 6.479822741844239,
+  "snapshot": "epoch_025.pt",
+  "level": 0.8878746032714844,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_richpinn_f10_s0": {
+  "coverage": 19.090609089194796,
+  "snapshot": "epoch_050.pt",
+  "level": 0.03261303901672363,
+  "inner_coverage": 6.376107863473505
+ },
+ "circ3_richpinn_f1_s0": {
+  "coverage": 6.397322270412974,
+  "snapshot": "epoch_050.pt",
+  "level": -1.0251368284225464,
+  "inner_coverage": 6.376107863473505
+ },
+ "quad3_dz_s0": {
+  "coverage": 0.04624853249848803,
+  "snapshot": "epoch_075.pt",
+  "level": 0.43940675258636475,
+  "inner_coverage": 0.0
+ },
+ "quad3_dz_s1": {
+  "coverage": 0.23124266249244013,
+  "snapshot": "epoch_050.pt",
+  "level": 0.7180617451667786,
+  "inner_coverage": 0.0
+ },
+ "quad3_dz_s2": {
+  "coverage": 0.10316980326585791,
+  "snapshot": "epoch_100.pt",
+  "level": 0.6029089093208313,
+  "inner_coverage": 0.0
+ },
+ "quad3_dz_s3": {
+  "coverage": 0.3984488953715892,
+  "snapshot": "epoch_025.pt",
+  "level": 0.7264789938926697,
+  "inner_coverage": 0.0
+ },
+ "quad3_dzf100_s0": {
+  "coverage": 1.3447650218791134,
+  "snapshot": "epoch_025.pt",
+  "level": -0.05321405827999115,
+  "inner_coverage": 0.0
+ },
+ "quad3_dzf10_s0": {
+  "coverage": 0.2739336155679676,
+  "snapshot": "epoch_025.pt",
+  "level": 0.21243317425251007,
+  "inner_coverage": 0.0
+ },
+ "quad3_dzf1_s0": {
+  "coverage": 0.04624853249848803,
+  "snapshot": "epoch_075.pt",
+  "level": 0.43940675258636475,
+  "inner_coverage": 0.0
+ },
+ "quad3_dzf30_s0": {
+  "coverage": 1.1846739478458856,
+  "snapshot": "epoch_025.pt",
+  "level": 0.12295034527778625,
+  "inner_coverage": 0.0
+ },
+ "quad3_dzf3_s0": {
+  "coverage": 0.120957700380661,
+  "snapshot": "epoch_050.pt",
+  "level": 0.3370373249053955,
+  "inner_coverage": 0.0
+ },
+ "quad3_pinn_s0": {
+  "coverage": 0.017787897114803088,
+  "snapshot": "epoch_075.pt",
+  "level": -0.01497805118560791,
+  "inner_coverage": 0.0
+ },
+ "quad3_pinn_s1": {
+  "coverage": 0.0,
+  "snapshot": null,
+  "level": null,
+  "inner_coverage": 0.0
+ },
+ "quad3_pinn_s2": {
+  "coverage": 0.0035575794229606174,
+  "snapshot": "epoch_050.pt",
+  "level": -0.08959852904081345,
+  "inner_coverage": 0.0
+ },
+ "quad3_pinn_s3": {
+  "coverage": 0.0,
+  "snapshot": null,
+  "level": null,
+  "inner_coverage": 0.0
+ },
+ "quad3_pinnf100_s0": {
+  "coverage": 0.21701234480059767,
+  "snapshot": "epoch_025.pt",
+  "level": -0.18187636137008667,
+  "inner_coverage": 0.0
+ },
+ "quad3_pinnf10_s0": {
+  "coverage": 0.4660429044078409,
+  "snapshot": "epoch_075.pt",
+  "level": -0.11131912469863892,
+  "inner_coverage": 0.0
+ },
+ "quad3_pinnf1_s0": {
+  "coverage": 0.017787897114803088,
+  "snapshot": "epoch_075.pt",
+  "level": -0.01497805118560791,
+  "inner_coverage": 0.0
+ },
+ "quad3_pinnf1_s1": {
+  "coverage": 0.0,
+  "snapshot": null,
+  "level": null,
+  "inner_coverage": 0.0
+ },
+ "quad3_pinnf1_s2": {
+  "coverage": 0.0035575794229606174,
+  "snapshot": "epoch_050.pt",
+  "level": -0.08959852904081345,
+  "inner_coverage": 0.0
+ },
+ "quad3_pinnf1_s3": {
+  "coverage": 0.0,
+  "snapshot": null,
+  "level": null,
+  "inner_coverage": 0.0
+ },
+ "quad3_pinnf300_s0": {
+  "coverage": 0.7791098936283752,
+  "snapshot": "epoch_100.pt",
+  "level": -0.16623282432556152,
+  "inner_coverage": 0.0
+ },
+ "quad3_pinnf30_s0": {
+  "coverage": 2.436941904728023,
+  "snapshot": "epoch_050.pt",
+  "level": -0.11464086174964905,
+  "inner_coverage": 0.0
+ },
+ "quad3_pinnf3_s0": {
+  "coverage": 0.6225763990181081,
+  "snapshot": "epoch_075.pt",
+  "level": 0.016536325216293335,
+  "inner_coverage": 0.0
+ },
+ "quad3_richdz_f10_s0": {
+  "coverage": 1.2415952186132555,
+  "snapshot": "epoch_025.pt",
+  "level": 0.1348465532064438,
+  "inner_coverage": 0.0
+ },
+ "quad3_richdz_f1_s0": {
+  "coverage": 0.43046711017823475,
+  "snapshot": "epoch_100.pt",
+  "level": 0.7992721796035767,
+  "inner_coverage": 0.0
+ },
+ "quad3_richpinn_f10_s0": {
+  "coverage": 0.5941157636344231,
+  "snapshot": "epoch_050.pt",
+  "level": -0.03550080955028534,
+  "inner_coverage": 0.0
+ },
+ "quad3_richpinn_f1_s0": {
+  "coverage": 1.0032373972748942,
+  "snapshot": "epoch_075.pt",
+  "level": 0.06809747219085693,
+  "inner_coverage": 0.0
+ },
+ "sin6_dz_s0": {
+  "coverage": 1.155424602757024,
+  "snapshot": "epoch_100.pt",
+  "level": 0.28796592354774475,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_dz_s1": {
+  "coverage": 1.170156792591813,
+  "snapshot": "epoch_050.pt",
+  "level": 0.29871296882629395,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_dz_s2": {
+  "coverage": 1.6100178890876566,
+  "snapshot": "epoch_100.pt",
+  "level": 0.734745979309082,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_dz_s3": {
+  "coverage": 1.1975165737135642,
+  "snapshot": "epoch_075.pt",
+  "level": 0.3873591125011444,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_dzf100_s0": {
+  "coverage": 26.235925497211408,
+  "snapshot": "epoch_100.pt",
+  "level": 0.16539397835731506,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_dzf10_s0": {
+  "coverage": 17.83647269283384,
+  "snapshot": "epoch_075.pt",
+  "level": 0.7759638428688049,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_dzf1_s0": {
+  "coverage": 1.155424602757024,
+  "snapshot": "epoch_100.pt",
+  "level": 0.28796592354774475,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_dzf30_s0": {
+  "coverage": 33.70304114490161,
+  "snapshot": "epoch_025.pt",
+  "level": 0.6417465806007385,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_dzf3_s0": {
+  "coverage": 2.9506471640534566,
+  "snapshot": "epoch_100.pt",
+  "level": 0.6600270867347717,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_pinn_s0": {
+  "coverage": 5.688729874776387,
+  "snapshot": "epoch_100.pt",
+  "level": 0.18239136040210724,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_pinn_s1": {
+  "coverage": 7.957487109333894,
+  "snapshot": "epoch_100.pt",
+  "level": 0.22826410830020905,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_pinn_s2": {
+  "coverage": 7.808060612438178,
+  "snapshot": "epoch_100.pt",
+  "level": 0.22504614293575287,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_pinn_s3": {
+  "coverage": 6.155950752393981,
+  "snapshot": "epoch_100.pt",
+  "level": 0.19316498935222626,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_pinnf0.3_s0": {
+  "coverage": 2.961170156792592,
+  "snapshot": "epoch_100.pt",
+  "level": 0.37558504939079285,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_pinnf100_s0": {
+  "coverage": 1.4458592023571504,
+  "snapshot": "epoch_025.pt",
+  "level": -0.03507624566555023,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_pinnf10_s0": {
+  "coverage": 3.97348205829738,
+  "snapshot": "epoch_050.pt",
+  "level": 0.010876044631004333,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_pinnf1_s0": {
+  "coverage": 5.688729874776387,
+  "snapshot": "epoch_100.pt",
+  "level": 0.18239136040210724,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_pinnf1_s1": {
+  "coverage": 7.957487109333894,
+  "snapshot": "epoch_100.pt",
+  "level": 0.22826410830020905,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_pinnf1_s2": {
+  "coverage": 7.808060612438178,
+  "snapshot": "epoch_100.pt",
+  "level": 0.22504614293575287,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_pinnf1_s3": {
+  "coverage": 6.155950752393981,
+  "snapshot": "epoch_100.pt",
+  "level": 0.19316498935222626,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_pinnf300_s0": {
+  "coverage": 1.4521729980006315,
+  "snapshot": "epoch_025.pt",
+  "level": -0.0433102548122406,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_pinnf30_s0": {
+  "coverage": 2.119330737661791,
+  "snapshot": "epoch_100.pt",
+  "level": -0.006483674049377441,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_pinnf3_s0": {
+  "coverage": 9.37177733347364,
+  "snapshot": "epoch_100.pt",
+  "level": 0.08437075465917587,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_richdz_f10_s0": {
+  "coverage": 14.549089761128064,
+  "snapshot": "epoch_025.pt",
+  "level": 0.7107254266738892,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_richdz_f1_s0": {
+  "coverage": 1.123855624539619,
+  "snapshot": "epoch_025.pt",
+  "level": 0.30008047819137573,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_richpinn_f10_s0": {
+  "coverage": 5.722403451541618,
+  "snapshot": "epoch_100.pt",
+  "level": 0.016248509287834167,
+  "inner_coverage": 1.090182047774387
+ },
+ "sin6_richpinn_f1_s0": {
+  "coverage": 4.928969799010838,
+  "snapshot": "epoch_100.pt",
+  "level": 0.15624134242534637,
+  "inner_coverage": 1.090182047774387
+ }
+}

@@ -4,65 +4,65 @@
  "snapshot": "epoch_025.pt",
  "alpha": 0.18226820820421552,
  "c_inner": 0.05094421305220749,
- "c1": 0.0,
+ "c1": -0.11510187921524048,
  "c2_screening_and_retest": [
-  0.0,
-  0.0
+  -0.11509037017822266,
+  -0.09385496377944946
  ],
- "c2_selected": 0.0,
- "c2": 0.0,
+ "c2_selected": -0.11509037017822266,
+ "c2": -0.11509037017822266,
  "iid": {
   "N": 1000000,
   "seed": 7110966,
   "distribution": "uniform on the box, i.i.d.",
   "eps": 1.3815510557964274e-05,
   "confidence": 0.999999,
-  "c1": 0.0,
-  "c2_old": 0.0,
+  "c1": -0.11510187921524048,
+  "c2_old": -0.11509037017822266,
   "c2_iid": 1.0,
-  "c2": 0.0,
+  "c2": -0.11509037017822266,
   "n_band": 0,
   "n_tested": 0,
   "first_failure": null,
-  "n_below_c1_outside_inner": 0,
-  "n_below_c1_outside_inner_failed": 0
+  "n_below_c1_outside_inner": 1,
+  "n_below_c1_outside_inner_failed": 1
  },
  "screening": [
   {
    "snapshot": "epoch_025.pt",
-   "c2": 0.0,
+   "c2": -0.09385496377944946,
    "volume": 0.01001999992877245
   },
   {
    "snapshot": "epoch_050.pt",
-   "c2": 0.0,
+   "c2": -0.10775035619735718,
    "volume": 0.01001999992877245
   },
   {
    "snapshot": "epoch_075.pt",
-   "c2": 0.0,
+   "c2": -0.08399524539709091,
    "volume": 0.01001999992877245
   },
   {
    "snapshot": "epoch_100.pt",
-   "c2": 0.0,
+   "c2": -0.0882703885436058,
    "volume": 0.01001999992877245
   }
  ],
  "retest": [
   {
    "snapshot": "epoch_025.pt",
-   "c2": 0.0,
+   "c2": -0.11509037017822266,
    "volume": 0.01001999992877245
   },
   {
    "snapshot": "epoch_050.pt",
-   "c2": 0.0,
+   "c2": -0.13958364725112915,
    "volume": 0.01001999992877245
   },
   {
    "snapshot": "epoch_075.pt",
-   "c2": 0.0,
+   "c2": -0.16175328195095062,
    "volume": 0.01001999992877245
   }
  ],
@@ -74,12 +74,12 @@
  ],
  "step_h": 0.025,
  "c1_sampled": true,
- "coverage": 1.090182047774387,
+ "coverage": 1.092286646322214,
  "false_positive": 0.0,
  "false_positive_of_region": 0.0,
  "inner_coverage": 1.090182047774387,
  "roa_fraction_of_box": 95.03,
- "region_fraction_of_box": 1.0359999723732471,
+ "region_fraction_of_box": 1.0379999876022339,
  "n_ground_truth": 50000,
- "seconds": 47.53211808204651
+ "seconds": 42.93825721740723
 }

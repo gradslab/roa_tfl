@@ -59,7 +59,8 @@ class PinnModel(nn.Module):
 
     def forward(self, x):
         ok = self.prob.admissible(x)
-        return torch.where(ok, self.W(torch.nan_to_num(x)).clamp(0.0, 1.0), torch.ones(len(x), dtype=x.dtype, device=x.device))
+        w = self.W(torch.nan_to_num(x)).clamp(max=1.0)
+        return torch.where(ok, w, torch.ones(len(x), dtype=x.dtype, device=x.device))
 
 
 class QuadModel(nn.Module):

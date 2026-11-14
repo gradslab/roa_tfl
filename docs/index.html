@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Learning Constrained Regions of Attraction</title>
+<title>Learning Regions of Attraction for TFL</title>
 <meta name="description" content="An estimate of the constrained region of attraction of a transverse feedback linearizing path-following controller, with a verified inner layer and an outer layer tested on samples.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@
 <header class="hero" id="top">
   <div class="hero-text">
     <span class="badge"><i></i>Under review</span>
-    <h1>Learning Constrained Regions of Attraction: Transverse Feedback Linearization and Beyond</h1>
+    <h1>Learning Regions of Attraction for Transverse Feedback Linearization under Controller Singularities</h1>
     <div class="authors"><span>Abdullah Waqar Malik<sup>1</sup></span><span>Hamza Tariq<sup>2</sup></span><span>Adeel Akhtar<sup>2</sup></span></div>
     <p class="affil"><sup>1</sup>National University of Sciences and Technology, Islamabad &nbsp;·&nbsp; <sup>2</sup>New Jersey Institute of Technology</p>
     <div class="btns">
@@ -47,17 +47,17 @@
 <section class="section" id="question">
   <div class="wrap">
     <p class="kicker">The question</p>
-    <h2 class="headline">The path attracts a neighbourhood. How large is it?</h2>
-    <p class="lead">Within each animation, every vehicle runs the same controller. While a vehicle stays admissible, its transverse error obeys linear, exponentially stable dynamics. Some vehicles reach the singular set or a state limit first, and then the controller fails. The constrained region of attraction is the set of starting states that never reach the singular set or leave the state limits.</p>
+    <h2 class="headline">TFL guarantees are local. How large is the region of attraction?</h2>
+    <p class="lead">Within each animation, every vehicle runs the same controller. While a vehicle stays admissible, its transverse error obeys linear, exponentially stable dynamics. Some vehicles reach the singular set or a state constraint first, and then the controller fails. The constrained region of attraction is the set of starting states that never reach the singular set or leave the state constraints.</p>
     <div class="cards">
       <figure class="card" style="margin:0"><video data-src="assets/media/unicycle_circle" muted loop playsinline autoplay></video>
-        <figcaption class="cap"><h3>Unicycle, circle</h3><p>Fifty vehicles start heading north at speed 1. Those in the simulated region swirl onto the circle. Red marks show runs that leave the state limits or reach the centre of the circle, where the path coordinate is undefined.</p></figcaption></figure>
+        <figcaption class="cap"><h3>Unicycle, circle</h3><p>Fifty vehicles start heading north at speed 1. Those in the simulated region swirl onto the circle. Red marks show runs that leave the state constraints or reach the centre of the circle, where the path coordinate is undefined.</p></figcaption></figure>
       <figure class="card" style="margin:0"><video data-src="assets/media/unicycle_sinusoid" muted loop playsinline autoplay></video>
-        <figcaption class="cap"><h3>Unicycle, sinusoid</h3><p>The same vehicle on a periodic path. On this slice the only failures are exits through the state limit on x₂.</p></figcaption></figure>
+        <figcaption class="cap"><h3>Unicycle, sinusoid</h3><p>The same vehicle on a periodic path. On this slice the only failures are exits through the state constraint on x₂.</p></figcaption></figure>
       <figure class="card" style="margin:0"><video data-src="assets/media/quadrotor" muted loop playsinline autoplay></video>
         <figcaption class="cap"><h3>Planar quadrotor</h3><p>Zero thrust is singular. Blue vehicles start in the estimate and orbit the loop. The others drive their thrust to zero and fail.</p></figcaption></figure>
     </div>
-    <div class="legend-row"><span><i class="sw roa"></i>simulated region of attraction</span><span><i class="sw est"></i>our estimate</span><span><i class="sw inner"></i>verified inner layer</span><span><i class="sw bad"></i>reaches the singular set or a limit</span><span><i class="sw path"></i>path</span></div>
+    <div class="legend-row"><span><i class="sw roa"></i>simulated region of attraction</span><span><i class="sw est"></i>our estimate</span><span><i class="sw inner"></i>verified inner layer</span><span><i class="sw bad"></i>reaches the singular set or a state constraint</span><span><i class="sw path"></i>path</span></div>
   </div>
 </section>
 
@@ -101,7 +101,7 @@
       <div class="panel">
         <canvas id="split" width="700" height="520" aria-label="value function along a trajectory"></canvas>
         <div class="ctrl" style="margin-top:12px"><label for="tSlide">Time along the trajectory <output id="tOut">0.0</output></label><input type="range" id="tSlide" min="0" max="1000" value="0"></div>
-        <p class="hint">A run that passes close to a state limit, the face x₂ = −2. The bar shows V at the current state, split into the known part and the part a network learns.</p>
+        <p class="hint">A run that passes close to a state constraint, the face x₂ = −2. The bar shows V at the current state, split into the known part and the part a network learns.</p>
       </div>
     </div>
   </div>
@@ -172,7 +172,7 @@
   <div class="wrap">
     <p class="kicker">Results</p>
     <h2 class="headline">Twelve systems, five methods.</h2>
-    <p class="lead">Coverage of the simulated region of attraction, mean over four seeds. Every method except sum-of-squares passes the same level selection and final test. Toggle methods, and hover a marker for its value. The physics-informed baselines win on some equilibrium benchmarks, and the plot shows where.</p>
+    <p class="lead">Coverage of the simulated region of attraction, mean over four seeds. Every method except sum-of-squares passes the same level selection and final test. Toggle methods, and hover a marker for its value. The physics-informed baselines win on most equilibrium benchmarks, and the plot shows where.</p>
     <div class="res-tools" id="resTools"></div>
     <div class="panel"><canvas id="dots" width="1100" height="760" aria-label="coverage of every method on every system"></canvas></div>
     <p class="note" style="margin-top:12px">Sum-of-squares is not applied to the TFL closed loops, which are rational with trigonometric terms and singular, and was not run on the obstacle benchmarks. The quadrotor is the hardest case: counterexamples hold its level low, and the bound V ≥ γq<sub>ex</sub> alone then excludes <span data-m="resFloorQuad">–</span> of its simulated region of attraction.</p>
@@ -183,9 +183,9 @@
 <section class="section band" id="beyond">
   <div class="wrap two" style="align-items:center">
     <div>
-      <p class="kicker">Beyond TFL</p>
+      <p class="kicker">Other closed loops</p>
       <h2 class="headline">The same learning applies to closed loops with an exponentially stable equilibrium.</h2>
-      <p class="lead">With the quadratic form of the linearization in place of the exact cost-to-go, the method applies to general closed loops. A sublevel set of that quadratic form, verified by interval branch and bound, is again the inner layer. Among the five benchmarks with obstacles, the 3-D system and the four of Meng and Liu, the estimate covers the most on <span data-m="resObsBestCount">–</span>.</p>
+      <p class="lead">With the quadratic form of the linearization in place of the exact cost-to-go, the method applies to closed loops with an exponentially stable equilibrium. A sublevel set of that quadratic form, verified by interval branch and bound, is again the inner layer. On nine benchmarks it covers, after fine-tuning, the most on the 3-D system with a state constraint and an obstacle. Physics-informed baselines trained on simulated labels, with a scale searched on the reference simulation, cover more on the other <span data-m="resPinnWinsN">–</span>.</p>
     </div>
     <figure class="card" style="margin:0"><video data-src="assets/media/obstacles" muted loop playsinline autoplay></video>
       <figcaption class="cap"><h3>Van der Pol with two obstacles</h3><p>Trajectories that start in the estimate converge, and so do some that start outside it. The others run into an obstacle or leave the box.</p></figcaption></figure>
@@ -228,8 +228,8 @@ bash reproduce.sh all</pre>
     <p class="kicker">Cite</p>
     <div style="position:relative"><button class="copy" id="copyBib">copy</button><pre id="bib">@unpublished{malik2027constrained,
   author = {Abdullah Waqar Malik and Hamza Tariq and Adeel Akhtar},
-  title  = {Learning Constrained Regions of Attraction: Transverse
-            Feedback Linearization and Beyond},
+  title  = {Learning Regions of Attraction for Transverse Feedback
+            Linearization under Controller Singularities},
   note   = {Under review},
   year   = {2027}
 }</pre></div>

@@ -11,7 +11,7 @@ setup() {
 }
 
 tables() {
-  (cd "$ROOT/tfl" && python make_results3.py)
+  (cd "$ROOT/tfl" && python make_results3.py) || { echo "ledger failed"; return 1; }
   local bad=0
   for f in $GEN; do
     if ! diff -u "$ROOT/paper/reference/$f" "$ROOT/paper/$f"; then bad=1; fi
@@ -42,6 +42,7 @@ tfl() {
   python -u inner_region.py --system unicycle
   python -u inner_region.py --system unicycle --path "y-sin(x)" --pi x --periodic-x1 true
   python -u inner_region.py --system quadrotor
+  bash run_probes.sh
   for c in circle sinusoid quadrotor; do
     bash run_stream.sh $c
     bash run_pinn2.sh $c
@@ -49,6 +50,7 @@ tfl() {
     bash run_dz2.sh $c
     bash run_rich.sh $c
   done
+  python -u oracle_tfl.py
   python -u ref_sensitivity.py
   python -u floor3.py
   python -u unsafe3.py circ3 sin6 quad3
@@ -77,13 +79,17 @@ benchmarks() {
   for k in pinn pinn2 dz; do python -u certify_core.py --noclamp $k $B; done
   python -u certify_core.py summary $B
   for k in ours quad pinn; do python -u certify_core.py $k vdp_obs1 power_obs2; done
+  python -u certify_core.py ours vdp_obs2 power_obs4
   python -u certify_core.py --noclamp pinn vdp_obs1 power_obs2
   python -u certify_core.py summary vdp_obs1 power_obs2
   python -u core_q_check.py $B $O
   for k in ours quad pinn pinn2 dz; do python -u certify_core.py --relaxed $k $B $O; done
+  python -u reselect.py $B $O
+  python -u certify_core.py summary $B
+  python -u certify_core.py summary vdp_obs1 power_obs2
   python -u certify_core.py --relaxed summary $B $O
-  python -u unsafe_bench.py --core $B vdp_obs1 power_obs2
-  python -u unsafe_bench_check.py --core $B vdp_obs1 power_obs2
+  python -u unsafe_bench.py --core $B $O
+  python -u unsafe_bench_check.py --core $B $O
   python -u unsafe_bench.py --core --relaxed $B $O
   python -u unsafe_bench_check.py --core --relaxed $B $O
   python box_effect.py $O

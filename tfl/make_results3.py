@@ -25,8 +25,8 @@ def pct(x, d=1):
 
 def main():
     macros, main_rows, seed_rows, inner_rows, const_rows, abl_rows = [], [], [], [], [], []
+    collapse_extra = []
     gains, kept, t_train, t_cert, t_rep, t_inner, iid_fail = [], 0, [], [], [], [], 0
-    pinn_levels = {}
     for name, case, label in CASES:
         S = load(f"results/summary_{name}.json")
         I = load(f"results/inner_{case}.json")
@@ -54,7 +54,8 @@ def main():
         if W:
             wrep = [r["coverage"] for r in W["rows"] if r["run"].endswith("_rep3")]
             macros += [f"\\newcommand{{\\resGap{m}}}{{{round(statistics.mean(cov_rep), 1) - round(statistics.mean(wrep), 1):.1f}}}", f"\\newcommand{{\\resWholeLevelMax{m}}}{{{max(r['c2'] for r in W['rows'] if r['run'].endswith('_rep3')):.4f}}}"]
-            macros += [f"\\newcommand{{\\resZubovMax{m}}}{{{pct(max(Qd, statistics.mean(Pc), statistics.mean(Dz)))}}}",
+            macros += [f"\\newcommand{{\\resPinnBothMax{m}}}{{{pct(max(statistics.mean(Pc), statistics.mean(Dz)))}}}",
+                       f"\\newcommand{{\\resZubovMax{m}}}{{{pct(max(Qd, statistics.mean(Pc), statistics.mean(Dz)))}}}",
                        f"\\newcommand{{\\resOtherMax{m}}}{{{pct(max(Qd, statistics.mean(Pc), statistics.mean(Dz), statistics.mean(wrep)))}}}"]
             macros += [f"\\newcommand{{\\resWhole{m}}}{{{pct(statistics.mean(wrep))}}}",
                        f"\\newcommand{{\\resWholeUnion{m}}}{{{pct(W['union_repaired'])}}}"]
@@ -77,13 +78,19 @@ def main():
         rich = [load(f"runs/{name}_rich{k_}_f{f_}_s0/certify_v3.json")["coverage"] for k_ in ("pinn", "dz") for f_ in (1, 10)]
         macros.append(f"\\newcommand{{\\resRichMax{m}}}{{{pct(max(rich))}}}")
         kept_case, draw_diff = 0, []
-        pinn_levels[name] = max(load(f"runs/{name}_pinn_s{k}/certify_v3.json")["c2"] for k in range(4))
+        for kind_, names_ in (("pinn", ("circ3", "quad3")), ("dz", ("sin6", "quad3"))):
+            if name in names_:
+                rs_ = [load(f"runs/{name}_{kind_}_s{k}/certify_v3.json") for k in range(4)]
+                extra_ = [round((r_["coverage"] - r_["inner_coverage"]) / 100 * r_["roa_fraction_of_box"] / 100 * r_["n_ground_truth"]) for r_ in rs_]
+                assert all(r_["c2"] - r_["c1"] <= 2e-4 * abs(r_["c1"]) + 1e-12 for r_ in rs_) and max(extra_) <= 1
+                collapse_extra.append(max(extra_))
         for k in range(4):
             r3 = load(f"runs/{name}_s{k}_rep3/certify_v3.json")
             r0 = load(f"runs/{name}_s{k}/certify_v3.json")
             rp = load(f"runs/{name}_s{k}_rep3/repair.json")
             hist = load(f"runs/{name}_s{k}/history.json")
-            t_train.append(hist[-1]["time"] / 60)
+            if k > 0:
+                t_train.append(hist[-1]["time"] / 60)
             t_cert.append(r3["seconds"] / 60)
             t_rep.append(rp["seconds"] / 60)
             kept += r3["snapshot"] == "epoch_000.pt"
@@ -107,7 +114,7 @@ def main():
             r00 = next(r for r in S["rows"] if r["run"] == f"{name}_s0")
             macros.append(f"\\newcommand{{\\resSeedZero{m}}}{{{pct(r00['coverage'])}}}")
             abl_rows.append(f"{label} & full method & {r00['c2']:.3f} & {r00['coverage']:.1f} & {r00['false_positive']:.2f}\\\\")
-            for key, lab in (("pinn_style", "PDE residual loss in place of fitted value iteration"), 
+            for key, lab in (("pinn_style", "PDE residual loss alone"), 
                              ("safety_value", "safety-value baseline"), ("no_step", "no finite-step penalty, no counterexamples"),
                              ("no_wcap", "no exponential loss weight"), ("sum_ansatz", "sum form $\\Phi=\\psi+\\Psi_\\theta$")):
                 if key in A:
@@ -141,11 +148,37 @@ def main():
     macros.append(f"\\newcommand{{\\resRefNoiseMax}}{{{pct(max(v['changed_pct'] for v in noise.values()), 2)}}}")
     for key_, m_ in (("circle", "Circ"), ("sinusoid", "Sin"), ("quadrotor", "Quad")):
         macros.append(f"\\newcommand{{\\resRefNoise{m_}}}{{{pct(noise[key_]['changed_pct'], 2)}}}")
+    probes = {n: (load(f"runs/cfg{n}/config.json"), load(f"runs/cfg{n}/certify_probe.json"))
+              for n in ("O_circle", "M10W1_circle", "O_sinusoid", "M10W1_sinusoid", "O_quadrotor", "M0_quadrotor", "M10_quadrotor",
+                        "W1_quadrotor", "M10W1_quadrotor", "M30W1_quadrotor", "M3W1_quadrotor", "M10W0_quadrotor", "M10W1H128_quadrotor")}
+    assert all(c["seed"] == 0 for c, _ in probes.values())
+    for n_ in ("circ3", "sin6", "quad3"):
+        cs = [load(f"runs/{n_}_s{k}/config.json") for k in range(4)]
+        tag = {"circ3": "O_circle", "sin6": "O_sinusoid", "quad3": "M10W0_quadrotor"}[n_]
+        assert all((c["mu_step"], c["w_cap"], c["hidden"]) == (probes[tag][0]["mu_step"], probes[tag][0]["w_cap"], probes[tag][0]["hidden"]) for c in cs)
+    pc = {n: r["coverage"] for n, (_, r) in probes.items()}
+    assert pc["O_circle"] > pc["M10W1_circle"] and pc["O_sinusoid"] > pc["M10W1_sinusoid"]
+    quad_pairs = [n for n in pc if n.endswith("_quadrotor") and "H128" not in n]
+    assert max(quad_pairs, key=pc.get) == "M10W0_quadrotor"
+    assert {probes[n][1]["iid"]["N"] for n in pc} == {200000}
+    macros += [f"\\newcommand{{\\resProbeKeepCirc}}{{{pct(pc['O_circle'])}}}",
+               f"\\newcommand{{\\resProbeAltCirc}}{{{pct(pc['M10W1_circle'])}}}",
+               f"\\newcommand{{\\resProbeKeepSin}}{{{pct(pc['O_sinusoid'])}}}",
+               f"\\newcommand{{\\resProbeAltSin}}{{{pct(pc['M10W1_sinusoid'])}}}",
+               f"\\newcommand{{\\resProbeOrigQuad}}{{{pct(pc['O_quadrotor'])}}}",
+               f"\\newcommand{{\\resProbeBestQuad}}{{{pct(pc['M10W0_quadrotor'])}}}",
+               f"\\newcommand{{\\resProbeWideQuad}}{{{pct(pc['M10W1H128_quadrotor'])}}}",
+               f"\\newcommand{{\\resProbeQuadN}}{{{['zero','one','two','three','four','five','six','seven','eight','nine','ten'][len(quad_pairs)]}}}"]
+    macros.append(f"\\newcommand{{\\resCollapseExtra}}{{{['no', 'one'][max(collapse_extra)]}}}")
+    orc = load("results/oracle_tfl.json")
+    for n_, m_ in MAC.items():
+        ob_ = max(v["coverage"] for k, v in orc.items() if k.startswith(n_ + "_"))
+        assert ob_ < statistics.mean(load(f"runs/{n_}_s{k}_rep3/certify_v3.json")["coverage"] for k in range(4))
+        macros.append(f"\\newcommand{{\\resOracleMax{m_}}}{{{pct(ob_)}}}")
     fp_all = {}
     for n, _, _ in CASES:
         S_ = load(f"results/summary_{n}.json")
         fp_all[n] = max(max(r["false_positive"] for r in S_["rows"]), S_["union_repaired_fp"], S_["union_unrepaired_fp"])
-    macros.append(f"\\newcommand{{\\resPinnLevelMax}}{{{max(pinn_levels['circ3'], pinn_levels['quad3']):.3f}}}")
     macros.append(f"\\newcommand{{\\resFPMax}}{{{pct(max(fp_all.values()), 3)}}}")
     def fp_sentence(fp):
         n = round(fp * 5e4 / 100)
@@ -161,7 +194,7 @@ def main():
                f"\\newcommand{{\\resTimeInner}}{{{min(t_inner):.0f} to {max(t_inner):.0f} seconds per case}}"]
     G = Path("../benchmarks")
     bench = [("vdp", "vdp1", "Van der Pol, $\\mu=1$", True), ("vdp3", "vdp3", "Van der Pol, $\\mu=3$", True), ("pendulum", "pendulum", "Pendulum, $|u|\\le0.8$", False),
-             ("con3d", "con3d", "3-D, limit and obstacle", True), ("power", "power", "Power system", False)]
+             ("con3d", "con3d", "3-D, constraint and obstacle", True), ("power", "power", "Power system", False)]
     Sm = load(G / "results/core_iid_summary.json")["relaxed"]
     b_rows, b_means, b_unions, b_fps, sos_gap = [], [], [], [], []
     import torch
@@ -180,7 +213,8 @@ def main():
         fp = max([load(G / f"runs/{key}_s{k}_rep/certify_core_relaxed.json")["false_positive"] for k in range(4)] + [load(G / f"results/core_union_relaxed_{key}.json")["false_positive"]])
         m_, s_ = statistics.mean(d["repair"]), statistics.stdev(d["repair"])
         p2 = d["pinn2"]
-        pick = max((d["pinn"], p2), key=statistics.mean)
+        assert statistics.mean(p2) > statistics.mean(d["pinn"])
+        pick = p2
         pm, ps = statistics.mean(pick), statistics.stdev(pick)
         dz = d["dz"]
         dm, ds = statistics.mean(dz), statistics.stdev(dz)
@@ -201,24 +235,36 @@ def main():
         roa = 100 * torch.load(G / f"results/gt_{key}.pt", map_location="cpu")["roa"].float().mean().item()
         fp = max([load(G / f"runs/{key}_s{k}_rep/certify_core_relaxed.json")["false_positive"] for k in range(4)] + [load(G / f"results/core_union_relaxed_{key}.json")["false_positive"]])
         m_, s_ = statistics.mean(d["repair"]), statistics.stdev(d["repair"])
-        pick = max((d["pinn"], d["pinn2"]), key=statistics.mean)
+        assert statistics.mean(d["pinn2"]) > statistics.mean(d["pinn"])
+        pick = d["pinn2"]
         pm, ps = statistics.mean(pick), statistics.stdev(pick)
         dm, ds = statistics.mean(d["dz"]), statistics.stdev(d["dz"])
         b_fps.append(fp); b_unions.append(d["union"])
         assert m_ > d["quad"] and bx[key]["ref_in_nobox"] and abs(bx[key]["roa_no_box_exit"] - roa) < 1e-9
-        o_best.append((key, m_ > max(pm, dm), d["union"] > max(pm, dm)))
         macros += [f"\\newcommand{{\\resSeed{tag}}}{{{pct(m_)}}}", f"\\newcommand{{\\resDz{tag}}}{{{pct(dm)}}}",
                    f"\\newcommand{{\\resPinn{tag}}}{{{pct(pm)}}}", f"\\newcommand{{\\resUnion{tag}}}{{{pct(d['union'])}}}"]
         o_rows.append(f"{lab} & {roa:.1f} & {d['quad']:.1f} & n/a & ${pm:.1f}\\pm{ps:.1f}$ & ${dm:.1f}\\pm{ds:.1f}$ & ${statistics.mean(d['ours']):.1f}\\pm{statistics.stdev(d['ours']):.1f}$ & ${m_:.1f}\\pm{s_:.1f}$ & {d['union']:.1f} & {fp:.2f}\\\\")
-    assert [k for k, a, _ in o_best if not a] == ["power_obs4"], o_best
     mn_ = statistics.mean
-    best_ = lambda k: mn_(Sm[k]["repair"]) > max(mn_(Sm[k]["pinn"]), mn_(Sm[k]["pinn2"]), mn_(Sm[k]["dz"]))
-    assert sum(best_(k) for k in ("con3d", "vdp_obs1", "vdp_obs2", "power_obs2", "power_obs4")) == 4
-    assert mn_(Sm["power_obs2"]["dz"]) <= max(mn_(Sm["power_obs2"]["pinn"]), mn_(Sm["power_obs2"]["pinn2"]))
-    adv = {k: mn_(Sm[k]["repair"]) - max(mn_(Sm[k]["pinn"]), mn_(Sm[k]["pinn2"]), mn_(Sm[k]["dz"])) for k in [b[0] for b in bench] + [o[0] for o in obs]}
-    assert sorted(adv, key=adv.get)[-2:] in (["con3d", "power_obs2"], ["power_obs2", "con3d"]), adv
-    macros += [f"\\newcommand{{\\resObsBestCount}}{{four}}",
-               f"\\newcommand{{\\resObsNoObsMin}}{{{pct(min(bx[k]['roa_no_obstacles'] - bx[k]['roa'] for k, *_ in obs))}}}",
+    allk = [b[0] for b in bench] + [o[0] for o in obs]
+    lead = [k for k in allk if mn_(Sm[k]["repair"]) > max(mn_(Sm[k]["pinn2"]), mn_(Sm[k]["dz"]))]
+    assert lead == ["con3d"], lead
+    assert all(mn_(Sm[k]["dz"]) > max(mn_(Sm[k]["pinn2"]), mn_(Sm[k]["repair"])) for k, *_ in obs)
+    assert all(mn_(Sm[k]["repair"]) > Sm[k]["quad"] for k in allk)
+    grids = {(kd, k): load(G / f"results/grid_relaxed_{kd}_{k}.json") for kd in ("pinn2", "dz") for k in allk}
+    edges = {key_ for key_, g in grids.items() if g["selected"] == max(r["factor"] for r in g["grid"])}
+    assert edges == {("pinn2", "vdp"), ("pinn2", "vdp_obs2"), ("dz", "pendulum"), ("dz", "vdp_obs2")}, edges
+    assert all(300.0 in [r["factor"] for r in grids[("dz", k)]["grid"]] for k in allk)
+    for (kd, k), g in grids.items():
+        cov_ = {r["factor"]: r["coverage"] for r in g["grid"]}
+        reach = [1.0, 3.0, 10.0, 30.0, 100.0] + ([300.0] if kd == "pinn2" else [])
+        best_ = lambda: min((f for f in reach), key=lambda f: (-round(cov_[f], 6), f))
+        if kd == "dz":
+            for f in (300.0, 1000.0):
+                if best_() == max(reach):
+                    reach.append(f)
+        assert sorted(cov_) == reach and g["selected"] == best_(), (kd, k)
+        assert all(abs(c_ - g["selected"]) < 1e-9 for c_ in [r_.get("factor", g["selected"]) for r_ in load(G / f"results/baseline_{kd}_core_relaxed_{k}.json")])
+    macros += [f"\\newcommand{{\\resObsNoObsMin}}{{{pct(min(bx[k]['roa_no_obstacles'] - bx[k]['roa'] for k, *_ in obs))}}}",
                f"\\newcommand{{\\resObsNoObsMax}}{{{pct(max(bx[k]['roa_no_obstacles'] - bx[k]['roa'] for k, *_ in obs))}}}"]
     st = {r["run"]: r for r in load(G / "results/sos_vdp_study.json")["runs"]}
     sset = load(G / "results/sos_settings.json")
@@ -243,7 +289,7 @@ def main():
                f"\\newcommand{{\\resBenchSeedMin}}{{{pct(min(b_means))}}}", f"\\newcommand{{\\resBenchSeedMax}}{{{pct(max(b_means))}}}"]
     (OUT / "table_bench3.tex").write_text(r"""\begin{table}[t]
 \centering\footnotesize\setlength{\tabcolsep}{2.5pt}
-\caption{Coverage (\%) on the equilibrium benchmarks, mean $\pm$ std over four seeds where shown. Below the line: the obstacle benchmarks of \citet{mengliu2026}. Zubov PINN: better of two scales. n/a: not run. FP as in Table~\ref{tab:main}.}
+\caption{Coverage (\%) on the equilibrium benchmarks, mean $\pm$ std over four seeds where shown. Below the line: the obstacle benchmarks of \citet{mengliu2026}. Zubov PINN: searched scale. n/a: not run. FP as in Table~\ref{tab:main}.}
 \label{tab:bench}
 \begin{tabular}{@{}lccccccccc@{}}
 \toprule
@@ -276,50 +322,50 @@ System & $c_0$ & $E$ (\% box) & $E$ (\% ROA) & Cells & Time (s)\\
 \end{table}
 """)
     Cs = load(G / "results/core_iid_summary.json")
-    red, rec, rest = [], [], []
+    red, rec, rest, nseeds = [], [], [], 0
     for key, *_ in bench:
         e_share = load(G / f"results/core_{key}.json")["share_of_reference_roa"]
         for m in ("pinn", "pinn2", "dz"):
             for st_, rl_ in zip(Cs[key][m], Sm[key][m]):
+                nseeds += 1
                 if st_ - e_share < 0.5:
                     red.append(key)
-                    (rec if rl_ - e_share > 5 else rest).append((key, rl_ - e_share, rl_))
+                    (rec if rl_ - e_share > 5 else rest).append((key, m, rl_ - e_share, rl_))
     W_ = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"]
-    assert {r[0] for r in rec} == {"vdp3", "pendulum", "power"} and {r[0] for r in rest} <= {"con3d"}, (rec, rest)
-    macros += [f"\\newcommand{{\\resRedN}}{{{W_[len(red)]}}}", f"\\newcommand{{\\resRecN}}{{{W_[len(rec)].capitalize()}}}",
-               f"\\newcommand{{\\resRecLo}}{{{min(r[2] for r in rec):.1f}}}", f"\\newcommand{{\\resRecHi}}{{{max(r[2] for r in rec):.1f}}}",
-               f"\\newcommand{{\\resRestN}}{{{W_[len(rest)]}}}", f"\\newcommand{{\\resRestGap}}{{{math.ceil(10 * max(r[1] for r in rest)) / 10:.1f}}}"]
-    gl = [g["c2_old"] - g["c2"] for key, *_ in bench for f in ("pinn2", "dz") for g in load(G / f"results/baseline_{f}_{key}.json")["grid"]]
+    assert {(r[0], r[1]) for r in rest} == {("con3d", "pinn")} and all(r[2] < 0.05 for r in rest), (rec, rest)
+    macros += [f"\\newcommand{{\\resRedN}}{{{len(red)}}}", f"\\newcommand{{\\resSeedsN}}{{{nseeds}}}", f"\\newcommand{{\\resRecN}}{{{len(rec)}}}",
+               f"\\newcommand{{\\resRecLo}}{{{min(r[3] for r in rec):.1f}}}", f"\\newcommand{{\\resRecHi}}{{{max(r[3] for r in rec):.1f}}}",
+               f"\\newcommand{{\\resRestN}}{{{W_[len(rest)]}}}"]
+    gl = [r["c2_old"] - r["c2"] for g in grids.values() for r in g["grid"]]
     macros += [f"\\newcommand{{\\resGridLowerMax}}{{{math.ceil(1000 * max(gl)) / 1000:.3f}}}"]
-    bu = [load(G / f"results/unsafe_core_{key}.json") for key, *_ in bench]
-    bc = load(G / "results/unsafe_core_check.json")
+    from scipy.stats import beta as beta_dist
+
+    def pool(k):
+        a, b = load(G / f"results/unsafe_core_{k}.json"), load(G / f"results/unsafe_core_relaxed_{k}.json")
+        assert a["levels"] == b["levels"] and a["seed"] != b["seed"] and abs(a["union_coverage_of_S"] - b["union_coverage_of_S"]) < 1e-9
+        assert a["N"] == b["N"] == 1000000
+        k_ = max(a["unsafe"], b["unsafe"])
+        eps_ = max(a["eps_k"], b["eps_k"])
+        assert abs(eps_ - float(beta_dist.ppf(1 - 1e-6, k_ + 1, a["N"] - k_))) < 1e-12
+        return dict(a, unsafe=k_, eps_k=eps_, longest_time_to_inner=max(a["longest_time_to_inner"], b["longest_time_to_inner"]))
+    ca, cb = load(G / "results/unsafe_core_check.json"), load(G / "results/unsafe_core_relaxed_check.json")
+    bc = {k: {**{f: ca[k][f] + cb[k][f] for f in ("n_compared", "disagreements", "unsafe_confirmed")},
+              "unsafe_checks": ca[k]["unsafe_checks"] + cb[k]["unsafe_checks"]} for k in ca}
+    bu = [pool(key) for key, *_ in bench]
     assert all(u["mode"] == "core" and abs(u["union_coverage_of_S"] - u["union_coverage_stored"]) < 1e-9 for u in bu)
     assert all(abs(u["union_coverage_of_S"] - Sm[k]["union"]) < 0.01 for u, (k, *_) in zip(bu, bench))
     assert all(u["levels"] == [load(G / f"runs/{k}_s{i}_rep/certify_core_relaxed.json")["c2"] for i in range(4)] for u, (k, *_) in zip(bu, bench))
-    mn = lambda x: statistics.mean(x)
-    pk = lambda k: max((Sm[k]["pinn"], Sm[k]["pinn2"]), key=mn)
-    assert mn(Sm["vdp3"]["dz"]) > mn(Sm["vdp3"]["repair"]) and mn(pk("power")) > mn(Sm["power"]["repair"])
-    assert abs(mn(pk("pendulum")) - mn(Sm["pendulum"]["repair"])) < 2.0
-    assert all(mn(Sm[k]["repair"]) > Sm[k]["quad"] for k, *_ in bench)
-    assert mn(Sm["con3d"]["repair"]) > max(mn(Sm["con3d"][m]) for m in ("pinn", "pinn2", "dz"))
     ks = [str(u["unsafe"]) for u in bu]
-    ou = [load(G / f"results/unsafe_core_{k}.json") if (G / f"results/unsafe_core_{k}.json").exists() else load(G / f"results/unsafe_core_relaxed_{k}.json") for k, *_ in obs]
+    ou = [pool(k) for k, *_ in obs]
+    assert all(load(G / f"runs/{k}_s{i}_rep/certify_core.json")["c2"] == load(G / f"runs/{k}_s{i}_rep/certify_core_relaxed.json")["c2"]
+               for k, *_ in bench + obs for i in range(4))
     assert all(u["levels"] == [load(G / f"runs/{k}_s{i}_rep/certify_core_relaxed.json")["c2"] for i in range(4)] for u, (k, *_) in zip(ou, obs))
     W12 = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
     mnn = statistics.mean
-    wins = [k for k in [b[0] for b in bench] + [o[0] for o in obs] if max(mnn(Sm[k]["pinn"]), mnn(Sm[k]["pinn2"]), mnn(Sm[k]["dz"])) > mnn(Sm[k]["repair"])]
-    assert wins == ["vdp3", "power", "power_obs4"], wins
-    assert mnn(Sm["vdp3"]["dz"]) > mnn(Sm["vdp3"]["repair"]) and mnn(Sm["power_obs4"]["dz"]) > mnn(Sm["power_obs4"]["repair"])
-    assert max(mnn(Sm["power"]["pinn"]), mnn(Sm["power"]["pinn2"])) > mnn(Sm["power"]["repair"])
     assert all(load(G / f"results/sos_recert_{k}.json")["coverage"] > mnn(Sm[k]["repair"]) for k in ("vdp", "vdp3"))
-    macros += [f"\\newcommand{{\\resPinnWinsN}}{{{W12[len(wins)]}}}"]
-    ob5 = ("con3d", "vdp_obs1", "vdp_obs2", "power_obs2", "power_obs4")
-    bb = [k for k in ob5 if mnn(Sm[k]["ours"]) > max(mnn(Sm[k]["pinn"]), mnn(Sm[k]["pinn2"]), mnn(Sm[k]["dz"]))]
-    assert all(mnn(Sm[k]["dz"]) > mnn(Sm[k]["ours"]) for k in ("vdp_obs1", "vdp_obs2")), "dz before"
-    macros += [f"\\newcommand{{\\resObsBestBeforeCount}}{{{W12[len(bb)]}}}"]
-    oc = {**load(G / "results/unsafe_core_check.json"), **{k: v for k, v in load(G / "results/unsafe_core_relaxed_check.json").items() if k in ("vdp_obs2", "power_obs4")}}
+    macros += [f"\\newcommand{{\\resPinnWinsN}}{{{W12[len(allk) - len(lead)]}}}"]
+    oc = bc
     ko = [str(u["unsafe"]) for u in ou]
-    assert max(u["eps_k"] for u in ou) <= max(u["eps_k"] for u in bu)
     macros += [f"\\newcommand{{\\resAllUnsafeMax}}{{{W12[max(u['unsafe'] for u in bu + ou)]}}}"]
     macros += [f"\\newcommand{{\\resOUnsafeList}}{{{', '.join(ko[:-1])} and {ko[-1]}}}",
                f"\\newcommand{{\\resOUnsafeEpsMax}}{{{sci(max(u['eps_k'] for u in ou))}}}",

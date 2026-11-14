@@ -4,65 +4,65 @@
  "snapshot": "epoch_025.pt",
  "alpha": 0.18226820820421552,
  "c_inner": 0.05094421305220749,
- "c1": 0.0,
+ "c1": -0.05467019749879837,
  "c2_screening_and_retest": [
-  0.0,
-  0.0
+  -0.0546647310256958,
+  -0.052512526512145996
  ],
- "c2_selected": 0.0,
- "c2": 0.0,
+ "c2_selected": -0.0546647310256958,
+ "c2": -0.0546647310256958,
  "iid": {
   "N": 1000000,
   "seed": 7077608,
   "distribution": "uniform on the box, i.i.d.",
   "eps": 1.3815510557964274e-05,
   "confidence": 0.999999,
-  "c1": 0.0,
-  "c2_old": 0.0,
+  "c1": -0.05467019749879837,
+  "c2_old": -0.0546647310256958,
   "c2_iid": 1.0,
-  "c2": 0.0,
+  "c2": -0.0546647310256958,
   "n_band": 0,
   "n_tested": 0,
   "first_failure": null,
-  "n_below_c1_outside_inner": 0,
-  "n_below_c1_outside_inner_failed": 0
+  "n_below_c1_outside_inner": 1,
+  "n_below_c1_outside_inner_failed": 1
  },
  "screening": [
   {
    "snapshot": "epoch_025.pt",
-   "c2": 0.0,
+   "c2": -0.052512526512145996,
    "volume": 0.01001999992877245
   },
   {
    "snapshot": "epoch_050.pt",
-   "c2": 0.0,
+   "c2": -0.034072935581207275,
    "volume": 0.01001999992877245
   },
   {
    "snapshot": "epoch_075.pt",
-   "c2": 0.0,
+   "c2": -0.0400691032409668,
    "volume": 0.01001999992877245
   },
   {
    "snapshot": "epoch_100.pt",
-   "c2": 0.0,
+   "c2": -0.03716018795967102,
    "volume": 0.01001999992877245
   }
  ],
  "retest": [
   {
    "snapshot": "epoch_025.pt",
-   "c2": 0.0,
+   "c2": -0.0546647310256958,
    "volume": 0.01001999992877245
   },
   {
    "snapshot": "epoch_050.pt",
-   "c2": 0.0,
+   "c2": -0.034502238035202026,
    "volume": 0.01001999992877245
   },
   {
    "snapshot": "epoch_075.pt",
-   "c2": 0.0,
+   "c2": -0.039903849363327026,
    "volume": 0.01001999992877245
   }
  ],
@@ -81,5 +81,5 @@
  "roa_fraction_of_box": 95.03,
  "region_fraction_of_box": 1.0359999723732471,
  "n_ground_truth": 50000,
- "seconds": 78.2024347782135
+ "seconds": 86.87834215164185
 }

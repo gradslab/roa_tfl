@@ -4,65 +4,65 @@
  "snapshot": "epoch_025.pt",
  "alpha": 0.08640078996816024,
  "c_inner": 0.0005978051076726842,
- "c1": 0.0,
+ "c1": -0.11262391106337309,
  "c2_screening_and_retest": [
-  0.0,
-  0.0
+  -0.11261264979839325,
+  -0.13316991925239563
  ],
- "c2_selected": 0.0,
- "c2": 0.0,
+ "c2_selected": -0.11262391106337309,
+ "c2": -0.11262391106337309,
  "iid": {
   "N": 1000000,
   "seed": 7474366,
   "distribution": "uniform on the box, i.i.d.",
   "eps": 1.3815510557964274e-05,
   "confidence": 0.999999,
-  "c1": 0.0,
-  "c2_old": 0.0,
+  "c1": -0.11262391106337309,
+  "c2_old": -0.11262391106337309,
   "c2_iid": 1.0,
-  "c2": 0.0,
+  "c2": -0.11262391106337309,
   "n_band": 0,
   "n_tested": 0,
   "first_failure": null,
-  "n_below_c1_outside_inner": 0,
-  "n_below_c1_outside_inner_failed": 0
+  "n_below_c1_outside_inner": 4,
+  "n_below_c1_outside_inner_failed": 4
  },
  "screening": [
   {
    "snapshot": "epoch_025.pt",
-   "c2": 0.0,
+   "c2": -0.13316991925239563,
    "volume": 0.0
   },
   {
    "snapshot": "epoch_050.pt",
-   "c2": 0.0,
+   "c2": -0.16704405844211578,
    "volume": 0.0
   },
   {
    "snapshot": "epoch_075.pt",
-   "c2": 0.0,
+   "c2": -0.18087291717529297,
    "volume": 0.0
   },
   {
    "snapshot": "epoch_100.pt",
-   "c2": 0.0,
+   "c2": -0.18797935545444489,
    "volume": 0.0
   }
  ],
  "retest": [
   {
    "snapshot": "epoch_025.pt",
-   "c2": 0.0,
+   "c2": -0.11261264979839325,
    "volume": 0.0
   },
   {
    "snapshot": "epoch_050.pt",
-   "c2": 0.0,
+   "c2": -0.1534668654203415,
    "volume": 0.0
   },
   {
    "snapshot": "epoch_075.pt",
-   "c2": 0.0,
+   "c2": -0.1883581578731537,
    "volume": 0.0
   }
  ],
@@ -81,5 +81,5 @@
  "roa_fraction_of_box": 56.218,
  "region_fraction_of_box": 0.0,
  "n_ground_truth": 50000,
- "seconds": 46.62413692474365
+ "seconds": 35.132423877716064
 }

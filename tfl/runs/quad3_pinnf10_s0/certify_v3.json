@@ -1,68 +1,68 @@
 {
  "run": "runs/quad3_pinnf10_s0",
  "case": "quadrotor",
- "snapshot": "epoch_025.pt",
+ "snapshot": "epoch_075.pt",
  "alpha": 0.08640078996816024,
  "c_inner": 0.0005978051076726842,
- "c1": 0.0,
+ "c1": -0.20737286681830883,
  "c2_screening_and_retest": [
-  0.0,
-  0.0
+  -0.20735213160514832,
+  -0.2007351517677307
  ],
- "c2_selected": 0.0,
- "c2": 0.0,
+ "c2_selected": -0.20735213160514832,
+ "c2": -0.20735213160514832,
  "iid": {
   "N": 1000000,
   "seed": 7221224,
   "distribution": "uniform on the box, i.i.d.",
   "eps": 1.3815510557964274e-05,
   "confidence": 0.999999,
-  "c1": 0.0,
-  "c2_old": 0.0,
+  "c1": -0.20737286681830883,
+  "c2_old": -0.20735213160514832,
   "c2_iid": 1.0,
-  "c2": 0.0,
+  "c2": -0.20735213160514832,
   "n_band": 0,
   "n_tested": 0,
   "first_failure": null,
-  "n_below_c1_outside_inner": 0,
-  "n_below_c1_outside_inner_failed": 0
+  "n_below_c1_outside_inner": 3,
+  "n_below_c1_outside_inner_failed": 3
  },
  "screening": [
   {
    "snapshot": "epoch_025.pt",
-   "c2": 0.0,
+   "c2": -0.20024245977401733,
    "volume": 0.0
   },
   {
    "snapshot": "epoch_050.pt",
-   "c2": 0.0,
+   "c2": -0.1936376690864563,
    "volume": 0.0
   },
   {
    "snapshot": "epoch_075.pt",
-   "c2": 0.0,
-   "volume": 0.0
+   "c2": -0.2007351517677307,
+   "volume": 1.9999999494757503e-05
   },
   {
    "snapshot": "epoch_100.pt",
-   "c2": 0.0,
-   "volume": 0.0
+   "c2": -0.20083758234977722,
+   "volume": 1.9999999494757503e-05
   }
  ],
  "retest": [
   {
-   "snapshot": "epoch_025.pt",
-   "c2": 0.0,
-   "volume": 0.0
-  },
-  {
-   "snapshot": "epoch_050.pt",
-   "c2": 0.0,
-   "volume": 0.0
-  },
-  {
    "snapshot": "epoch_075.pt",
-   "c2": 0.0,
+   "c2": -0.20735213160514832,
+   "volume": 1.9999999494757503e-05
+  },
+  {
+   "snapshot": "epoch_100.pt",
+   "c2": -0.20488184690475464,
+   "volume": 1.9999999494757503e-05
+  },
+  {
+   "snapshot": "epoch_025.pt",
+   "c2": -0.21820807456970215,
    "volume": 0.0
   }
  ],
@@ -81,5 +81,5 @@
  "roa_fraction_of_box": 56.218,
  "region_fraction_of_box": 0.0,
  "n_ground_truth": 50000,
- "seconds": 94.90305805206299
+ "seconds": 42.54915499687195
 }

@@ -13,7 +13,7 @@ Systems
   pendulum  inverted pendulum with the linear gains of Liu et al. (2025, Example 5), torque saturated
             at |u| <= 0.8, on [-pi, pi] x [-4, 4]  (gravity can exceed the torque: bounded ROA)
   con3d     the Gruene-Zidani (2015, Example 5.1) dynamics (unperturbed) with a driven third state
-            x3' = -x3 + x1 x2, the state limit x3 < 1 and a cylindrical keep-out region
+            x3' = -x3 + x1 x2, the state constraint x3 < 1 and a cylindrical keep-out region
             (x1 + 1)^2 + (x2 - 1)^2 > 0.3^2 as in their Example 5.2, on [-3, 3]^2 x [-2, 2]
   power     two-machine power system (Vannelli & Vidyasagar 1985; Liu et al. 2025, Example 7), shifted to
             the stable equilibrium, on [-2, 3] x [-3, 3]

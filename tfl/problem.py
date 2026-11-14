@@ -142,7 +142,7 @@ class ConstrainedZubov:
         return 1.0 - torch.exp(-self.h(x, beta))
 
     def rho(self, x):
-        """Weight rho of the extra running cost: a smooth step of alpha q_ex from c_inner / 2 to c_inner."""
+        """Weight rho of the shaping cost: a smooth step of alpha q_ex from c_inner / 2 to c_inner."""
         if self.cfg.c_inner <= 0:
             raise RuntimeError("rho needs the verified inner level c_inner > 0")
         t = ((self.alpha * self.q_exact(x) - 0.5 * self.cfg.c_inner) / (0.5 * self.cfg.c_inner)).clamp(0.0, 1.0)

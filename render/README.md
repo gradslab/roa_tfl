@@ -1,6 +1,6 @@
 # Animations
 
-Each script writes `<name>.mp4`, `<name>.gif` and `<name>.jpg` to `../docs/assets/media/`.
+Each script writes `<name>.mp4`, `<name>.gif` and `<name>.jpg` to `../docs/assets/media/`. The repository keeps the GIFs shown in the top-level README.
 
 | Script | Content |
 |---|---|

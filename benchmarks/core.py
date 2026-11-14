@@ -1,5 +1,5 @@
 r"""
-Candidate for the equilibrium benchmarks (paper, Section 3, "General closed loops"): state-constrained Zubov value function
+Candidate for the equilibrium benchmarks (paper, Appendix D, "Construction"): state-constrained Zubov value function
 (Gruene & Zidani 2015) learned by fitted semi-Lagrangian value iteration.
 The same code and the same configuration (Config defaults) for every system; a system only supplies problem data.
 

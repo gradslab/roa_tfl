@@ -458,10 +458,6 @@ def build(cfg: TrainConfig):
 
 
 def train(cfg: TrainConfig):
-    if cfg.auto_settings:
-        from auto_settings import auto_settings
-        cfg = auto_settings(cfg)
-        print(f"auto settings: eta_c_hi {cfg.eta_c_hi:g}, kappa {cfg.kappa:g}", flush=True)
     if cfg.c_inner <= 0:
         from certify3 import case_name, inner_level
         f = Path(f"results/inner_{case_name(cfg)}.json")

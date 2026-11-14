@@ -201,7 +201,7 @@ def sampled_c1(model, prob, inner, n, rounds, seed):
         out = _batched(inner, x) >= 1
         if out.any():
             lo = min(lo, torch.nan_to_num(_batched(model, x[out]), nan=1.0).min().item())
-    return lo * (1 - 1e-4)
+    return lo - 1e-4 * abs(lo)
 
 
 def region(model, inner, c2, x):
@@ -222,7 +222,7 @@ def ground_truth(prob, n=50000, seed=4242):
     return xg, label == 0, label
 
 
-def certify_run(run, top=3, tag="_v3", n_iid=N_IID, snapshots=None, verbose=True):
+def certify_run(run, top=3, tag="_v3", n_iid=N_IID, snapshots=None, verbose=True, seed_tag=None):
     t0 = time.time()
     prob, model, cfg = load(run)
     sys = prob.sys
@@ -265,7 +265,7 @@ def certify_run(run, top=3, tag="_v3", n_iid=N_IID, snapshots=None, verbose=True
         y, ok = flow_step(prob, x, T)
         return y, ok & (sys.field(x)[1] > 0)
     iid = iid_test(model, inner, lambda u: sys._box_map(u.to(sys.device, sys.dtype)), step,
-                   lambda x: sys.z_tilde(x).norm(dim=-1), dim_of(sys), c1, c2_sel, seed_of(Path(run).name + tag),
+                   lambda x: sys.z_tilde(x).norm(dim=-1), dim_of(sys), c1, c2_sel, seed_of(Path(run).name + (seed_tag or tag)),
                    n=n_iid, horizons=HORIZONS[1:])
     c2 = iid["c2"]
     xg, roa, label = ground_truth(prob)
@@ -293,9 +293,10 @@ def main():
     ap.add_argument("--top", type=int, default=3)
     ap.add_argument("--tag", default="_v3")
     ap.add_argument("--n-iid", type=int, default=N_IID)
+    ap.add_argument("--seed-tag", default=None)
     a = ap.parse_args()
     for run in a.runs:
-        certify_run(run, a.top, a.tag, a.n_iid)
+        certify_run(run, a.top, a.tag, a.n_iid, seed_tag=a.seed_tag)
 
 
 if __name__ == "__main__":

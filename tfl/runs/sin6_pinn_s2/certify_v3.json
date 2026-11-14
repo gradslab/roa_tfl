@@ -30,7 +30,7 @@
  "screening": [
   {
    "snapshot": "epoch_025.pt",
-   "c2": 0.0,
+   "c2": -0.008391225710511208,
    "volume": 0.01001999992877245
   },
   {
@@ -81,5 +81,5 @@
  "roa_fraction_of_box": 95.03,
  "region_fraction_of_box": 4.28600013256073,
  "n_ground_truth": 50000,
- "seconds": 29.80657696723938
+ "seconds": 37.75266790390015
 }

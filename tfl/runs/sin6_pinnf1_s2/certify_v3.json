@@ -1,5 +1,5 @@
 {
- "run": "runs/sin6_pinn_s2",
+ "run": "runs/sin6_pinnf1_s2",
  "case": "sinusoid",
  "snapshot": "epoch_050.pt",
  "alpha": 0.18226820820421552,
@@ -13,7 +13,7 @@
  "c2": 0.158961221575737,
  "iid": {
   "N": 1000000,
-  "seed": 7561625,
+  "seed": 7470681,
   "distribution": "uniform on the box, i.i.d.",
   "eps": 1.3815510557964274e-05,
   "confidence": 0.999999,
@@ -21,16 +21,16 @@
   "c2_old": 0.158961221575737,
   "c2_iid": 1.0,
   "c2": 0.158961221575737,
-  "n_band": 40762,
-  "n_tested": 40762,
+  "n_band": 40850,
+  "n_tested": 40850,
   "first_failure": null,
-  "n_below_c1_outside_inner": 1,
+  "n_below_c1_outside_inner": 4,
   "n_below_c1_outside_inner_failed": 0
  },
  "screening": [
   {
    "snapshot": "epoch_025.pt",
-   "c2": 0.0,
+   "c2": -0.008391225710511208,
    "volume": 0.01001999992877245
   },
   {
@@ -81,5 +81,5 @@
  "roa_fraction_of_box": 95.03,
  "region_fraction_of_box": 4.28600013256073,
  "n_ground_truth": 50000,
- "seconds": 29.80657696723938
+ "seconds": 47.15988278388977
 }

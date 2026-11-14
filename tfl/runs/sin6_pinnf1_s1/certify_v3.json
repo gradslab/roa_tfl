@@ -1,5 +1,5 @@
 {
- "run": "runs/sin6_pinn_s1",
+ "run": "runs/sin6_pinnf1_s1",
  "case": "sinusoid",
  "snapshot": "epoch_050.pt",
  "alpha": 0.18226820820421552,
@@ -10,30 +10,30 @@
   0.17916841804981232
  ],
  "c2_selected": 0.17373152077198029,
- "c2": 0.15983846783638,
+ "c2": 0.16808010637760162,
  "iid": {
   "N": 1000000,
-  "seed": 7565303,
+  "seed": 7299447,
   "distribution": "uniform on the box, i.i.d.",
   "eps": 1.3815510557964274e-05,
   "confidence": 0.999999,
   "c1": 0.018660768973454832,
   "c2_old": 0.17373152077198029,
-  "c2_iid": 0.15983846783638,
-  "c2": 0.15983846783638,
-  "n_band": 45456,
-  "n_tested": 40000,
+  "c2_iid": 0.16808010637760162,
+  "c2": 0.16808010637760162,
+  "n_band": 46018,
+  "n_tested": 46018,
   "first_failure": {
-   "v": 0.15983846783638,
+   "v": 0.16808010637760162,
    "kind": 1,
    "x": [
-    2.3145272731781006,
-    1.0291790962219238,
-    2.445497751235962,
-    -2.9683053493499756
+    2.56679368019104,
+    0.9538097381591797,
+    2.360935926437378,
+    -2.9970736503601074
    ]
   },
-  "n_below_c1_outside_inner": 3,
+  "n_below_c1_outside_inner": 2,
   "n_below_c1_outside_inner_failed": 0
  },
  "screening": [
@@ -83,12 +83,12 @@
  ],
  "step_h": 0.025,
  "c1_sampled": true,
- "coverage": 4.442807534462801,
+ "coverage": 4.794275491949911,
  "false_positive": 0.0,
  "false_positive_of_region": 0.0,
  "inner_coverage": 1.090182047774387,
  "roa_fraction_of_box": 95.03,
- "region_fraction_of_box": 4.222000017762184,
+ "region_fraction_of_box": 4.555999860167503,
  "n_ground_truth": 50000,
- "seconds": 27.727843761444092
+ "seconds": 41.90660810470581
 }

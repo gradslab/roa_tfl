@@ -4,65 +4,74 @@
  "snapshot": "epoch_025.pt",
  "alpha": 0.13319182559965004,
  "c_inner": 0.10497684620895598,
- "c1": 0.0,
+ "c1": -0.07152041669785976,
  "c2_screening_and_retest": [
-  0.0,
-  0.0
+  -0.07151326537132263,
+  -0.05811682343482971
  ],
- "c2_selected": 0.0,
- "c2": 0.0,
+ "c2_selected": -0.07151326537132263,
+ "c2": -0.07151761651039124,
  "iid": {
   "N": 1000000,
   "seed": 7522627,
   "distribution": "uniform on the box, i.i.d.",
   "eps": 1.3815510557964274e-05,
   "confidence": 0.999999,
-  "c1": 0.0,
-  "c2_old": 0.0,
-  "c2_iid": 1.0,
-  "c2": 0.0,
-  "n_band": 0,
-  "n_tested": 0,
-  "first_failure": null,
-  "n_below_c1_outside_inner": 0,
-  "n_below_c1_outside_inner_failed": 0
+  "c1": -0.07152041669785976,
+  "c2_old": -0.07151326537132263,
+  "c2_iid": -0.07151761651039124,
+  "c2": -0.07151761651039124,
+  "n_band": 1,
+  "n_tested": 1,
+  "first_failure": {
+   "v": -0.07151761651039124,
+   "kind": 0,
+   "x": [
+    -0.4148063659667969,
+    0.8655567169189453,
+    0.5272359848022461,
+    -1.4221022129058838
+   ]
+  },
+  "n_below_c1_outside_inner": 7,
+  "n_below_c1_outside_inner_failed": 7
  },
  "screening": [
   {
    "snapshot": "epoch_025.pt",
-   "c2": 0.0,
+   "c2": -0.05811682343482971,
    "volume": 0.054740000516176224
   },
   {
    "snapshot": "epoch_050.pt",
-   "c2": 0.0,
+   "c2": -0.13515636324882507,
    "volume": 0.054740000516176224
   },
   {
    "snapshot": "epoch_075.pt",
-   "c2": 0.0,
+   "c2": -0.1477501541376114,
    "volume": 0.054740000516176224
   },
   {
    "snapshot": "epoch_100.pt",
-   "c2": 0.0,
+   "c2": -0.15505605936050415,
    "volume": 0.054740000516176224
   }
  ],
  "retest": [
   {
    "snapshot": "epoch_025.pt",
-   "c2": 0.0,
+   "c2": -0.07151326537132263,
    "volume": 0.054740000516176224
   },
   {
    "snapshot": "epoch_050.pt",
-   "c2": 0.0,
+   "c2": -0.13710209727287292,
    "volume": 0.054740000516176224
   },
   {
    "snapshot": "epoch_075.pt",
-   "c2": 0.0,
+   "c2": -0.1510343700647354,
    "volume": 0.054740000516176224
   }
  ],
@@ -74,12 +83,12 @@
  ],
  "step_h": 0.025,
  "c1_sampled": true,
- "coverage": 6.376107863473505,
+ "coverage": 6.378465019800113,
  "false_positive": 0.0,
  "false_positive_of_region": 0.0,
  "inner_coverage": 6.376107863473505,
  "roa_fraction_of_box": 84.848,
- "region_fraction_of_box": 5.4099999368190765,
+ "region_fraction_of_box": 5.412000045180321,
  "n_ground_truth": 50000,
- "seconds": 127.56661295890808
+ "seconds": 62.26218628883362
 }
