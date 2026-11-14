@@ -426,11 +426,11 @@
     if (!RES) return;
     const cv = $("dots"), ctx = cv.getContext("2d"), tip = $("tip");
     const M = [
-      { key: "ours", label: "Ours (mean of 4 seeds)", col: C.blue, shape: "circle" },
-      { key: "union", label: "Ours (union of 4 seeds)", col: C.blue, shape: "ring" },
+      { key: "ours", label: "Ours", col: C.blue, shape: "circle" },
+      { key: "exact", label: "Exact value function at the same level", col: C.blue, shape: "ring" },
+      { key: "nodecomp", label: "No decomposition", col: C.aquaD, shape: "tri" },
       { key: "pinn", label: "Zubov PINN", col: "#c98500", shape: "square" },
       { key: "dz", label: "Dirichlet-Zubov PINN", col: "#d55181", shape: "diamond" },
-      { key: "sos", label: "Sum-of-squares", col: C.aquaD, shape: "tri" },
       { key: "quad", label: "Quadratic", col: "#8a8f98", shape: "x" },
     ];
     const on = Object.fromEntries(M.map((m) => [m.key, true]));
@@ -460,7 +460,7 @@
         ctx.textAlign = "left"; ctx.fillStyle = C.ink; ctx.font = "600 17px Inter"; ctx.fillText(s.name, 20, yy + 6);
         ctx.strokeStyle = "#e3dccb"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(left, yy); ctx.lineTo(right, yy); ctx.stroke();
         for (const m of M) {
-          if (!on[m.key]) continue; const val = m.key === "union" ? (s.union != null ? [s.union, null] : null) : s[m.key];
+          if (!on[m.key]) continue; const val = s[m.key];
           if (!val) continue; const px = X(val[0]);
           if (val[1]) { ctx.strokeStyle = m.col; ctx.globalAlpha = .45; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(X(Math.max(0, val[0] - val[1])), yy); ctx.lineTo(X(Math.min(100, val[0] + val[1])), yy); ctx.stroke(); ctx.globalAlpha = 1; }
           mark(m, px, yy); hits.push({ x: px, y: yy, t: `<b>${s.name}</b><br>${m.label}: ${val[0].toFixed(1)}%${val[1] ? " ± " + val[1].toFixed(1) : ""}` });
@@ -476,6 +476,15 @@
     draw();
   }
 
+  /* ------------------------------------------------------------ step setting table */
+  function stepTable() {
+    const el = $("stepTbl"); if (!RES || !RES.step || !el) return;
+    const f = (v) => v.toFixed(1), b = (v, on) => (on ? `<b>${f(v)}</b>` : f(v));
+    let h = "<tr><th>System</th><th>Share, long</th><th>Share, short</th><th>Kept</th><th>Coverage</th></tr>";
+    for (const r of RES.step) h += `<tr><td>${r.name}</td><td>${b(r.share_long, r.kept === "long")}</td><td>${b(r.share_short, r.kept === "short")}</td><td>${r.kept}</td><td>${f(r.cov_kept)} %</td></tr>`;
+    el.innerHTML = h;
+  }
+
   /* ------------------------------------------------------------ misc */
   function fillMacros() { if (!RES) return; document.querySelectorAll("[data-m]").forEach((el) => { const v = RES.macros[el.dataset.m]; if (v != null) el.textContent = v.replace(/%$/, " %").replace(/(\d)e(-?\d+)/, "$1×10^$2").replace(/\^(-?\d+)/, (s, p) => p.split("").map((ch) => "⁻⁰¹²³⁴⁵⁶⁷⁸⁹"["-0123456789".indexOf(ch)]).join("")); }); }
   let mathTries = 0;
@@ -489,7 +498,7 @@
     media(); math(); odds();
     try { CONST = await getJSON("constants.json"); } catch (e) { CONST = null; }
     try { RES = await getJSON("results.json"); } catch (e) { RES = null; }
-    fillMacros(); hero(); launchPad(); splitPanel(); levelPanel(); results();
+    fillMacros(); hero(); launchPad(); splitPanel(); levelPanel(); results(); stepTable();
   }
   main();
 })();

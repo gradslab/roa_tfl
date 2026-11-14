@@ -96,7 +96,7 @@
       <div>
         <p class="lead" style="margin-bottom:14px">The state-constrained Zubov value function of Grüne and Zidani is finite exactly on the constrained region of attraction. On the admissible set the error coordinates obey ż = Az, so the running cost integrates to a quadratic, and the value function splits in two:</p>
         <div class="eq" id="eqSplit"></div>
-        <p style="color:var(--ink2)">The first term is the <b style="color:var(--orange)">quadratic cost-to-go</b>. It is exact, and it decreases strictly along every trajectory in the admissible set until the trajectory reaches the path. The second is a <b style="color:var(--blue)">safety value function</b>: the worst future margin to the constraints. It is the only part a network has to learn, and it is learned by fitted value iteration from short simulated steps, without infinite-horizon labels. In the traces above, the orange part always falls. The blue part is positive only while the vehicle will later approach a constraint, and it never grows along a run.</p>
+        <p style="color:var(--ink2)">The first term is the <b style="color:var(--orange)">quadratic cost-to-go</b>. It is exact, and it decreases strictly along every trajectory in the admissible set until the trajectory reaches the path. The second is a <b style="color:var(--blue)">safety value function</b>: the worst future margin to the constraints. It is the only part a network has to learn, and it is learned by fitted value iteration from short trajectory segments, without infinite-horizon trajectory labels. In the traces above, the orange part always falls. The blue part is positive only while the vehicle will later approach a constraint, and it never grows along a run.</p>
       </div>
       <div class="panel">
         <canvas id="split" width="700" height="520" aria-label="value function along a trajectory"></canvas>
@@ -142,7 +142,7 @@
         <p class="lead">The direct test of unsafe states draws N independent samples of the box and simulates each sample in the estimate until it reaches the verified inner layer. If k of them are unsafe, then with confidence 1 − 10⁻⁶ and up to the integration error, the unsafe states occupy at most ε of the box, where ε is the one-sided Clopper–Pearson bound.</p>
         <div class="ctrl"><label for="nS">Samples N <output id="nOut">10⁶</output></label><input type="range" id="nS" min="3" max="7" step="0.25" value="6"></div>
         <div class="ctrl" style="margin-top:14px"><label for="kS">Failures found k <output id="kOut">0</output></label><input type="range" id="kS" min="0" max="20" step="1" value="0"></div>
-        <p class="note" style="margin-top:14px">In the paper: <span data-m="resUnsafeKCirc">–</span>, <span data-m="resUnsafeKSin">–</span> and <span data-m="resUnsafeKQuad">–</span> unsafe samples, with 10⁶ box samples per case, in the unions of four estimates of the circle, the sinusoid and the quadrotor, giving ε ≤ <span data-m="resUnsafeEpsCirc">–</span>, <span data-m="resUnsafeEpsSin">–</span> and <span data-m="resUnsafeEpsQuad">–</span>.</p>
+        <p class="note" style="margin-top:14px">In the paper, with 10⁶ box samples per case, the test finds k = <span data-m="resUnsafeKCirc">–</span>, <span data-m="resUnsafeKSin">–</span> and <span data-m="resUnsafeKQuad">–</span> in the unions of four estimates of the circle, the sinusoid and the quadrotor, giving ε ≤ <span data-m="resUnsafeEpsCirc">–</span>, <span data-m="resUnsafeEpsSin">–</span> and <span data-m="resUnsafeEpsQuad">–</span>.</p>
       </div>
       <div class="panel" style="text-align:center">
         <div class="big" id="eps">–</div>
@@ -171,11 +171,11 @@
 <section class="section" id="results">
   <div class="wrap">
     <p class="kicker">Results</p>
-    <h2 class="headline">Twelve systems, five methods.</h2>
-    <p class="lead">Coverage of the simulated region of attraction, mean over four seeds. Every method except sum-of-squares passes the same level selection and final test. Toggle methods, and hover a marker for its value. The physics-informed baselines win on most equilibrium benchmarks, and the plot shows where.</p>
+    <h2 class="headline">Three cases, five methods.</h2>
+    <p class="lead">Coverage of the simulated region of attraction, mean over four seeds. Every method passes the same level selection and final test. The no-decomposition baseline uses the same network, data, losses and fine-tuning without the quadratic cost-to-go in the value function. Toggle methods, and hover a marker for its value.</p>
     <div class="res-tools" id="resTools"></div>
     <div class="panel"><canvas id="dots" width="1100" height="760" aria-label="coverage of every method on every system"></canvas></div>
-    <p class="note" style="margin-top:12px">Sum-of-squares is not applied to the TFL closed loops, which are rational with trigonometric terms and singular, and was not run on the obstacle benchmarks. The quadrotor is the hardest case: counterexamples hold its level low, and the bound V ≥ γq<sub>ex</sub> alone then excludes <span data-m="resFloorQuad">–</span> of its simulated region of attraction.</p>
+    <p class="note" style="margin-top:12px">The hollow marker is the exact value function cut at the level of the candidate, which shows how much the level alone allows. The quadrotor is the hardest case: counterexamples hold its level low, and the bound V ≥ γq<sub>ex</sub> alone then excludes <span data-m="resFloorQuad">–</span> of its simulated region of attraction.</p>
   </div>
 </section>
 
@@ -183,12 +183,15 @@
 <section class="section band" id="beyond">
   <div class="wrap two" style="align-items:center">
     <div>
-      <p class="kicker">Other closed loops</p>
-      <h2 class="headline">The same learning applies to closed loops with an exponentially stable equilibrium.</h2>
-      <p class="lead">With the quadratic form of the linearization in place of the exact cost-to-go, the method applies to closed loops with an exponentially stable equilibrium. A sublevel set of that quadratic form, verified by interval branch and bound, is again the inner layer. On nine benchmarks it covers, after fine-tuning, the most on the 3-D system with a state constraint and an obstacle. Physics-informed baselines trained on simulated labels, with a scale searched on the reference simulation, cover more on the other <span data-m="resPinnWinsN">–</span>.</p>
+      <p class="kicker">One algorithm</p>
+      <h2 class="headline">The step setting is chosen without reference labels.</h2>
+      <p class="lead">The algorithm trains seed 0 with a long-step and a short-step setting, and keeps, for all seeds, the setting whose estimate holds the larger share of box samples before fine-tuning. On the TFL closed loops, the long step is kept on <span data-m="resStepTFL">–</span>.</p>
+      <p class="lead">Beyond TFL, the same algorithm applies to closed loops with an exponentially stable equilibrium, with the quadratic form of the linearization in place of the exact cost-to-go. The decomposition is then no longer exact, yet on one seed of five benchmarks the estimates cover between <span data-m="resStepBenchCovMin">–</span> and <span data-m="resStepBenchCovMax">–</span> of the simulated region of attraction.</p>
     </div>
-    <figure class="card" style="margin:0"><video data-src="assets/media/obstacles" muted loop playsinline autoplay></video>
-      <figcaption class="cap"><h3>Van der Pol with two obstacles</h3><p>Trajectories that start in the estimate converge, and so do some that start outside it. The others run into an obstacle or leave the box.</p></figcaption></figure>
+    <div class="panel">
+      <table class="map step" id="stepTbl"></table>
+      <p class="hint">Seed 0. Share: share of box samples in the estimate before fine-tuning, which decides the setting. Coverage: share of the simulated region of attraction covered with the kept setting after fine-tuning.</p>
+    </div>
   </div>
 </section>
 
@@ -210,11 +213,11 @@ bash reproduce.sh tables
 bash reproduce.sh figure
 bash reproduce.sh paper
 
-<span class="c"># the full computation from scratch (hours on a laptop CPU)</span>
+<span class="c"># the full computation from scratch (three to four days on a laptop CPU)</span>
 bash reproduce.sh all</pre>
       <table class="map">
         <tr><td>tfl/</td><td>the three TFL cases: training, interval verification, level selection, final test, fine-tuning, baselines, and the generator of every number</td></tr>
-        <tr><td>benchmarks/</td><td>the nine equilibrium benchmarks, their verified inner layers, sum-of-squares and the physics-informed baselines</td></tr>
+        <tr><td>benchmarks/</td><td>five closed loops with an exponentially stable equilibrium, trained on seed 0 with both step settings</td></tr>
         <tr><td>paper/</td><td>the paper sources and the reference copy of every generated table</td></tr>
         <tr><td>render/, web/</td><td>the animations and the data of this page</td></tr>
       </table>

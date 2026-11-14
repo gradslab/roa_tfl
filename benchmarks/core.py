@@ -1,7 +1,9 @@
 r"""
-Candidate for the equilibrium benchmarks (paper, Appendix D, "Construction"): state-constrained Zubov value function
+Candidate for the equilibrium benchmarks (paper, Appendix D, "Closed loops with an equilibrium"): state-constrained Zubov value function
 (Gruene & Zidani 2015) learned by fitted semi-Lagrangian value iteration.
 The same code and the same configuration (Config defaults) for every system; a system only supplies problem data.
+Step setting: short = the defaults (tau 0.2, 8 substeps, gamma_num 3, w_exit 0), long = --tau 2 --sub 80 --gamma-num 1
+--w-exit 10, with alpha = gamma_num / (90th percentile of q over admissible samples); step_rule.py keeps one per system.
 
     V(x) = sup_{t >= 0} [ int_0^t g(y) ds + h(y(t)) ],   v = 1 - e^{-V},   ROA = {v < 1}
     g = alpha |x~|^2 + kappa rho,  x~ = S x (box-normalized),  h = sum_i relu(b_i / d_i - 1)^2  (inf off Omega_ad)
@@ -12,7 +14,7 @@ Model (as for the TFL unicycle, with the exact transverse cost replaced by the l
     non-box constraints).  V >= h by construction, so {v < c} lies in Omega_ad for every c < 1.
 
 Training (unsupervised: only the model equations):
-    value iteration  Phi(x) = max( M(x), C(x) + Phi(x_tau) )   over a step tau = 0.2 of the normalized field, with
+    value iteration  Phi(x) = max( M(x), C(x) + Phi(x_tau) )   over a step tau of the normalized field, with
                      C = int g + alpha (q(x_tau) - q(x)),  M = running max of C + psi along the step (inf if it leaves)
     GZ inequality    DV.f <= -g (supersolution penalty) and obstacle-slope penalty
     finite-step      V(x_1) <= V(x) - margin int_0^1 g   (the condition of level selection, tau = 1), with counterexamples
@@ -49,6 +51,8 @@ class Config:
     lr_final: float = 1e-5
     tau: float = 0.2
     sub: int = 8
+    gamma_num: float = 3.0
+    w_exit: float = 0.0
     mu: float = 10.0
     mu_obs: float = 10.0
     obs_eps: float = 0.01
@@ -89,7 +93,7 @@ class Problem:
             d = sys_.distances(x)
             adm = (d > 0).all(-1)
             self.scale = torch.quantile(d[adm], 0.5, dim=0)
-            self.alpha = 3.0 / torch.quantile(self.q(x[adm]), 0.9).item()
+            self.alpha = cfg.gamma_num / torch.quantile(self.q(x[adm]), 0.9).item()
         self.kappa = cfg.kappa
         self.inner_c = None
 
@@ -426,6 +430,8 @@ def train(cfg: Config):
             need = ~act & ((model.alpha * bt["dq"] + bt["dpsi"] + bt["g"]) > 0)
             fit = fit + cfg.mu_obs * (torch.relu(bt["psi"] + cfg.obs_eps - Psi) * need * torch.exp(-V.detach())) ** 2
             w2 = torch.exp(2 * V.detach().clamp(0, cfg.w_cap))
+            if cfg.w_exit > 0:
+                fit = fit * (1.0 + cfg.w_exit * torch.isinf(nxt["M"][idx]).float())
             sv, _ = step_violation(model, bt, {k: v[idx] for k, v in stp.items()}, cfg.step_margin)
             loss = (w2 * fit).mean() + cfg.mu * (w2 * viol ** 2).mean() + cfg.mu_step * (w2 * sv ** 2).mean()
             opt.zero_grad()
@@ -471,8 +477,12 @@ def main():
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", required=True)
     ap.add_argument("--epochs", type=int, default=Config.epochs)
+    ap.add_argument("--tau", type=float, default=Config.tau)
+    ap.add_argument("--sub", type=int, default=Config.sub)
+    ap.add_argument("--gamma-num", type=float, default=Config.gamma_num)
+    ap.add_argument("--w-exit", type=float, default=Config.w_exit)
     a = ap.parse_args()
-    train(Config(system=a.system, seed=a.seed, out=a.out, epochs=a.epochs))
+    train(Config(system=a.system, seed=a.seed, out=a.out, epochs=a.epochs, tau=a.tau, sub=a.sub, gamma_num=a.gamma_num, w_exit=a.w_exit))
 
 
 if __name__ == "__main__":

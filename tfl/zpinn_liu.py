@@ -1,7 +1,7 @@
 r"""
 Baselines on the TFL closed loops, with the level selection and final test of certify3.py exactly like the candidate.
 
-  pinn   Zubov PINN of Liu, Meng, Fitzsimmons & Zhou (Automatica 2025; LyZNet) with the settings of benchmarks/baselines.py: W = tanh(a V), residual
+  pinn   Zubov PINN of Liu, Meng, Fitzsimmons & Zhou (Automatica 2025; LyZNet) with these settings: W = tanh(a V), residual
          DW.f + a omega (1 - W^2) = 0 (divided by N_f = sqrt(1 + |S f|^2), a positive weight, because f is unbounded near the singular set),
          boundary W = 0 on target points, data loss on 3000 simulated states, W^ = tanh(a q_ex) if the state converges and 1 otherwise.
          Two hidden layers of 30 tanh units on the normalized state features, 1e5 collocation points, 2e4 Adam steps (batch 2048, cosine lr 1e-3 to 1e-5).

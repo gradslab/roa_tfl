@@ -141,7 +141,7 @@ def main():
     top = max(a.title.get_window_extent().y1 for a in axs) / fig.bbox.height
     fig.legend(handles=handles, loc="lower center", bbox_to_anchor=(0.5, top + 0.01), ncol=4, frameon=False,
                handlelength=1.6, handleheight=0.9, columnspacing=1.4, handletextpad=0.5, fontsize=9)
-    fig.savefig(OUT / "fig_slices3.pdf")
+    fig.savefig(OUT / "fig_slices3.pdf", metadata={"CreationDate": None})
     fig.savefig(OUT / "fig_slices3.png", dpi=300)
     print("wrote", OUT / "fig_slices3.pdf")
 

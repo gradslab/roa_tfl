@@ -8,8 +8,8 @@ Level selection on the equilibrium benchmarks (no simulation labels); the estima
     samples: box + 50 % face samples + 20 % next to the extra constraints + box-boundary outflow samples;
   * every snapshot screened (3 x 50k), the 3 largest re-certified on fresh sets A (5 x 100k), the largest kept and
     certified again on an independent set B (5 x 100k); the reported c2 is the lowest found on A and B.
-  * set B is not i.i.d. uniform (it mixes box, face and constraint samples), so the paper's scenario bound comes from
-    the separate final test of iid.py / certify_iid.py, not from this script.
+  * set B is not i.i.d. uniform (it mixes box, face and constraint samples); the i.i.d. final test of iid.py is the one of
+    the TFL cases (tfl/certify3.py).
 Coverage / false positives against the simulated ground truth are evaluation only.
 
 Run:  python -u certify.py runs/vdp_s0 runs/vdp_s1 ...

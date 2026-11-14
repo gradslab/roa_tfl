@@ -5,9 +5,9 @@ S is the union of the four fine-tuned estimates of the case, I u {v_k < c2_k}, f
 uniform samples of the box are drawn with seeds disjoint from every earlier test.  A sample in S counts as safe if its
 trajectory of the normalized field reaches the verified inner layer I within normalized length T_MAX while every RK4
 substep (length STEP) is finite, admissible, inside the box, and keeps the sign of det D (a sign change between substeps
-would cross the singular set unnoticed).  I is forward invariant and lies in D(M) (paper, Theorem "Two-layer estimate"
-(i)), so a safe sample lies in D(M) up to the integration error.  The other samples of S form the set U, which contains
-S minus D(M).  With k samples in U, the one-sided Clopper-Pearson bound eps_k satisfies P^N[ P(U) > eps_k ] <= 1e-6.
+would cross the singular set unnoticed).  I is forward invariant and lies in D(M) (paper, Theorem 3 (i)), so a safe
+sample lies in D(M) up to the integration error.  The other samples of S form the set U, which contains S minus D(M).
+With k samples in U, the one-sided Clopper-Pearson bound eps_k satisfies P^N[ P(U) > eps_k ] <= 1e-6.
 U contains the corresponding set of every seed, since each seed's estimate lies in S.
 
 Run:  python -u unsafe3.py circ3 sin6 quad3     (writes results/unsafe_<name>.json)

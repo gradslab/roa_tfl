@@ -17,14 +17,6 @@ Systems
             (x1 + 1)^2 + (x2 - 1)^2 > 0.3^2 as in their Example 5.2, on [-3, 3]^2 x [-2, 2]
   power     two-machine power system (Vannelli & Vidyasagar 1985; Liu et al. 2025, Example 7), shifted to
             the stable equilibrium, on [-2, 3] x [-3, 3]
-
-Obstacle benchmarks of Meng & Liu (ECC 2026, arXiv 2511.09523, Section IV): their obstacles U_i = {h_i >= 1} are discs, written
-here as d_i = |x - c_i| - r_i > 0; their region of interest Omega is the box (leaving it counts as leaving the admissible set)
-  vdp_obs1    reversed Van der Pol, mu = 1, on [-2.5, 2.5] x [-3.5, 3.5], disc centre (1, 1), radius 0.25      (Example 3)
-  vdp_obs2    as vdp_obs1 with a second disc, centre (-1, -1), radius 0.25                                     (Example 3)
-  power_obs2  the power system on [-1, 1.5] x [-1.5, 1], discs of radius 1/8 at (0.25, 0.25), (0.25, -0.25)  (Example 4, case 1)
-  power_obs4  the power system on [-2, 3] x [-3, 1.5], discs of radius 1/4 at (2, -1.5), (-1, 0.5), (-1, -1.5)
-              and (pi/3, 0) (the last one covers the saddle)                                                (Example 4, case 2)
 """
 from __future__ import annotations
 
@@ -175,31 +167,7 @@ def power(delta=math.pi / 3):
     return System("power", f, [-2.0, -3.0], [3.0, 3.0], sim_T=60.0)
 
 
-def _disc(c, r):
-    return lambda x: torch.sqrt((x[:, 0] - c[0]) ** 2 + (x[:, 1] - c[1]) ** 2) - r
-
-
-def vdp_obs(k):
-    """Meng & Liu (ECC 2026), Example 3: h_i = 1 + 1/4 - |x - c_i|^2 / 0.5^2, i.e. discs of radius 0.25."""
-    base = vdp()
-    cs = [(1.0, 1.0), (-1.0, -1.0)][:k]
-    return System(f"vdp_obs{k}", base._f, [-2.5, -3.5], [2.5, 3.5], [_disc(c, 0.25) for c in cs],
-                  [f"obstacle {i + 1}" for i in range(k)], sim_T=40.0)
-
-
-def power_obs(k, delta=math.pi / 3):
-    """Meng & Liu (ECC 2026), Example 4: h_i = 1 + r^2 - |x - c_i|^2, case 1 (two discs) and case 2 (four discs)."""
-    base = power(delta)
-    if k == 2:
-        cs, r, lo, hi = [(0.25, 0.25), (0.25, -0.25)], 1 / 8, [-1.0, -1.5], [1.5, 1.0]
-    else:
-        cs, r, lo, hi = [(2.0, -1.5), (-1.0, 0.5), (-1.0, -1.5), (delta, 0.0)], 1 / 4, [-2.0, -3.0], [3.0, 1.5]
-    return System(f"power_obs{k}", base._f, lo, hi, [_disc(c, r) for c in cs], [f"obstacle {i + 1}" for i in range(k)], sim_T=60.0)
-
-
-SYSTEMS = {"vdp": vdp, "vdp3": lambda: vdp(3.0), "pendulum": pendulum, "con3d": con3d, "power": power,
-           "vdp_obs1": lambda: vdp_obs(1), "vdp_obs2": lambda: vdp_obs(2),
-           "power_obs2": lambda: power_obs(2), "power_obs4": lambda: power_obs(4)}
+SYSTEMS = {"vdp": vdp, "vdp3": lambda: vdp(3.0), "pendulum": pendulum, "con3d": con3d, "power": power}
 
 
 def get(name):

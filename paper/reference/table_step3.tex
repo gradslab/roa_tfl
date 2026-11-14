@@ -1,0 +1,20 @@
+\begin{table}[ht]
+\centering\small
+\caption{Step setting of Algorithm~\ref{alg:method} on seed 0. Share: share of box samples in the estimate (\%), before fine-tuning, which decides the setting without reference labels. Coverage (\%) of the simulated region of attraction is shown for comparison, before fine-tuning for both settings and after fine-tuning for the kept one.}
+\label{tab:step}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+System & \shortstack{Share,\\long} & \shortstack{Share,\\short} & Kept & \shortstack{Coverage,\\long} & \shortstack{Coverage,\\short} & \shortstack{Coverage,\\kept, fine-tuned}\\
+\midrule
+Circle & 61.1 & 59.3 & long & 72.0 & 69.8 & 74.0\\
+Sinusoid & 78.4 & 54.3 & long & 82.5 & 57.2 & 83.7\\
+Quadrotor & 14.0 & 5.3 & long & 24.9 & 9.4 & 22.9\\
+\midrule
+Van der Pol, $\mu=1$ & 30.3 & 38.8 & short & 77.3 & 98.9 & 98.9\\
+Van der Pol, $\mu=3$ & 15.4 & 21.3 & short & 54.1 & 74.9 & 89.2\\
+Pendulum & 30.2 & 27.4 & long & 93.5 & 84.6 & 94.2\\
+3-D system & 50.0 & 40.0 & long & 84.7 & 67.8 & 86.5\\
+Power system & 15.7 & 29.9 & short & 47.5 & 90.3 & 92.4\\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,4 +1,4 @@
-"""Shared paths, palette, style and the MP4/GIF/JPG writer. The tfl/ and benchmarks/ code is only read."""
+"""Shared paths, palette, style and the MP4/GIF/JPG writer. The tfl/ code is only read."""
 from __future__ import annotations
 
 import contextlib
@@ -18,9 +18,8 @@ import numpy as np  # noqa: E402
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-TFL = ROOT / "tfl"
+TFL = Path(os.environ.get("ROA_TFL_DIR", ROOT / "tfl"))
 UNI = TFL / "unicycle"
-BENCH = ROOT / "benchmarks"
 MEDIA = HERE.parent / "docs" / "assets" / "media"
 CACHE = HERE / "_cache"
 CACHE.mkdir(exist_ok=True)
@@ -36,7 +35,6 @@ C_INN = "#eb6834"
 C_PATH = "#1b1b1b"
 C_BAD = "#e34948"
 INK, INK2 = "#1b1b1b", "#5a5955"
-C_OBS = "#2b2b2b"
 PATH_DASH = (0, (3.5, 2.2))
 
 FPS = 30
@@ -58,9 +56,8 @@ def research(subdir):
     d = Path(subdir)
     if str(d) not in sys.path:
         sys.path.insert(0, str(d))
-    for p in (UNI, BENCH):
-        if str(p) not in sys.path:
-            sys.path.append(str(p))
+    if str(UNI) not in sys.path:
+        sys.path.append(str(UNI))
     os.chdir(d)
     try:
         yield

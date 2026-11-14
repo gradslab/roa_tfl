@@ -8,10 +8,9 @@ Each script writes `<name>.mp4`, `<name>.gif` and `<name>.jpg` to `../docs/asset
 | `unicycle_sinusoid.py` | The same on the sinusoid slice |
 | `quadrotor.py` | Planar quadrotors on the vertical loop |
 | `level_sweep.py` | Level sweep of seed 0's candidate on the circle slice |
-| `obstacles.py` | Van der Pol oscillator with two obstacles |
 
 Requires the packages of `../requirements.txt`, Pillow, `ffmpeg` (libx264) and `gifsicle`. Data are read from
-`../tfl/` and `../benchmarks/`. The unicycle slices use `tfl/results/slice_gt_*_321.pt`, written by `tfl/figs3.py`.
+`../tfl/`. The unicycle slices use `tfl/results/slice_gt_*_321.pt`, written by `tfl/figs3.py`.
 
 ```sh
 python tfl_data.py
@@ -19,7 +18,6 @@ python unicycle_circle.py
 python unicycle_sinusoid.py
 python quadrotor.py
 python level_sweep.py
-python obstacles.py
 ```
 
 Seeds are fixed. Simulations and chosen initial states are cached in `_cache/`; delete it to recompute everything.

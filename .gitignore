@@ -20,4 +20,6 @@ paper/fig_slices3.png
 # stored results moved aside by reproduce.sh tfl|benchmarks
 */runs.stored/
 */results.stored/
+*/runs_short_seed0.stored/
+*/runs_long_seed0.stored/
 render/_cache/

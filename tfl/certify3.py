@@ -2,7 +2,7 @@ r"""
 Level selection and final test of a learned function on the TFL closed loops (paper, Section 3, "Level selection").
 
 Inner layer (verified, inner_region.py):  I = {alpha q_ex < c_I} intersected with the open box.  Since V >= alpha q_ex,
-    {v < c1} with c1 = 1 - e^{-c_I} lies inside I (paper, Theorem "Two-layer estimate" (ii)); this needs no samples.
+    {v < c1} with c1 = 1 - e^{-c_I} lies inside I (paper, Theorem 3 (ii)); this needs no samples.
 Finite-step decrease condition (sampled):  a sample x with v(x) >= c1 passes if, for some horizon H in HORIZONS, the
     trajectory of the normalized field stays in Omega_ad and the box at every RK4 substep (spacing STEP_H) over length H
     and v at its end point is below v(x).  A sample that fails is a counterexample (this includes samples whose unit
@@ -11,7 +11,7 @@ Protocol:  every snapshot of a run is screened (3 x 50k samples) and ranked by t
     I u {v < c2}; the best `top` snapshots are retested on fresh samples (5 x 100k); the largest is kept with the
     lowest level it received.  Final test: N i.i.d. uniform box samples with disjoint seeds (benchmarks/iid.py) lower c2 to
     the lowest counterexample; with confidence 1 - 1e-6 the uniform measure of counterexamples in the annulus
-    {c1 <= v < c2} is at most ln(1e6) / N (paper, Proposition "Scenario bound").
+    {c1 <= v < c2} is at most ln(1e6) / N (paper, Proposition 4).
 Evaluation (simulation, never used for selection):  coverage of the simulated region of attraction by I u {v < c2}
     and the false-positive share, on the reference states of the case.
 
@@ -71,6 +71,9 @@ def inner_level(cfg, prob=None):
         if prob is not None and "problem" in d:
             from inner_region import problem_signature
             sig = problem_signature(prob)
+            scale = float(sig["alpha"]) / float(d["problem"]["alpha"])
+            d["problem"] = dict(d["problem"], alpha=float(sig["alpha"]))
+            d["c_inner"] = float(d["c_inner"]) * scale
             for k, v in d["problem"].items():
                 mine = sig[k]
                 same = (abs(float(v) - float(mine)) <= 1e-6 * max(1.0, abs(float(mine)))) if isinstance(v, (int, float)) and not isinstance(v, bool) \

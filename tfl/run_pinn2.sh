@@ -20,4 +20,9 @@ if [ "$BEST" != "1" ]; then
   python -u certify3.py $runs --top 3
 fi
 echo "$BEST" > runs/${N}_pinn_s0/factor.txt
+# sinusoid: one run with the smaller divisor 0.3, outside the search grid
+if [ "$C" = sinusoid ]; then
+  python -u zpinn_liu.py pinn $C 0 runs/${N}_pinnf0.3_s0 0.3
+  python -u certify3.py runs/${N}_pinnf0.3_s0 --top 3
+fi
 echo "PINN2 DONE $N"

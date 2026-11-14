@@ -3,13 +3,13 @@ State-constrained Zubov problem (Grune & Zidani 2015) for the TFL closed loops, 
 (paper, Section 2 and Section 3, "Decomposition of the value function").
 
     V(x) = sup_{t >= 0} [ int_0^t g(y(s)) ds + h(y(t)) ],     v = 1 - exp(-V)          (GZ (3.4)-(3.5))
-    D(M) = {V < inf} = {v < 1}                                                         (paper, Theorem "Region of attraction of a TFL closed loop")
+    D(M) = {V < inf} = {v < 1}                                                         (paper, Theorem 2)
 
 Paper setting (target "z", the default):
   * Omega_ad: |det D| > eps_D, |det J_T| > eps_T, 1/||grad pi|| > eps_pi (the regularity constraints), and the open box;
   * target M = {z = 0}; for the unicycle z = (xi1, xi2, eta2 - 1), the quadrotor is in quad_system.py;
   * running cost g = alpha zeta^T Q zeta (+ kappa rho), zeta = z / z_scale; alpha is the paper's gamma, and 0 selects
-    3 / (90th percentile of zeta^T P zeta over admissible samples);
+    gamma_num / (90th percentile of zeta^T P zeta over admissible samples), gamma_num = 3 (short step) or 1 (long step);
   * h = sum_i relu(b_i / d_i - 1)^h_pow, d_i the signed distance to the i-th constraint, b_i = beta * median d_i
     (the paper uses beta = 0.1 and h_pow = 2);
   * q_exact = zeta^T P zeta is the exact cost-to-go because zdot = A z on Omega_ad, so V = alpha q_exact + Phi;
@@ -40,6 +40,7 @@ class ProblemConfig:
     eta_c_hi: float = 1.8
     Q_diag: tuple = (1.742, 0.249, 3.281)
     alpha: float = 0.0
+    gamma_num: float = 3.0
     beta: float = 0.1
     kappa: float = 0.0
     h_pow: float = 1.0
@@ -78,7 +79,7 @@ class ConstrainedZubov:
             d = self.distances(x)
             adm = torch.isfinite(d).all(-1) & (d > 0).all(-1)
             self.scale = torch.quantile(d[adm], 0.5, dim=0)
-            self.alpha = cfg.alpha if cfg.alpha > 0 else 3.0 / torch.quantile(self.q(x[adm]), 0.9).item()
+            self.alpha = cfg.alpha if cfg.alpha > 0 else getattr(cfg, "gamma_num", 3.0) / torch.quantile(self.q(x[adm]), 0.9).item()
 
     def zeta(self, x):
         return torch.nan_to_num(self.sys.z(x) / self.sys.z_scale, nan=1e3, posinf=1e3, neginf=-1e3)

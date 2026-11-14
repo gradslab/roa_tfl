@@ -1,5 +1,5 @@
 r"""
-Final test for the scenario bound (paper, Proposition "Scenario bound"): independent i.i.d. samples.  The function v and the levels c1, c2_old were
+Final test for the scenario bound (paper, Proposition 4): independent i.i.d. samples.  The function v and the levels c1, c2_old were
 fixed before this test, so they are independent of its samples.  N i.i.d. uniform box samples are drawn; c2_iid is the
 lowest v among the samples in {c1 <= v < c2_old} that fail the multi-horizon condition, and the reported level is
 c2 = min(c2_old, c2_iid).  Samples with v >= c2_old cannot change c2, so they are drawn and counted but need no flow.

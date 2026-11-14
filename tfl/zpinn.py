@@ -4,16 +4,18 @@ Training of the candidate on the TFL closed loops (paper, Section 3: "Neural can
 Value function (problem.py):  V = alpha q_ex + Phi,  v = 1 - exp(-V)       (alpha in the code is gamma in the paper)
     q_ex   exact quadratic cost-to-go, D q_ex . f = -zeta^T Q zeta on Omega_ad
     psi    = relu(h - alpha q_ex)                                (margin function)
-    Phi    = sup_t psi(y(t))                                     (safety value function, paper Lemma "Decomposition")
+    Phi    = sup_t psi(y(t))                                     (safety value function, paper, Lemma 1)
 Candidate (--ansatz max):  Phi_theta = max(psi, Psi_theta),  Psi_theta = tanh(q_ex / q0) softplus(sharp N_theta(F)) / sharp,
     so V_theta >= max(h, alpha q_ex) and every finite sublevel set lies in Omega_ad.
 Training (--loss vi):  fitted semi-Lagrangian value iteration over steps of normalized length tau (sub RK4 substeps of
     f / N_f, N_f = sqrt(1 + |S f|^2)) with a frozen target from the averaged weights; the finite-step, decrease and
-    obstacle penalties; the exponential loss weight e^{2 min(V, w_cap)}; counterexamples to the finite-step penalty.
+    obstacle penalties; the exponential loss weight e^{2 min(V, w_cap)}; counterexamples to the finite-step penalty;
+    the factor 1 + w_exit on the regression loss and the obstacle penalty of points whose step leaves Omega_ad.
     Step end points, running maxima and running-cost integrals do not depend on the network and are computed once.
-    Constants: paper/table_config3.tex.
+    Constants: paper/table_config3.tex and paper/table_config3b.tex.
 
-The paper's runs use the flags in run_stream.sh.  Options used only for the ablations of the paper: --loss residual
+The paper's runs use the flags in run_stream.sh.  Step setting: long = --tau 2.0 --sub 80 --gamma-num 1 --w-exit 10,
+short = the defaults (tau 0.2, 8 substeps, gamma_num 3, w_exit 0).  Options used only for the ablations of the paper: --loss residual
 (PDE residual loss), --ansatz sum (Phi = psi + Psi_theta), --mu-step 0, --w-cap 0.
 
 Run:  python -u zpinn.py <flags of run_stream.sh> --seed 0 --out runs/circ3_s0
@@ -70,6 +72,7 @@ class TrainConfig(ProblemConfig):
     cex_rolling: bool = False
     auto_settings: bool = False
     cex_worst: bool = False
+    w_exit: float = 0.0
     expectile: float = 0.5
     w_cap: float = 0.0
     q0_quantile: float = 0.01
@@ -410,6 +413,8 @@ def train_vi(cfg: TrainConfig, prob, model, x, data, out, t0):
             else:
                 fit = (torch.exp(-(V - model.alpha * bt["qe"])) - ut) ** 2
             w2 = torch.exp(2 * V.detach().clamp(0, cfg.w_cap)) if cfg.w_cap > 0 else 1.0
+            if getattr(cfg, "w_exit", 0.0) > 0:
+                fit = fit * (1.0 + cfg.w_exit * torch.isinf(nxt["M"][idx]).float())
             loss = (w2 * fit).mean() + cfg.mu * (w2 * viol ** 2).mean()
             if stp is not None:
                 sv, _ = step_violation(model, bt, {k: v[idx] for k, v in stp.items()}, cfg.step_margin, cfg.step_detach)

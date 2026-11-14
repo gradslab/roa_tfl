@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering\footnotesize\renewcommand{\arraystretch}{1.1}
+\caption{Configuration of every case: level selection, fine-tuning and reference simulation. Step lengths are in normalized time, except in the reference simulation.}
+\label{tab:config2}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.16\linewidth}>{\raggedright\arraybackslash}p{0.81\linewidth}@{}}
+\toprule
+\multicolumn{2}{@{}l}{\textit{Level selection and fine-tuning}}\\
+Level selection & Horizons $H\in\{1,2,4,8\}$, RK4 substep $0.025$, states with $\|\zeta\|\le10^{-3}$, which lie in $\I$, exempt from the decrease. Snapshots every 5 epochs and at epoch 0. A test on a number of box samples adds half as many near the faces, a fifth as many next to the singular set and half as many on the faces, where states with outward field count as counterexamples. Screening: $5\cdot10^4$ box samples, 3 rounds. Retest of the top 3: $10^5$ box samples, 5 rounds. Ranking by share of $5\cdot10^4$ fixed box samples. Final test: $10^6$ i.i.d.\ uniform box samples\\
+Fine-tuning & 4 rounds, each on the counterexamples with $c_1\le v_\theta<\min\{c_2+0.05,\,0.999\}$ for a level $c_2$ estimated again in that round, pool of $10^6$ box samples, $5\cdot10^5$ near the faces and $2\cdot10^5$ next to the singular set, 8 Gaussian neighbours per counterexample, 300 Adam steps (learning rate $5\cdot10^{-5}$, batch 4096), weight 100 on counterexamples whose step stays in $\Oad$, weight 10 on those that leave it, decrease margin 0.2, counterexample sets capped at $5\cdot10^4$, anchor on $2\cdot10^5$ box samples, exponential loss weight with $V_{\max}=3$ on all systems\\
+\midrule
+\multicolumn{2}{@{}l}{\textit{Reference simulation}}\\
+Reference & $5\cdot10^4$ Sobol states, RK4 step 0.01, horizon 30 (unicycle) and 40 (quadrotor). Converged: held for one time unit, $\|\xi\|<10^{-3}$ and $|\eta_2-1|<0.05$ (unicycle), $\|\zeta\|<10^{-3}$ (quadrotor). States that have neither converged nor failed at the horizon count as outside\\
+\bottomrule
+\end{tabular}
+\end{table}
